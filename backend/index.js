@@ -3,8 +3,8 @@ const app = express()
 require('dotenv').config()
 require('./config/database')
 
-
-
+app.use(express.json())
+app.use('/', require('./routes/users'))
 
 app.listen(4000, () => {
     
