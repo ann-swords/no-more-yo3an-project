@@ -9,6 +9,18 @@ import axios from "axios";
 
 //User Authentication:
 
+//Add a new user:
+const registerHandler = (user) => {
+  axios
+    .post("http://localhost:4000/users", user)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 
 function App() {
   return (
@@ -16,7 +28,7 @@ function App() {
     <div className="App">
       <Routes>
         {/* <Route path="*" element={<HomePage />} /> */}
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<Signup register={registerHandler}/>} />
         <Route path="/login" element={ <Login />} />
       </Routes>
     </div>
