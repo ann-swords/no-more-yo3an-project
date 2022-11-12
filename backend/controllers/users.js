@@ -14,6 +14,7 @@ async function createUser(req, res){
             email: req.body.email,
             password: hashedPassword,
             role: req.body.role,
+            mobile: req.body.mobile
         })
         res.json(newUser);
     }catch (err){

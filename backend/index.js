@@ -5,6 +5,7 @@ require('./config/database')
 
 app.use(express.json())
 app.use('/', require('./routes/users'))
+app.use('/', require('./routes/food'))
 
 app.listen(4000, () => {
     
