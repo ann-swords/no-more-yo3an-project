@@ -7,11 +7,12 @@ const UserModel = new Schema({
     password: {type: String, required: true},
     firstName: {type: String, required: true},
     lastName: {type: String, required: true},
+    mobile:  {type: String},
     role: {
         type: String,
         enum: {
           values: ['Donator', 'Benefiter', 'Admin'],
-          default: '',
+          default: 'Donator',
           message: '{VALUE} is not supported',
         }
     },
