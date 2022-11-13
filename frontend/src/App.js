@@ -83,6 +83,14 @@ const donationHandler = (food) => {
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
         <Route path="/login" element={ <Login login={loginHandler}/>} />
         <Route path="/donate" element={ <Food donate={donationHandler}/>} />
+
+
+
+
+
+
+        
+        <Route path="/allood" element={ <AllFood/>} />
       </Routes>
     </div>
   </Router>
