@@ -1,5 +1,6 @@
 const Food = require('../models/Food')
-mongoose = require('mongoose');
+mongoose = require('mongoose'),
+User = require('../models/User')
 
 const createFood = async (req, res) => {
 
@@ -36,7 +37,6 @@ const createFood = async (req, res) => {
 
 }
 
-
 const getAllFood = async (req, res) => {
 
     try {
@@ -62,9 +62,19 @@ const deleteFood = async (req, res) => {
     }
 }
 
+const getFoodByIdWithUserDonatorDetails = async (req , res) => {
+    try {
+        let foodById = await Food.findById(req.params._id);
+        await foodById.populate('userDonateId')
+        res.json(foodById)
+    } catch (err) {
+        res.json(err)
+    }
+}
 
 module.exports = {
     createFood,
     getAllFood,
-    deleteFood
+    deleteFood,
+    getFoodByIdWithUserDonatorDetails
 }
