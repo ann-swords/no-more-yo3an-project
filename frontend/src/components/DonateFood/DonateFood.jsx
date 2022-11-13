@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Food(props) {
+export default function DonateFood(props) {
   const [allergie, setAllergie] = useState([
     { contentName: "Milk" },
     { contentName: "Fish" },
@@ -63,7 +63,7 @@ export default function Food(props) {
         <label>Description</label>
         <input type="text" name="description" onChange={changeHandler}/>
         <br /><br />
-        <label>Prodection Date</label>
+        <label>Production Date</label>
         <input type="date" name="prodDate" onChange={changeHandler}/>
         <br /><br />
         <label>Expiry Date</label>
@@ -89,7 +89,7 @@ export default function Food(props) {
 
         <label>Contains:</label> <br />
         {allergie.map((a, index) => (
-          <>
+          <React.Fragment key={index}>
             <input
               type="checkbox"
               id={index}
@@ -98,7 +98,7 @@ export default function Food(props) {
               onChange={changeHandler}
             />
             <label htmlFor={index}>{a.contentName}</label> <br />
-          </>
+          </React.Fragment>
         ))}
         <br /><br />
         <button onClick={donationHandler}>Donate</button>

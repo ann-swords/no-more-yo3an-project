@@ -29,6 +29,11 @@ export default function Login(props) {
         <input type="password" name="password"  onChange={changeHandler} />
         <br /><br />
         <button  onClick={loginHandler} >Login</button>
+
+        <p>
+        Don't have an account? <br />
+        <a href="/signup">Signup here</a>
+      </p>
       </form>
     </div>
   );
