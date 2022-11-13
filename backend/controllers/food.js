@@ -21,13 +21,21 @@ const createFood = async (req, res) => {
     
             // reference the location table
             location: mongoose.Types.ObjectId(req.body.location),
-    
+
             // references the foodContent table
             // contains: [{
             //     type: Schema.Types.ObjectId,
             //     ref: 'FoodContent'
             // }],
         })
+
+        let user = await User.findById(mongoose.Types.ObjectId(req.body._id))
+        
+        let food = newFood;
+
+        user.foods.push(food._id)
+
+        await user.save()
     
         res.json({message: "Food got created"})
 
