@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose'),
+Schema = mongoose.Schema;
 
 const LocationModel = new Schema({
     governorate: {type: String, required: true},
