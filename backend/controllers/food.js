@@ -1,6 +1,5 @@
 const Food = require('../models/Food')
-mongoose = require('mongoose'),
-User = require('../models/User')
+mongoose = require('mongoose');
 
 const createFood = async (req, res) => {
 
