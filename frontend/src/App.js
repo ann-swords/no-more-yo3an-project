@@ -67,7 +67,7 @@ const registerHandler = (user) => {
       <Routes>
         <Route path="*" element={isAuth? <HomePage></HomePage> : <Login login={loginHandler}/>} />
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
-        <Route path="/login" element={ <Login login={loginHandler}/>} />
+        <Route path="/signin" element={ <Login login={loginHandler}/>} />
         <Route path="/donate" element={ <Food/>} />
       </Routes>
     </div>
