@@ -12,11 +12,38 @@ export default function Food(props) {
     { contentName: "Soybeans" },
   ]);
 
-  const [newFood, setNewFood] = useState({});
+  const [newFood, setNewFood] = useState({
+
+    // must be declared
+    contains: []
+  });
 
   const changeHandler = (e) => {
+
+
+    console.log('target name', e.target.name)
+
       const food = { ...newFood };
-      food[e.target.name] = e.target.value;
+
+      // if the field is contains then do this
+      if(e.target.name === 'contains'){
+        console.log('contains is modified')
+ 
+        // if checked removed then add it
+        if(e.target.checked){
+          food.contains.push(e.target.value)
+
+          // remove the content if not checked removed
+        } else {
+          let id = food.contains.findIndex(element => element === e.target.value)
+          food.contains.splice(id, 1)
+        }
+
+        // if other fields then go here an update normally
+      }else{
+        food[e.target.name] = e.target.value;
+      }
+
       console.log(food);
       setNewFood(food);
   }
@@ -66,7 +93,7 @@ export default function Food(props) {
             <input
               type="checkbox"
               id={index}
-              // name={a.contentName}
+              name= "contains"
               value={a.contentName}
               onChange={changeHandler}
             />

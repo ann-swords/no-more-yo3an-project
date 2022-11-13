@@ -3,12 +3,12 @@ import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import HomePage from './components/HomePage/HomePage'; 
 import Food from './components/CreateFood/Food';
+import AllFood from './components/AllFood/AllFood';
 
 import { useState, useEffect} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-
 
 
 
@@ -91,7 +91,7 @@ const donationHandler = (food) => {
 
 
         
-        <Route path="/allood" element={ <AllFood/>} />
+        <Route path="/allfood" element={ <AllFood/>} />
 
       </Routes>
     </div>
