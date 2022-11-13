@@ -2,6 +2,8 @@ import './App.css';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import HomePage from './components/HomePage/HomePage'; 
+import Food from './components/CreateFood/Food';
+
 import { useState, useEffect} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -29,11 +31,11 @@ function App() {
       }
     }
   },[])
-//User Authentication:
+
 
 
 const loginHandler = (cred) =>{
-  axios.post("http://localhost:4000/auth/signin")
+  axios.post("http://localhost:4000/auth/signin", cred)
   .then(res =>{
     if(res.data.token != null){
       localStorage.setItem("token", res.data.token);
@@ -59,13 +61,38 @@ const registerHandler = (user) => {
       console.log(err);
     });
 };
+
+
+//Add a new Food donation
+const donationHandler = (food) => {
+  axios
+    .post("http://localhost:4000/food", food)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
   return (
     <Router>
     <div className="App">
       <Routes>
-        {/* <Route path="*" element={<HomePage />} /> */}
+        <Route path="*" element={isAuth? <HomePage></HomePage> : <Login login={loginHandler}/>} />
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
-        <Route path="/login" element={isAuth? <HomePage></HomePage> : <Login login={loginHandler}/>} />
+`
+        <Route path="/login" element={ <Login login={loginHandler}/>} />
+        <Route path="/donate" element={ <Food donate={donationHandler}/>} />
+
+
+
+
+
+
+        
+        <Route path="/allood" element={ <AllFood/>} />
+
       </Routes>
     </div>
   </Router>
