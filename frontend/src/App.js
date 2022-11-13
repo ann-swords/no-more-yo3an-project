@@ -61,6 +61,20 @@ const registerHandler = (user) => {
       console.log(err);
     });
 };
+
+
+//Add a new Food donation
+const donationHandler = (food) => {
+  axios
+    .post("http://localhost:4000/food", food)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
   return (
     <Router>
     <div className="App">
@@ -68,7 +82,7 @@ const registerHandler = (user) => {
         <Route path="*" element={isAuth? <HomePage></HomePage> : <Login login={loginHandler}/>} />
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
         <Route path="/login" element={ <Login login={loginHandler}/>} />
-        <Route path="/donate" element={ <Food/>} />
+        <Route path="/donate" element={ <Food donate={donationHandler}/>} />
       </Routes>
     </div>
   </Router>
