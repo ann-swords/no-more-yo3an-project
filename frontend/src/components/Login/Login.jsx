@@ -11,8 +11,9 @@ export default function Login(props) {
         setNewUser(user);
     }
 
-    const loginHandler = () => {
-        props.login(newUser)
+    const loginHandler = (e) => {
+      e.preventDefault() 
+      props.login(newUser)
     }
 
 
