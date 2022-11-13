@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose'),
+Schema = mongoose.Schema;
 
 const FoodModel = new Schema({
     name: {type: String, required: true},

@@ -1,5 +1,5 @@
 const Food = require('../models/Food')
-var mongoose = require('mongoose');
+mongoose = require('mongoose');
 
 const createFood = async (req, res) => {
 
@@ -21,12 +21,11 @@ const createFood = async (req, res) => {
             // reference the location table
             location: mongoose.Types.ObjectId(req.body.location),
     
-    
             // references the foodContent table
-            contains: [{
-                type: Schema.Types.ObjectId,
-                ref: 'FoodContent'
-            }],
+            // contains: [{
+            //     type: Schema.Types.ObjectId,
+            //     ref: 'FoodContent'
+            // }],
         })
     
         res.json({message: "Food got created"})
@@ -51,7 +50,21 @@ const getAllFood = async (req, res) => {
     }
 }
 
+const deleteFood = async (req, res) => {
+
+    try {
+            await Food.findByIdAndDelete(
+            req.params._id
+        )
+        res.json({message: 'Food Deleted Successfully'})
+    } catch (err) {
+        res.json(err)
+    }
+}
+
+
 module.exports = {
     createFood,
-    getAllFood
+    getAllFood,
+    deleteFood
 }
