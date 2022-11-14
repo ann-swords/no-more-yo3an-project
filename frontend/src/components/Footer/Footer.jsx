@@ -6,7 +6,7 @@ export default function Footer() {
 
           <div className="footer" >
             <span className="copyright">
-              <p>
+              <p className="pfooter">
               © {new Date().getFullYear()}, Made with{" "}
               <i className="fa fa-heart heart" /> by SE --&gt; FSAA
               </p>

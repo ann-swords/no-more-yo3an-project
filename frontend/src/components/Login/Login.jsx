@@ -30,9 +30,10 @@ export default function Login(props) {
         <br /><br />
         <button  onClick={loginHandler} >Login</button>
 
-        <p>
+        <p> <br />
         Don't have an account? <br />
-        <a href="/signup">Signup here</a>
+        <a className="btn btn-link" href="/signup">Signup here</a>
+
       </p>
       </form>
     </div>
