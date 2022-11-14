@@ -6,22 +6,16 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
-// import DropdownButton from 'react-bootstrap/DropdownButton';
+
 
 export default function Navbar(props) {
+    let user = props.user
     const [show, setShow] = useState(false);
-    const [user, setUser] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-    });
-
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         email: '',
     })
-
 
     const handleChange = (e) => {
         setFormData({
@@ -32,31 +26,27 @@ export default function Navbar(props) {
     }
 
     
-    const getUser = () =>{
-        axios.get(`http://localhost:4000/users/${props.user.user.id}`)
+    const getUser = () => {
+        axios.get(`http://localhost:4000/users/${user._id}`)
         .then(res => {
-            setUser(res.data);
             setFormData(res.data);
             setShow(true);
         })
         .catch(err => console.log(err))
     }
 
-   
 
     const handleClose = () => setShow(false);
-    const handleShow = (e) => {
-        // e.preventDefault();
-        getUser();
+    const handleShow = () => {
+      getUser(user._id);
+      setFormData(user);
+
+      setShow(true);
     }
 
     const handleSubmit = (e) =>{
-        axios.post(`http://localhost:4000/users/${props.user.user.id}`, formData)
-        .then(res => {
-            setUser(res.data);
-            // props.user.user.name = formData.firstName
-            handleClose();
-        })
+        props.onSubmitHandler(formData);
+        handleClose();
     }
     
 
@@ -69,10 +59,10 @@ export default function Navbar(props) {
              <Link to='/home'>Home</Link>
           </div>
           <div>
-            <NavDropdown title={props.user ? "Welcome " + props.user.user.name : null}>
-                    <NavDropdown.Item onClick={handleShow}>My Profile</NavDropdown.Item>
-                    <NavDropdown.Item href='/user/donates'>My Donations</NavDropdown.Item>
-                    <NavDropdown.Item href="/logout" onClick={props.onLogoutHandler}>Logout</NavDropdown.Item>
+            <NavDropdown title={props.user ? "Welcome " + user.firstName : null}>
+                <NavDropdown.Item onClick={handleShow}>My Profile</NavDropdown.Item>
+                <NavDropdown.Item href='/user/donates'>My Donations</NavDropdown.Item>
+                <NavDropdown.Item href="/logout" onClick={props.onLogoutHandler}>Logout</NavDropdown.Item>
             </NavDropdown>
           </div>
           </div>
@@ -113,7 +103,7 @@ export default function Navbar(props) {
               <Form.Label>Last Name</Form.Label>
               <Form.Control
                 type="text"
-                value={formData.las}
+                value={formData.lastName}
                 name="lastName"
                 onChange={handleChange}
                 placeholder="Last name"
