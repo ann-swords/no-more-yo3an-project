@@ -22,6 +22,26 @@ async function createUser(req, res){
     }
 }
 
+async function getUserById(req, res){
+    try{
+        const user = await User.findById(req.params.userId)
+        res.json(user)
+    }catch (err){
+        res.json(err);
+    }
+}
+
+async function updateUser(req, res){
+    try{
+        const filter = {_id: req.params.userId};
+        const update = req.body;
+        const updatedUser = await User.findOneAndUpdate(filter, update);
+        res.json(updatedUser);
+    }catch (err){
+        res.json(err);
+    }
+}
+
 async function auth_signin(req, res){
     let {email, password} = req.body;
     try{
@@ -65,5 +85,7 @@ async function auth_signin(req, res){
 
 module.exports = {
     createUser,
-    auth_signin
+    auth_signin,
+    getUserById,
+    updateUser
 }
