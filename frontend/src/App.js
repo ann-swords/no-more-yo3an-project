@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import Footer from './components/Footer/Footer';
-
+import FoodDetails from './components/FoodDetails/FoodDetails';
 
 
 function App() {
@@ -112,6 +112,8 @@ const donationHandler = (food) => {
         {/* <Route path="/food/new" element={ <Food donate={donationHandler}/>} />         */}
         <Route path="/food" element={ <AllFood/>} />
         <Route path="/donate" element={isAuth? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/> } />
+
+        <Route path="/fooddetails/:id" element={<FoodDetails />} />
       </Routes>
       <Footer/>
     </div>

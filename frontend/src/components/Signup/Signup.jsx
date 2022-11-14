@@ -11,7 +11,8 @@ export default function Signup(props) {
         setNewUser(user);
     }
 
-    const regsiterHandler = () => {
+    const regsiterHandler = (e) => {
+        e.preventDefault();
         props.register(newUser)
     }
 
@@ -22,7 +23,7 @@ export default function Signup(props) {
       <h1>Signup</h1>
 
 
-      <form>
+      <form onSubmit={regsiterHandler}>
         <label>FirstName:</label>
         <input type="text"  name="firstName"   onChange={changeHandler}  />
 
@@ -51,12 +52,22 @@ export default function Signup(props) {
         <br /><br />
 
 {/* Still not sure how it will be */}
-        {/* <label>Role:</label>
-        <input type="text" name="role"/>   onChange={changeHandler} */}
+        <label>Role:</label>
+        <br /><br />
+
+        <label htmlFor="Donator">Donator</label>
+        <input type="radio" name="role" id="Donator" value="Donator" onChange={changeHandler}/>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+
+
+        <label htmlFor="Benefiter">Benefiter</label>
+        <input type="radio" name="role" id="Benefiter" value="Benefiter" onChange={changeHandler}/>
 
         <br /><br />
 
-        <button  onClick={regsiterHandler}  >Signup</button>
+        <button type='submit'>Signup</button>
 
         <p>
         Aleady have an account? <br />
