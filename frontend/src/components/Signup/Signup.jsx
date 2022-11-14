@@ -50,19 +50,6 @@ import React, {useState} from 'react'
 
         <br /><br />
 
-        <label>Role:</label>
-        <br /><br />
-
-        <label htmlFor="Donator">Donator</label>
-        <input type="radio" name="role" id="Donator" value="Donator" onChange={changeHandler}/>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-
-
-        <label htmlFor="Benefiter">Benefiter</label>
-        <input type="radio" name="role" id="Benefiter" value="Benefiter" onChange={changeHandler}/>
-
         <div className="custom-control custom-radio custom-control-inline">
           <p>Please select from below if you are a Food Donator or Food Reciever ..</p>
           <input type="radio" name="role" value={'Donator'} className="custom-control-input" onChange={changeHandler} required />
