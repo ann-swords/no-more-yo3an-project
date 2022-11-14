@@ -76,7 +76,7 @@ const registerHandler = (user) => {
       console.log(res);
     })
     .catch((err) => {
-      console.log(err);
+      alert(err.response.data.message)
     });
 };
 
@@ -106,14 +106,14 @@ const donationHandler = (food) => {
     <div className="App">
     <Navbar onLogoutHandler={onLogoutHandler} onSubmitHandler={onSubmitHandler} isAuth={isAuth} user={user}></Navbar>
       <Routes>
-      <Route path="*" element={isAuth? <HomePage></HomePage> : <Login login={loginHandler}/>} />
+      <Route path="/home" element={<HomePage/>} />
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
-        <Route path="/login" element={ <Login login={loginHandler}/>} />
+        <Route path="/login" element={isAuth? <HomePage/> : <Login login={loginHandler}/>} />
         {/* <Route path="/food/new" element={ <Food donate={donationHandler}/>} />         */}
-        <Route path="/food" element={ <AllFood/>} />
+        <Route path="/food" element={isAuth? <AllFood/> : <Login login={loginHandler}/>} />
         <Route path="/donate" element={isAuth? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/> } />
 
-        <Route path="/fooddetails/:id" element={<FoodDetails />} />
+        <Route path="/fooddetails/:id" element={isAuth? <FoodDetails /> : <Login login={loginHandler}/>} />
       </Routes>
       <Footer/>
     </div>

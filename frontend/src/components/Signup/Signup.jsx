@@ -2,51 +2,65 @@ import React, {useState} from 'react'
 
  export default function Signup(props) {
 
+  window.addEventListener('load', () => {
+    document.getElementById('signUpBtn').disabled = true;
+  });
+
   const [newUser, setNewUser] = useState({});
 
     const changeHandler = (e) => {
         const user = { ...newUser };
         user[e.target.name] = e.target.value;
-        console.log(user);
         setNewUser(user);
+
+        if(user.firstName == 0 || user.firstName == undefined ||
+            user.lastName == 0 || user.lastName == undefined  ||
+            user.mobile ==   0 || user.mobile == undefined    ||
+            user.email ==    0 || user.email == undefined     ||
+            user.password == 0 || user.password == undefined  ||
+            user.role ==     0 || user.role == undefined)
+        document.getElementById('signUpBtn').disabled = true
+        else{
+        document.getElementById('signUpBtn').disabled = false
+    }
+        
     }
 
-    const regsiterHandler = (e) => {
+  const regsiterHandler = (e) => {
         e.preventDefault();
         props.register(newUser)
+        
     }
 
   return (
-    
+
     <div>
       <h1>Signup</h1>
 
+      <form id='signUpForm'>
 
-
-      <form onSubmit={regsiterHandler}>
         <label>FirstName:</label>
-        <input type="text" name="firstName" onChange={changeHandler} />
-        
-        <br /><br />
+        <input  type="text" name="firstName" onChange={changeHandler} required />
+
+        <br /> <br />
 
         <label>LastName:</label>
-        <input type="text" name="lastName" onChange={changeHandler}/>
-      
+        <input  type="text" name="lastName" onChange={changeHandler} required/>
+
         <br /><br />
 
-
         <label>Mobile Number:</label>
-        <input type="text" name="mobile" onChange={changeHandler} />
+        <input  type="text" name="mobile" onChange={changeHandler} required/>
 
         <br /><br />
 
         <label>Email:</label>
-        <input type="email" name="email" onChange={changeHandler} />
+        <input  type="email" name="email" onChange={changeHandler} required/>
 
         <br /><br />
 
         <label>Password:</label>
-        <input type="password" name="password" autoComplete='' onChange={changeHandler} />
+        <input  type="password" name="password" autoComplete='' onChange={changeHandler} required />
 
         <br /><br />
 
@@ -55,19 +69,18 @@ import React, {useState} from 'react'
           <input type="radio" name="role" value={'Donator'} className="custom-control-input" onChange={changeHandler} required />
           <label className="custom-control-label" style={{ "marginRight": "10px" }}>Food Donator</label>
 
-          <input type="radio" name="role" value={'Reciever'} className="custom-control-input" onChange={changeHandler} />
+          <input type="radio" name="role" value={'Reciever'} className="custom-control-input" onChange={changeHandler} required/>
           <label className="custom-control-label">Food Reciever</label>
         </div>
 
         <br />
 
-        <button onClick={regsiterHandler}>Signup</button>
+        <button id="signUpBtn" onClick={regsiterHandler}>Signup</button>
 
         <p> <br />
           Aleady have an account?<br />
           <a className="btn btn-link" href="/login">Login here</a>
         </p>
-
 
       </form>
       

@@ -7,16 +7,21 @@ const jwt = require('jsonwebtoken');
 
 async function createUser(req, res){
     try{
-        let hashedPassword = bcrypt.hashSync(req.body.password, salt)
-        const newUser = await User.create({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: hashedPassword,
-            role: req.body.role,
-            mobile: req.body.mobile
-        })
-        res.json(newUser);
+            if(Object.keys(req.body).length === 6){
+                let hashedPassword = bcrypt.hashSync(req.body.password, salt)
+                const newUser = await User.create({
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    password: hashedPassword,
+                    role: req.body.role,
+                    mobile: req.body.mobile
+                })
+                res.json(newUser);
+            } else{
+                res.status(400).send({message:'All Fields Are Required!'})
+                return;
+            }
     }catch (err){
         res.json(err)
     }
