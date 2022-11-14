@@ -58,6 +58,10 @@ export default function Signup(props) {
 
         <button  onClick={regsiterHandler}  >Signup</button>
 
+        <p>
+        Aleady have an account? <br />
+        <a href="/login">Login here</a>
+      </p>
         
       </form>
     </div>
