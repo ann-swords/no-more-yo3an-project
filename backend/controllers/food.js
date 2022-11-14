@@ -115,11 +115,23 @@ const getAllFoodContents = async (req, res) => {
     }
 }
 
+
+const getFoodWithContent = async (req , res) => {
+    try {
+        let foodById = await Food.findById(req.params._id).populate('contains')
+        res.json(foodById)
+    } catch (err) {
+        res.json(err)
+    }
+}
+
+
 module.exports = {
     createFood,
     getAllFood,
     deleteFood,
     getFoodByIdWithUserDonatorDetails,
     createContent,
-    getAllFoodContents
+    getAllFoodContents,
+    getFoodWithContent
 }

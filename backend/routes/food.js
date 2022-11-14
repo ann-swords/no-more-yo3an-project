@@ -11,4 +11,6 @@ router.delete('/food/:_id', foodController.deleteFood)
 router.get('/food-contents', foodController.getAllFoodContents)
 router.post('/foodContent', foodController.createContent)
 
+router.get('/foodContent/:_id', foodController.getFoodWithContent)
+
 module.exports = router
