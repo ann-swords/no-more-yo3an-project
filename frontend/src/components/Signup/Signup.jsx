@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-export default function Signup(props) {
+ export default function Signup(props) {
 
   const [newUser, setNewUser] = useState({});
 
@@ -15,55 +15,66 @@ export default function Signup(props) {
         props.register(newUser)
     }
 
-
-
   return (
+    
     <div>
       <h1>Signup</h1>
 
-
-      <form>
+    <form>
         <label>FirstName:</label>
-        <input type="text"  name="firstName"   onChange={changeHandler}  />
-
-       
+        <input type="text" name="firstName" onChange={changeHandler} />
+        
         <br /><br />
 
         <label>LastName:</label>
-        <input type="text" name="lastName"   onChange={changeHandler} />
-
+        <input type="text" name="lastName" onChange={changeHandler}/>
+      
         <br /><br />
 
 
         <label>Mobile Number:</label>
-        <input type="text" name="mobile"   onChange={changeHandler} />
+        <input type="text" name="mobile" onChange={changeHandler} />
 
         <br /><br />
 
         <label>Email:</label>
-        <input type="email" name="email"  onChange={changeHandler} />
+        <input type="email" name="email" onChange={changeHandler} />
 
         <br /><br />
 
         <label>Password:</label>
-        <input type="password" name="password"   onChange={changeHandler} />
+        <input type="password" name="password" autoComplete='' onChange={changeHandler} />
 
         <br /><br />
 
-{/* Still not sure how it will be */}
+        {/* i will add signup roles . */}
+
+        {/* Still not sure how it will be */}
         {/* <label>Role:</label>
-        <input type="text" name="role"/>   onChange={changeHandler} */}
+    <input type="text" name="role"/>   onChange={changeHandler} */}
 
-        <br /><br />
+        <div className="custom-control custom-radio custom-control-inline">
+          <p>Please select from below if you are a Food Donator or Food Reciever ..</p>
+          <input type="radio" name="role" value={'Donator'} className="custom-control-input" onChange={changeHandler} required />
+          <label className="custom-control-label" style={{ "marginRight": "10px" }}>Food Donator</label>
 
-        <button  onClick={regsiterHandler}  >Signup</button>
+          <input type="radio" name="role" value={'Reciever'} className="custom-control-input" onChange={changeHandler} />
+          <label className="custom-control-label">Food Reciever</label>
+        </div>
 
-        <p>
-        Aleady have an account? <br />
-        <a href="/login">Login here</a>
-      </p>
-        
+        <br />
+
+        <button onClick={regsiterHandler}>Signup</button>
+
+        <p> <br />
+          Aleady have an account?<br />
+          <a className="btn btn-link" href="/login">Login here</a>
+        </p>
+
       </form>
+      
     </div>
   );
 }
+
+

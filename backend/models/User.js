@@ -10,8 +10,7 @@ const UserModel = new Schema({
     role: {
         type: String,
         enum: {
-          values: ['Donator', 'Benefiter', 'Admin'],
-          default: 'Donator',
+          values: ['Donator', 'Reciever', 'Admin'],
           message: '{VALUE} is not supported',
         }
     },
