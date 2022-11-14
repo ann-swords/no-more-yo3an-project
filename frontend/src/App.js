@@ -21,7 +21,7 @@ function App() {
     let token = localStorage.getItem("token");
     if(token != null){
       let user = jwt_decode(token);
-
+      getUser(user.user.id);
       if(user){
         setIsAuth(true);
         setUser(user);
@@ -41,14 +41,32 @@ const loginHandler = (cred) =>{
       localStorage.setItem("token", res.data.token);
       let user = jwt_decode(res.data.token);
       setIsAuth(true);
-      setUser(user);
+      getUser(user.user.id)
+
+
     }
+
   })
   .catch(err => {
     console.log(err);
   })
 }
 
+const getUser = (id) =>{
+  axios.get(`http://localhost:4000/users/${id}`)
+  .then(res => {
+      setUser(res.data);
+      setIsAuth(true);
+  })
+  .catch(err => console.log(err))
+}
+
+const onSubmitHandler = (formData) =>{
+  axios.post(`http://localhost:4000/users/${user._id}`, formData)
+  .then(res => {
+      getUser(res.data._id);
+  })
+}
 
 //Add a new user:
 const registerHandler = (user) => {
@@ -86,7 +104,7 @@ const donationHandler = (food) => {
   return (
     <Router>
     <div className="App">
-    <Navbar onLogoutHandler={onLogoutHandler}  isAuth={isAuth} user={user}></Navbar>
+    <Navbar onLogoutHandler={onLogoutHandler} onSubmitHandler={onSubmitHandler} isAuth={isAuth} user={user}></Navbar>
       <Routes>
       <Route path="*" element={isAuth? <HomePage></HomePage> : <Login login={loginHandler}/>} />
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
@@ -94,8 +112,6 @@ const donationHandler = (food) => {
         {/* <Route path="/food/new" element={ <Food donate={donationHandler}/>} />         */}
         <Route path="/food" element={ <AllFood/>} />
         <Route path="/donate" element={isAuth? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/> } />
-  
-
       </Routes>
       <Footer/>
     </div>
