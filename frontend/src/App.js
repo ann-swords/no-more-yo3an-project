@@ -91,7 +91,7 @@ const donationHandler = (food) => {
       <Route path="*" element={isAuth? <HomePage></HomePage> : <Login login={loginHandler}/>} />
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
         <Route path="/login" element={ <Login login={loginHandler}/>} />
-        <Route path="/food/new" element={ <Food donate={donationHandler}/>} />        
+        {/* <Route path="/food/new" element={ <Food donate={donationHandler}/>} />         */}
         <Route path="/food" element={ <AllFood/>} />
         <Route path="/donate" element={isAuth? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/> } />
   
