@@ -2,20 +2,20 @@ import './App.css';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import HomePage from './components/HomePage/HomePage'; 
-import Food from './components/CreateFood/Food';
+import DonateFood from './components/DonateFood/DonateFood';
 import AllFood from './components/AllFood/AllFood';
 
 import { useState, useEffect} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import Footer from './components/Footer/Footer';
 
 
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState({});
-
 
   useEffect(()=>{
     let token = localStorage.getItem("token");
@@ -83,7 +83,7 @@ const donationHandler = (food) => {
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
 `
         <Route path="/login" element={ <Login login={loginHandler}/>} />
-        <Route path="/donate" element={ <Food donate={donationHandler}/>} />
+        <Route path="/donate" element={isAuth? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/> } />
 
 
 
@@ -94,6 +94,7 @@ const donationHandler = (food) => {
         <Route path="/allfood" element={ <AllFood/>} />
 
       </Routes>
+      <Footer/>
     </div>
   </Router>
   );
