@@ -2,17 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function DonateFood(props) {
-  // const [allergie, setAllergie] = useState([
-  //   { contentName: "Milk" },
-  //   { contentName: "Fish" },
-  //   { contentName: "Eggs" },
-  //   { contentName: "Shellfish" },
-  //   { contentName: "TreeNuts" },
-  //   { contentName: "Peanuts" },
-  //   { contentName: "Wheats" },
-  //   { contentName: "Soybeans" },
-  // ]);
-
 
   const [allergie, setAllergie] = useState([]);
 
