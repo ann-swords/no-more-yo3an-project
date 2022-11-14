@@ -1,0 +1,10 @@
+.food-details-container {
+    border: 2px solid red;
+    width: 900px;
+    height: 700px;
+    margin: 0 auto;
+}
+
+.food-details-img {
+    width: 800px;
+}
