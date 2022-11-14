@@ -157,10 +157,10 @@ function AllFood() {
 
     <div className='food-container'>
         
-        {foodList.map(food => 
-
+        {foodList.map( (food, index) => 
+          <React.Fragment key={index}>
           <SingleFood food={food} />
-
+          </React.Fragment>
         )}
 
 
