@@ -1,0 +1,27 @@
+.navbar-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 30px;
+}
+.navbar{
+    height: 60px;
+    background-color: rgb(98, 13, 176);
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    line-height: 2;
+    color: #fff;
+}
+
+.nav-link , .nav-link:hover, .nav-link:focus{
+    color: #fff;
+}
+
+li{
+    margin: 0 20px;
+    list-style: none;
+    display: inline-block;
+}

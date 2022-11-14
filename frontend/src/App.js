@@ -4,7 +4,7 @@ import Login from './components/Login/Login';
 import HomePage from './components/HomePage/HomePage'; 
 import DonateFood from './components/DonateFood/DonateFood';
 import AllFood from './components/AllFood/AllFood';
-
+import Navbar from './components/NavBar/Navbar';
 import { useState, useEffect} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -62,6 +62,13 @@ const registerHandler = (user) => {
     });
 };
 
+const onLogoutHandler = (e) => {
+  e.preventDefault();
+  localStorage.removeItem("token");
+  setIsAuth(false);
+  setUser(null);
+}
+
 
 //Add a new Food donation
 const donationHandler = (food) => {
@@ -75,23 +82,19 @@ const donationHandler = (food) => {
     });
 };
 
+
   return (
     <Router>
     <div className="App">
+    <Navbar onLogoutHandler={onLogoutHandler}  isAuth={isAuth} user={user}></Navbar>
       <Routes>
-        <Route path="*" element={isAuth? <HomePage></HomePage> : <Login login={loginHandler}/>} />
+      <Route path="*" element={isAuth? <HomePage></HomePage> : <Login login={loginHandler}/>} />
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
-`
         <Route path="/login" element={ <Login login={loginHandler}/>} />
+        {/* <Route path="/food/new" element={ <Food donate={donationHandler}/>} />         */}
+        <Route path="/food" element={ <AllFood/>} />
         <Route path="/donate" element={isAuth? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/> } />
-
-
-
-
-
-
-        
-        <Route path="/allfood" element={ <AllFood/>} />
+  
 
       </Routes>
       <Footer/>
