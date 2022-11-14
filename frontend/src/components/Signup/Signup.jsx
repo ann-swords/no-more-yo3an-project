@@ -11,7 +11,8 @@ import React, {useState} from 'react'
         setNewUser(user);
     }
 
-    const regsiterHandler = () => {
+    const regsiterHandler = (e) => {
+        e.preventDefault();
         props.register(newUser)
     }
 
@@ -20,7 +21,9 @@ import React, {useState} from 'react'
     <div>
       <h1>Signup</h1>
 
-    <form>
+
+
+      <form onSubmit={regsiterHandler}>
         <label>FirstName:</label>
         <input type="text" name="firstName" onChange={changeHandler} />
         
@@ -47,11 +50,18 @@ import React, {useState} from 'react'
 
         <br /><br />
 
-        {/* i will add signup roles . */}
+        <label>Role:</label>
+        <br /><br />
 
-        {/* Still not sure how it will be */}
-        {/* <label>Role:</label>
-    <input type="text" name="role"/>   onChange={changeHandler} */}
+        <label htmlFor="Donator">Donator</label>
+        <input type="radio" name="role" id="Donator" value="Donator" onChange={changeHandler}/>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+
+
+        <label htmlFor="Benefiter">Benefiter</label>
+        <input type="radio" name="role" id="Benefiter" value="Benefiter" onChange={changeHandler}/>
 
         <div className="custom-control custom-radio custom-control-inline">
           <p>Please select from below if you are a Food Donator or Food Reciever ..</p>
@@ -70,6 +80,7 @@ import React, {useState} from 'react'
           Aleady have an account?<br />
           <a className="btn btn-link" href="/login">Login here</a>
         </p>
+
 
       </form>
       
