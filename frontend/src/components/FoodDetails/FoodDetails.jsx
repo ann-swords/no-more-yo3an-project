@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './FoodDetails.css'
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import Maps from '../Maps/Maps'
 
 function FoodDetails(props) {
 
@@ -26,7 +27,7 @@ function FoodDetails(props) {
         console.log(err)
       })
   
-    },[])
+    },[id])
     
   
   
@@ -61,7 +62,12 @@ function FoodDetails(props) {
                 <p></p>
         </div>
         <div className='food-details-maps-div'>
-            <img className='map-img' src='https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg'></img>
+            {/* <img className='map-img' src='https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg'></img> */}
+        
+        
+
+          < Maps />
+                
         </div>
         {/* <div>
             right down box
