@@ -42,8 +42,6 @@ const loginHandler = (cred) =>{
       let user = jwt_decode(res.data.token);
       setIsAuth(true);
       getUser(user.user.id)
-
-
     }
 
   })
@@ -90,23 +88,27 @@ const onLogoutHandler = (e) => {
 
 //Add a new Food donation
 const donationHandler = (food) => {
-  axios
-    .post("http://localhost:4000/food", food)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const token = localStorage.getItem('token')
+  if (token) {
+    axios
+      .post("http://localhost:4000/food", food, {
+        headers: {Authorization: token}
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 };
-
 
   return (
     <Router>
     <div className="App">
     <Navbar onLogoutHandler={onLogoutHandler} onSubmitHandler={onSubmitHandler} isAuth={isAuth} user={user}></Navbar>
       <Routes>
-      <Route path="*" element={isAuth? <HomePage></HomePage> : <Login login={loginHandler}/>} />
+        <Route path="*" element={isAuth? <HomePage user={user}></HomePage> : <Login login={loginHandler}/>} />
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
         <Route path="/login" element={ <Login login={loginHandler}/>} />
         {/* <Route path="/food/new" element={ <Food donate={donationHandler}/>} />         */}
