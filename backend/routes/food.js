@@ -4,7 +4,10 @@ const foodController = require('../controllers/food');
 const isLoggedIn = require('../helper/isLoggedIn');
 
 
+router.post('/food/:_id', foodController.updateFoodStatus)
+
 router.post('/food',isLoggedIn, foodController.createFood)
+
 router.get('/food', foodController.getAllFood)
 router.get('/food/:_id', foodController.getFoodByIdWithUserDonatorDetails)
 router.delete('/food/:_id', foodController.deleteFood)
