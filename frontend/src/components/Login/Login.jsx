@@ -21,18 +21,19 @@ export default function Login(props) {
     <div>
       <h1>Login</h1>
 
-      <form>
+      <form onSubmit={loginHandler}>
         <label>Email:</label>
         <input type="email" name="email"  onChange={changeHandler}  />
         <br /><br />
         <label>Password:</label>
         <input type="password" name="password"  onChange={changeHandler} />
         <br /><br />
-        <button  onClick={loginHandler} >Login</button>
+        <button type="submit">Login</button>
 
-        <p>
+        <p> <br />
         Don't have an account? <br />
-        <a href="/signup">Signup here</a>
+        <a className="btn btn-link" href="/signup">Signup here</a>
+
       </p>
       </form>
     </div>

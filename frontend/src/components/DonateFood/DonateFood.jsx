@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function DonateFood(props) {
-  const [allergie, setAllergie] = useState([
-    { contentName: "Milk" },
-    { contentName: "Fish" },
-    { contentName: "Eggs" },
-    { contentName: "Shellfish" },
-    { contentName: "TreeNuts" },
-    { contentName: "Peanuts" },
-    { contentName: "Wheats" },
-    { contentName: "Soybeans" },
-  ]);
+
+  const [allergie, setAllergie] = useState([]);
+
+
+  useEffect(()=>{
+    axios.get("http://localhost:4000/food-contents")
+    .then(res => {
+      console.log(res.data)
+      setAllergie(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+  },[])
+
+
 
   const [newFood, setNewFood] = useState({
 
@@ -48,7 +56,9 @@ export default function DonateFood(props) {
       setNewFood(food);
   }
 
-  const donationHandler = () => {
+  // ISSUE HERE
+  const donationHandler = (e) => {
+      e.preventDefault();
       props.donate(newFood)
   }
 
@@ -56,7 +66,7 @@ export default function DonateFood(props) {
   return (
     <div>
       <h1>Donate Food</h1>
-      <form action="">
+      <form onSubmit={donationHandler}>
         <label>Name</label>
         <input type="text" name="name" onChange={changeHandler}/>
         <br /><br />
@@ -94,14 +104,15 @@ export default function DonateFood(props) {
               type="checkbox"
               id={index}
               name= "contains"
-              value={a.contentName}
+              value={a._id}
               onChange={changeHandler}
             />
             <label htmlFor={index}>{a.contentName}</label> <br />
           </React.Fragment>
         ))}
         <br /><br />
-        <button onClick={donationHandler}>Donate</button>
+        <button type="submit">Donate</button>
+        {/* <button type="submit">Donate</button> */}
       </form>
     </div>
   );

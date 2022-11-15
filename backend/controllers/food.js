@@ -1,4 +1,5 @@
 const Food = require('../models/Food')
+const FoodContent = require('../models/FoodContent')
 mongoose = require('mongoose'),
 User = require('../models/User')
 const jwt_decode = require('jwt-decode')
@@ -11,6 +12,15 @@ const createFood = async (req, res) => {
 
     try {
 
+        console.log(req.body)
+        console.log('name', req.body.name)
+
+        let containsIdArray = req.body.contains 
+
+        containsIdArray.forEach(element => {
+            element = mongoose.Types.ObjectId(element)
+        });
+
         const newFood = await Food.create({
             name: req.body.name,
             description: req.body.description,
@@ -22,16 +32,13 @@ const createFood = async (req, res) => {
             userDonateId: mongoose.Types.ObjectId(req.body.userDonateId),
     
             // reference to person reserving the food
-            userReserved: mongoose.Types.ObjectId(req.body.userReserved),
+            userReserved: (req.body.userReserved),
     
             // reference the location table
             location: mongoose.Types.ObjectId(req.body.location),
 
             // references the foodContent table
-            // contains: [{
-            //     type: Schema.Types.ObjectId,
-            //     ref: 'FoodContent'
-            // }],
+            contains: containsIdArray
         })
 
         let user = await User.findById(mongoose.Types.ObjectId(req.body._id))
@@ -85,9 +92,51 @@ const getFoodByIdWithUserDonatorDetails = async (req , res) => {
     }
 }
 
+
+const createContent = async (req, res) => {
+    try {
+
+        let newContent = await FoodContent.create({
+            contentName: req.body.contentName
+        })
+
+        res.json(newContent)
+    
+    }catch (err){
+        res.json(err)
+    }
+}
+
+
+const getAllFoodContents = async (req, res) => {
+    try {
+
+        let allFoodContents = await FoodContent.find({})
+
+        res.json(allFoodContents)
+
+    }catch(err) {
+        res.json(err)
+    }
+}
+
+
+const getFoodWithContent = async (req , res) => {
+    try {
+        let foodById = await Food.findById(req.params._id).populate('contains')
+        res.json(foodById)
+    } catch (err) {
+        res.json(err)
+    }
+}
+
+
 module.exports = {
     createFood,
     getAllFood,
     deleteFood,
-    getFoodByIdWithUserDonatorDetails
+    getFoodByIdWithUserDonatorDetails,
+    createContent,
+    getAllFoodContents,
+    getFoodWithContent
 }
