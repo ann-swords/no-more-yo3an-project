@@ -14,4 +14,6 @@ router.post('/foodContent', foodController.createContent)
 
 router.get('/foodContent/:_id', foodController.getFoodWithContent)
 
+router.get('/locations/', foodController.getAllLocations)
+
 module.exports = router
