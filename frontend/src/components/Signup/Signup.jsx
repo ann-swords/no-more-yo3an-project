@@ -15,12 +15,12 @@ import './Signup.css'
         user[e.target.name] = e.target.value;
         setNewUser(user);
 
-        if(user.firstName == 0 || user.firstName == undefined ||
-            user.lastName == 0 || user.lastName == undefined  ||
-            user.mobile ==   0 || user.mobile == undefined    ||
-            user.email ==    0 || user.email == undefined     ||
-            user.password == 0 || user.password == undefined  ||
-            user.role ==     0 || user.role == undefined)
+        if(user.firstName === 0 || user.firstName === undefined ||
+            user.lastName === 0 || user.lastName === undefined  ||
+            user.mobile ===   0 || user.mobile === undefined    ||
+            user.email ===    0 || user.email === undefined     ||
+            user.password === 0 || user.password === undefined  ||
+            user.role ===     0 || user.role === undefined)
         document.getElementById('signUpBtn').disabled = true
         else{
         document.getElementById('signUpBtn').disabled = false
@@ -44,7 +44,7 @@ import './Signup.css'
         <Col className='right-row' xs={8 }>
       <h1>Signup</h1>
 
-      <form id='signUpForm'>
+      <form id='signUpForm' onSubmit={regsiterHandler}>
 
         <label>FirstName:</label>
         <input  type="text" name="firstName" onChange={changeHandler} required />
@@ -82,7 +82,7 @@ import './Signup.css'
 
         <br />
 
-        <button id="signUpBtn" onClick={regsiterHandler}>Signup</button>
+        <button id="signUpBtn" type='submit'>Signup</button>
 
         <p> <br />
           Aleady have an account?<br />
