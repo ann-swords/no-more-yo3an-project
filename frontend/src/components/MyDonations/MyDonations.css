@@ -1,0 +1,54 @@
+.donations-list{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.donations-container{
+    width: 45%;
+    border: 2px solid grey;
+    margin: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-radius: 20px;
+
+}
+
+.badge-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.myDonations-img{
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-right: 2px solid grey;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.donation-details{
+    padding: 10px 0;
+    text-align: start;
+    font-weight: 500;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.donation-details > p{
+    margin-bottom: 0;
+}
+
+.time-text{
+    font-size: 13px;
+    color: grey;
+    font-style: italic;
+}
+
+.myDonations-list-container{
+    text-align: left;
+    padding: 30px;
+}
