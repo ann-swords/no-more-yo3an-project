@@ -2,8 +2,13 @@ const Food = require('../models/Food')
 const FoodContent = require('../models/FoodContent')
 mongoose = require('mongoose'),
 User = require('../models/User')
+const jwt_decode = require('jwt-decode')
 
 const createFood = async (req, res) => {
+    console.log("this is the create food function!!!")
+    console.log("Request headers:")
+    const user = jwt_decode(req.headers.authorization)
+    console.log(user)
 
     try {
 

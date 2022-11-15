@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Food = require('../models/Food')
 
 const bcrypt = require('bcrypt');
 const salt = 10;
@@ -30,6 +31,7 @@ async function createUser(req, res){
 async function getUserById(req, res){
     try{
         const user = await User.findById(req.params.userId)
+        await user.populate('foods')
         res.json(user)
     }catch (err){
         res.json(err);
@@ -42,6 +44,19 @@ async function updateUser(req, res){
         const update = req.body;
         const updatedUser = await User.findOneAndUpdate(filter, update);
         res.json(updatedUser);
+    }catch (err){
+        res.json(err);
+    }
+}
+
+async function getUsersDonates(req, res){
+    console.log('user',req.user.id)
+    try{
+       const user = await User.findById(mongoose.Types.ObjectId(req.user.id))
+       await user.populate('foods')
+       res.json(user)
+        // console.log('user',user)
+
     }catch (err){
         res.json(err);
     }
@@ -65,7 +80,9 @@ async function auth_signin(req, res){
         const payload = {
             user: {
                 id: user._id,
-                name: `${user.firstName} ${user.lastName}`
+                // name: `${user.firstName} ${user.lastName}`,
+                // firstName: user.firstName,
+                // lastName: user.lastName
             }
         }
 
@@ -80,6 +97,8 @@ async function auth_signin(req, res){
             }
         )
 
+        // req.user = payload;
+
     } catch (err){
         res.json({message: "You are not loggedin, please try again later!"}).status(400);
     }
@@ -92,5 +111,6 @@ module.exports = {
     createUser,
     auth_signin,
     getUserById,
-    updateUser
+    updateUser,
+    getUsersDonates
 }
