@@ -11,7 +11,11 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import Footer from './components/Footer/Footer';
 import FoodDetails from './components/FoodDetails/FoodDetails';
+
+import MyDonations from './components/MyDonations/MyDonations';
+
 import NotAuthorized from './components/NotAuthorized';
+
 
 
 function App() {
@@ -22,10 +26,11 @@ function App() {
     let token = localStorage.getItem("token");
     if(token != null){
       let user = jwt_decode(token);
-      getUser(user.user.id);
+        getUser(user.user.id);
       if(user){
         setIsAuth(true);
         setUser(user);
+        // localStorage.setItem("userName", user.firstName);
       }else if(!user){
         localStorage.removeItem("token");
         setIsAuth(false);
@@ -57,6 +62,7 @@ const getUser = (id) =>{
   .then(res => {
       setUser(res.data);
       setIsAuth(true);
+      localStorage.setItem("userName", res.data.firstName);
   })
   .catch(err => console.log(err))
 }
@@ -65,6 +71,7 @@ const onSubmitHandler = (formData) =>{
   axios.post(`http://localhost:4000/users/${user._id}`, formData)
   .then(res => {
       getUser(res.data._id);
+    
   })
 }
 
@@ -115,7 +122,11 @@ const donationHandler = (food) => {
         <Route path="/login" element={isAuth? <HomePage/> : <Login login={loginHandler}/>} />
         {/* <Route path="/food/new" element={ <Food donate={donationHandler}/>} />         */}
         <Route path="/food" element={isAuth? <AllFood/> : <Login login={loginHandler}/>} />
+
+        <Route path="/user/donates" element={<MyDonations/>} />
+
         <Route path="/donate" element={user.role == 'Donator' ? <DonateFood donate={donationHandler} /> : <NotAuthorized/> } />
+
         <Route path="/fooddetails/:id" element={isAuth? <FoodDetails /> : <Login login={loginHandler}/>} />
       </Routes>
       <Footer/>

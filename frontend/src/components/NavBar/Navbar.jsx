@@ -59,7 +59,7 @@ export default function Navbar(props) {
              <Link to='/home'><img src="https://i.imgur.com/XO6tb1a.png" alt="No More Yo3an Logo" width="200" height="80"/></Link>
           </div>
           <div>
-            <NavDropdown title={props.user ? "Welcome " + user.firstName : null}>
+            <NavDropdown title={props.user ? "Welcome " + localStorage.getItem("userName") : null}>
                 <NavDropdown.Item onClick={handleShow}>My Profile</NavDropdown.Item>
                 <NavDropdown.Item href='/user/donates'>My Donations</NavDropdown.Item>
                 <NavDropdown.Item href="/home" onClick={props.onLogoutHandler}>Logout</NavDropdown.Item>
