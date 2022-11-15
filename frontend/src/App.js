@@ -11,7 +11,11 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import Footer from './components/Footer/Footer';
 import FoodDetails from './components/FoodDetails/FoodDetails';
+
 import MyDonations from './components/MyDonations/MyDonations';
+
+import NotAuthorized from './components/NotAuthorized';
+
 
 
 function App() {
@@ -118,8 +122,11 @@ const donationHandler = (food) => {
         <Route path="/login" element={isAuth? <HomePage/> : <Login login={loginHandler}/>} />
         {/* <Route path="/food/new" element={ <Food donate={donationHandler}/>} />         */}
         <Route path="/food" element={isAuth? <AllFood/> : <Login login={loginHandler}/>} />
+
         <Route path="/user/donates" element={<MyDonations/>} />
-        <Route path="/donate" element={isAuth? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/> } />
+
+        <Route path="/donate" element={user.role == 'Donator' ? <DonateFood donate={donationHandler} /> : <NotAuthorized/> } />
+
         <Route path="/fooddetails/:id" element={isAuth? <FoodDetails /> : <Login login={loginHandler}/>} />
       </Routes>
       <Footer/>

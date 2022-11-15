@@ -19,11 +19,8 @@ const FoodModel = new Schema({
     // Idle is not selected
     status: {
         type: String,
-        enum: {
-        values: ['Idle', 'Reserved', 'Collected'],
-        default: 'Idle',
-        message: '{VALUE} is not supported',
-        }
+        enum : ['Available','Reserved','Collected'],
+        default: 'Available'
     },
 
     // reference to person reserving the food
