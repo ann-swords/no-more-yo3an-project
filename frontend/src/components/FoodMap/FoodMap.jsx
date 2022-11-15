@@ -5,20 +5,11 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 
-// import {
-//   Combobox,
-//   ComboboxPopover,
-//   ComboboxList,
-//   ComboboxOption,
-//   ComboboxOptionText,
-//   Listbox,
-// } from "react-widgets";
-
 import { Combobox } from '@headlessui/react'
 
 export default function FoodMap() {
   const center = useMemo(() => ({ lat: 26.0667, lng: 50.5577 }), []);
-  const [selected, setSelected] = useState('')
+  const [selected, setSelected] = useState(null)
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
@@ -61,15 +52,30 @@ const PlacesAutocomplete = ({ setSelected}) => {
 
     // debugger;
 
+    //----- A function that convertes the address to lang and lut--------------
+    //val: A string that represents the address the user selected.
+    const handleSelect = async  (address) => {
+        setValue(address, false);
+        clearSuggestions();
+
+        const results = await getGeocode({address});
+        const {lat, lng} = await getLatLng(results[0]);
+        setSelected({lat, lng});
+
+    }
+
+    //Call axios here 
 
     return (
-    <Combobox>
+    <Combobox onChange={handleSelect}>
         <Combobox.Input value={value} onChange={e =>setValue(e.target.value)} disabled={!ready} placeholder={"Search an address"} />
     
             <Combobox.Options>
             {
              data.map(item => 
-            <Combobox.Option key={item.place_id}  value={item.description}>{item.description}</Combobox.Option>
+            <ul>
+                <Combobox.Option key={item.place_id}  value={item.description}><li>{item.description}</li></Combobox.Option>
+            </ul>
             )}
             </Combobox.Options>
 
