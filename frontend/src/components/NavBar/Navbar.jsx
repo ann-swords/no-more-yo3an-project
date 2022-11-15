@@ -62,7 +62,7 @@ export default function Navbar(props) {
             <NavDropdown title={props.user ? "Welcome " + user.firstName : null}>
                 <NavDropdown.Item onClick={handleShow}>My Profile</NavDropdown.Item>
                 <NavDropdown.Item href='/user/donates'>My Donations</NavDropdown.Item>
-                <NavDropdown.Item href="/logout" onClick={props.onLogoutHandler}>Logout</NavDropdown.Item>
+                <NavDropdown.Item href="/home" onClick={props.onLogoutHandler}>Logout</NavDropdown.Item>
             </NavDropdown>
           </div>
           </div>
@@ -78,7 +78,7 @@ export default function Navbar(props) {
                     <Link to="/signup">Signup</Link>
                 </li>
                 <li>
-                    <Link to="/signin">Signin</Link>
+                    <Link to="/login">Signin</Link>
                 </li>
             </div>
         </div>
