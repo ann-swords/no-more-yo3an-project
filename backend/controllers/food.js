@@ -1,5 +1,6 @@
 const Food = require('../models/Food')
 const FoodContent = require('../models/FoodContent')
+const Location = require('../models/Location')
 mongoose = require('mongoose'),
 User = require('../models/User')
 
@@ -30,7 +31,10 @@ const createFood = async (req, res) => {
             userReserved: (req.body.userReserved),
     
             // reference the location table
-            location: mongoose.Types.ObjectId(req.body.location),
+            // location: mongoose.Types.ObjectId(req.body.location),
+
+            
+
 
             // references the foodContent table
             contains: containsIdArray
@@ -44,6 +48,34 @@ const createFood = async (req, res) => {
 
         await user.save()
     
+
+        /*
+            governorate: {type: String, required: true},
+            city: {type: String, required: true},
+            block: {type: String, required: true},
+            road: {type: String, required: true},
+            house: {type: String, required: true},
+
+            // can be [arrays of string] that represents latitude and longitude
+            // or it can be [float number]   so [lat, len]
+
+            mapsInfo:  {type: String}
+        */
+
+        // Create location for food
+        let foodLocation = await Location.create({
+            governorate: req.body.location.governorate,
+            city: req.body.location.city,
+            block: req.body.location.block,
+            road: req.body.location.road,
+            house: req.body.location.house,
+            mapsInfo: [parseFloat(req.body.mapsInfo.lat), parseFloat(req.body.mapsInfo.len)]
+        })
+        
+        
+        let updatedUser = await user.findByIdAndUpdate(user._id, {location: foodLocation._id})
+        
+
         res.json({message: "Food got created"})
 
     } catch(err) {
