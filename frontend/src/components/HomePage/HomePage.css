@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+.carousel {
+    width:100%;
+    height:100vh;
+    margin: auto;
+  }
+
+.caption{
+    font-size: 40px;
+   margin-bottom: 10%;
+    inline-size: 30%;
+    overflow-wrap: break-word;
+    font-family: 'Lato', sans-serif;
+}
+
+.d-block{
+    width: 99vw;
+}

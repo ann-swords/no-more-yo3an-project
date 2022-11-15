@@ -1,0 +1,11 @@
+.left-row{
+    border: 2px blue solid;
+    
+}
+.right-row{
+    border: 2px red solid;
+}
+.container{
+    margin-top: 20px ;
+border: 2px solid green;
+}

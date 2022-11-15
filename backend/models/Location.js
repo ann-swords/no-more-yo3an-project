@@ -7,7 +7,7 @@ const LocationModel = new Schema({
     block: {type: String, required: true},
     road: {type: String, required: true},
     house: {type: String, required: true},
-    mapsInfo:  {type: String}
+    mapsInfo: [Number]
 },{
     timestamps: true
 })

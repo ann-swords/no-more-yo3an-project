@@ -44,7 +44,6 @@ const loginHandler = (cred) =>{
       setIsAuth(true);
       getUser(user.user.id)
 
-
     }
 
   })
@@ -91,16 +90,20 @@ const onLogoutHandler = (e) => {
 
 //Add a new Food donation
 const donationHandler = (food) => {
-  axios
-    .post("http://localhost:4000/food", food)
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const token = localStorage.getItem('token')
+  if (token) {
+    axios
+      .post("http://localhost:4000/food", food, {
+        headers: {Authorization: token}
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 };
-
 
   return (
     <Router>

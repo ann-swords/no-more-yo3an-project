@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import './DonateFood.css'
+
+import FoodMap from "../FoodMap/FoodMap";
+
 
 export default function DonateFood(props) {
 
@@ -83,18 +87,24 @@ export default function DonateFood(props) {
         <input type="file" name="images" onChange={changeHandler}/>
         <br /><br />
 
-        {/* <div>
+{/* Map and Location Deatils: */}
+        <div>
           <label>Address:</label> <br />
-          <label>Block</label>
-          <input type="text" />
-          <label>Road</label>
-          <input type="text" />
-          <label>House</label>
-          <input type="text" />
+          <input type="text" placeholder="Block" name="block"/>
+          <input type="text" placeholder="Road" name="road" />
+          <input type="text" placeholder="House" name="house" />
           <br /><br />
-          MAP HERE
+          
+
+
+          <div className='map-details'>
+
+          < FoodMap />
+                
+        </div>
+        
           <br /><br />
-        </div> */}
+        </div>
 
 
         <label>Contains:</label> <br />
