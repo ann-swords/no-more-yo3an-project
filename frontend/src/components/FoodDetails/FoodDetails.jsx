@@ -2,7 +2,9 @@ import React, {useState, useEffect} from 'react'
 import './FoodDetails.css'
 import axios from "axios";
 import { useParams } from 'react-router-dom';
-import Maps from '../Maps/Maps'
+import Maps from '../Maps/Maps';
+import Button from 'react-bootstrap/Button';
+
 
 function FoodDetails(props) {
 
@@ -15,7 +17,7 @@ function FoodDetails(props) {
     console.log(id)
 
     const [food, setFood] = useState({})
-  
+    const [foodStatus, setFoodStatus] = useState({status: ''})
   
     useEffect(()=>{
       axios.get(`http://localhost:4000/foodContent/${id}`)
@@ -28,10 +30,35 @@ function FoodDetails(props) {
       })
   
     },[id])
-    
-  
-  
 
+    function reservedStat() {
+      return new Promise((resolve) => setTimeout(resolve, 3000));
+    }
+
+      const [isReserving, setReserving] = useState(false);
+    
+      useEffect(() => {
+        if (isReserving) {
+
+          reservedStat().then(() => {
+            document.getElementById('reserveBtn').innerText = 'Reserved'
+          });
+          
+          axios.post(`http://localhost:4000/food/${id}` , foodStatus)
+          .then(res => {})
+          .catch(err => {
+            console.log(err)
+          })
+        }
+      }, [isReserving]);
+    
+      const handleClick = (e) => { 
+        setReserving(true);
+        setFoodStatus({
+          ...foodStatus,
+          [e.target.name]: e.target.value
+        })
+      }
 
 
   return (
@@ -48,7 +75,7 @@ function FoodDetails(props) {
 
 
                 {food.contains? <h3>Food Contents:</h3> : null}
-                
+
                 {food.contains ?
                 
                 food.contains.map((el, idx) =>
@@ -60,7 +87,18 @@ function FoodDetails(props) {
                 {/* Add the location */}
                 
                 <p></p>
-        </div>
+                {food.status == 'Reserved' ? null : <Button
+                id='reserveBtn'
+          variant="success"
+          name="status"
+          value={foodStatus.status = 'Reserved'}
+          disabled={isReserving}
+          onClick={!isReserving ? handleClick : null}
+        >
+          {isReserving ? 'Reserving...' : 'Reserve'}
+        </Button>}
+                
+                </div>
         <div className='food-details-maps-div'>
             {/* <img className='map-img' src='https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg'></img> */}
         
@@ -80,6 +118,5 @@ function FoodDetails(props) {
         
     </div>
   )
-}
-
+      }
 export default FoodDetails

@@ -52,11 +52,21 @@ const createFood = async (req, res) => {
 
 }
 
+const updateFoodStatus = async (req, res) => {
+    try {
+        const update = req.body;
+        await Food.findByIdAndUpdate(req.params._id , update);
+        res.status(200).json({message: 'Food Status Updated Successfully!'})
+    } catch (err) {
+        res.json(err)
+    }
+}
+
 const getAllFood = async (req, res) => {
 
     try {
     
-        const allFood = await Food.find({})
+        const allFood = await Food.find({status: 'Available' })
     
         res.send(allFood)
 
@@ -133,5 +143,6 @@ module.exports = {
     getFoodByIdWithUserDonatorDetails,
     createContent,
     getAllFoodContents,
-    getFoodWithContent
+    getFoodWithContent,
+    updateFoodStatus
 }

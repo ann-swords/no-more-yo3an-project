@@ -4,6 +4,7 @@ const foodController = require('../controllers/food')
 
 
 router.post('/food', foodController.createFood)
+router.post('/food/:_id', foodController.updateFoodStatus)
 router.get('/food', foodController.getAllFood)
 router.get('/food/:_id', foodController.getFoodByIdWithUserDonatorDetails)
 router.delete('/food/:_id', foodController.deleteFood)
