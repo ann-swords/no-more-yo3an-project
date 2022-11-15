@@ -28,7 +28,7 @@ export default function Login(props) {
         <label>Password:</label>
         <input type="password" name="password"  onChange={changeHandler} />
         <br /><br />
-        <button  onClick={loginHandler} >Login</button>
+        <button  onClick={loginHandler}>Login</button>
 
         <p> <br />
         Don't have an account? <br />

@@ -56,7 +56,7 @@ export default function Navbar(props) {
         <div className='navbar'>
           <div className="navbar-container">
           <div>
-             <Link to='/home'>Home</Link>
+             <Link to='/home'><img src="https://i.imgur.com/XO6tb1a.png" alt="No More Yo3an Logo" width="200" height="80"/></Link>
           </div>
           <div>
             <NavDropdown title={props.user ? "Welcome " + user.firstName : null}>
@@ -71,14 +71,14 @@ export default function Navbar(props) {
     (<div className='navbar'>
         <div className="navbar-container">
             <div>
-                <Link to='/home'>Home</Link>
+                <Link to='/home'><img src="https://i.imgur.com/XO6tb1a.png" alt="No More Yo3an Logo" width="200" height="80"/></Link>
             </div>
             <div>
                 <li>
                     <Link to="/signup">Signup</Link>
                 </li>
                 <li>
-                    <Link to="/signin">Signin</Link>
+                    <Link to="/login">Login</Link>
                 </li>
             </div>
         </div>

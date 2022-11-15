@@ -43,7 +43,6 @@ const loginHandler = (cred) =>{
       setIsAuth(true);
       getUser(user.user.id)
 
-
     }
 
   })
@@ -106,7 +105,7 @@ const donationHandler = (food) => {
     <div className="App">
     <Navbar onLogoutHandler={onLogoutHandler} onSubmitHandler={onSubmitHandler} isAuth={isAuth} user={user}></Navbar>
       <Routes>
-      <Route path="*" element={isAuth? <HomePage></HomePage> : <Login login={loginHandler}/>} />
+      <Route path="*" element={<HomePage></HomePage>} />
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
         <Route path="/login" element={ <Login login={loginHandler}/>} />
         {/* <Route path="/food/new" element={ <Food donate={donationHandler}/>} />         */}

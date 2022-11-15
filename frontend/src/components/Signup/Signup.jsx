@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import './Signup.css'
 
  export default function Signup(props) {
 
@@ -19,34 +21,32 @@ import React, {useState} from 'react'
   return (
     
     <div>
+
+      <Container>
+      <Row >
+        <Col className='left-row' >ADD IMAGE HERE</Col>
+        <Col className='right-row' xs={8 }>
       <h1>Signup</h1>
 
+        <form onSubmit={regsiterHandler}>
 
-
-      <form onSubmit={regsiterHandler}>
-        <label>FirstName:</label>
-        <input type="text" name="firstName" onChange={changeHandler} />
+        <input type="text" name="firstName" onChange={changeHandler} placeholder="FirstName"/>
         
         <br /><br />
 
-        <label>LastName:</label>
-        <input type="text" name="lastName" onChange={changeHandler}/>
+        <input type="text" name="lastName" onChange={changeHandler} placeholder="LastName"/>
       
         <br /><br />
 
-
-        <label>Mobile Number:</label>
-        <input type="text" name="mobile" onChange={changeHandler} />
+        <input type="text" name="mobile" onChange={changeHandler} placeholder="Mobile Number"/>
 
         <br /><br />
 
-        <label>Email:</label>
-        <input type="email" name="email" onChange={changeHandler} />
+        <input type="email" name="email" onChange={changeHandler} placeholder="Email"/>
 
         <br /><br />
 
-        <label>Password:</label>
-        <input type="password" name="password" autoComplete='' onChange={changeHandler} />
+        <input type="password" name="password" autoComplete='' onChange={changeHandler} placeholder="password"/>
 
         <br /><br />
 
@@ -61,7 +61,7 @@ import React, {useState} from 'react'
 
         <br />
 
-        <button onClick={regsiterHandler}>Signup</button>
+        <Button onClick={regsiterHandler}>Signup </Button>
 
         <p> <br />
           Aleady have an account?<br />
@@ -70,6 +70,12 @@ import React, {useState} from 'react'
 
 
       </form>
+
+        </Col>
+      </Row>
+    </Container>
+
+      
       
     </div>
   );
