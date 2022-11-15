@@ -4,22 +4,38 @@ import './Signup.css'
 
  export default function Signup(props) {
 
+  window.addEventListener('load', () => {
+    document.getElementById('signUpBtn').disabled = true;
+  });
+
   const [newUser, setNewUser] = useState({});
 
     const changeHandler = (e) => {
         const user = { ...newUser };
         user[e.target.name] = e.target.value;
-        console.log(user);
         setNewUser(user);
+
+        if(user.firstName == 0 || user.firstName == undefined ||
+            user.lastName == 0 || user.lastName == undefined  ||
+            user.mobile ==   0 || user.mobile == undefined    ||
+            user.email ==    0 || user.email == undefined     ||
+            user.password == 0 || user.password == undefined  ||
+            user.role ==     0 || user.role == undefined)
+        document.getElementById('signUpBtn').disabled = true
+        else{
+        document.getElementById('signUpBtn').disabled = false
+    }
+        
     }
 
-    const regsiterHandler = (e) => {
+  const regsiterHandler = (e) => {
         e.preventDefault();
         props.register(newUser)
+        
     }
 
   return (
-    
+
     <div>
 
       <Container>
@@ -28,25 +44,30 @@ import './Signup.css'
         <Col className='right-row' xs={8 }>
       <h1>Signup</h1>
 
-        <form onSubmit={regsiterHandler}>
+      <form id='signUpForm'>
 
-        <input type="text" name="firstName" onChange={changeHandler} placeholder="FirstName"/>
-        
-        <br /><br />
+        <label>FirstName:</label>
+        <input  type="text" name="firstName" onChange={changeHandler} required />
 
-        <input type="text" name="lastName" onChange={changeHandler} placeholder="LastName"/>
-      
-        <br /><br />
+        <br /> <br />
 
-        <input type="text" name="mobile" onChange={changeHandler} placeholder="Mobile Number"/>
+        <label>LastName:</label>
+        <input  type="text" name="lastName" onChange={changeHandler} required/>
 
         <br /><br />
 
-        <input type="email" name="email" onChange={changeHandler} placeholder="Email"/>
+        <label>Mobile Number:</label>
+        <input  type="text" name="mobile" onChange={changeHandler} required/>
 
         <br /><br />
 
-        <input type="password" name="password" autoComplete='' onChange={changeHandler} placeholder="password"/>
+        <label>Email:</label>
+        <input  type="email" name="email" onChange={changeHandler} required/>
+
+        <br /><br />
+
+        <label>Password:</label>
+        <input  type="password" name="password" autoComplete='' onChange={changeHandler} required />
 
         <br /><br />
 
@@ -55,19 +76,18 @@ import './Signup.css'
           <input type="radio" name="role" value={'Donator'} className="custom-control-input" onChange={changeHandler} required />
           <label className="custom-control-label" style={{ "marginRight": "10px" }}>Food Donator</label>
 
-          <input type="radio" name="role" value={'Reciever'} className="custom-control-input" onChange={changeHandler} />
+          <input type="radio" name="role" value={'Reciever'} className="custom-control-input" onChange={changeHandler} required/>
           <label className="custom-control-label">Food Reciever</label>
         </div>
 
         <br />
 
-        <Button onClick={regsiterHandler}>Signup </Button>
+        <button id="signUpBtn" onClick={regsiterHandler}>Signup</button>
 
         <p> <br />
           Aleady have an account?<br />
           <a className="btn btn-link" href="/login">Login here</a>
         </p>
-
 
       </form>
 
