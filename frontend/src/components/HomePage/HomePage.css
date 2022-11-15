@@ -1,18 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 .carousel {
     width:100%;
-    height:100vh;
+    height:105vh;
     margin: auto;
   }
 
 .caption{
     font-size: 40px;
-   margin-bottom: 10%;
+   margin-bottom: 15%;
     inline-size: 30%;
     overflow-wrap: break-word;
     font-family: 'Lato', sans-serif;
 }
 
+.slide2{
+    margin-bottom: 5%;
+}
+
 .d-block{
     width: 100vw;
+}
+
+.btn-primary{
+    background-color: rgb(236, 93, 41);
+    --bs-btn-bg: rgb(236, 93, 41);
+    --bs-btn-border-color: rgb(236, 93, 41);
+    --bs-btn-hover-bg: rgb(183, 83, 47);
+    --bs-btn-hover-border-color: rgb(183, 83, 47);
+
+    /* disable  */
+    --bs-btn-disabled-bg: #676767;
+    --bs-btn-disabled-border-color: #676767;
+    --bs-btn-disabled-color: rgb(13, 13, 13);
+    
+    height: 50px;
+    width: 100px;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+
+}
+
+.cap{
+    font-size: 50px;
+    margin-bottom: 19%;
+     inline-size: 30%;
+     overflow-wrap: break-word;
+     font-family: 'Lato', sans-serif;
+
+}
+
+.donationBtn{
+    font-size: 17px;
+    height: 50px;
+    width: 105px;
 }

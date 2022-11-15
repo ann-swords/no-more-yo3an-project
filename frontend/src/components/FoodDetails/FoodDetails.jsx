@@ -71,7 +71,7 @@ function FoodDetails(props) {
         <div className='food-details-text'>
             <h3>{food.name}</h3>
                 <h3>{food.description}</h3>
-                <h3>{food.name}</h3>
+                
 
 
                 {food.contains? <h3>Food Contents:</h3> : null}
@@ -85,6 +85,7 @@ function FoodDetails(props) {
 
 
                 {/* Add the location */}
+                <h3>Location:...</h3>
                 
                 <p></p>
                 {food.status == 'Reserved' ? null : <Button

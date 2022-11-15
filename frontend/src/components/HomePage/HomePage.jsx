@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
+import {Carousel, Button} from 'react-bootstrap';
+import {useNavigate} from 'react-router-dom';
 import './HomePage.css'
 
+
 export default function HomePage() {
+
+  const navigate = useNavigate();
 
   const [index, setIndex] = useState(0);
 
@@ -10,43 +14,50 @@ export default function HomePage() {
     setIndex(selectedIndex);
   };
 
+  const navigateToDonatePage = () =>{
+    navigate('/donate')
+  }
+
+  const navigateToFoodPage = () =>{
+    navigate('/food')
+  }
+
   return (
     <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
         <img
-          className="d-block"  height={560}
+          className="d-block"  height={590}
           src="https://i.imgur.com/20F147c.png"
           alt="First slide"
         />
         <Carousel.Caption className='caption'>
           <p> Help to significantly reduce the amount of food waste in Bahrain.</p>
+        <Button  className='btn' onClick={navigateToDonatePage}>Donate</Button>
         </Carousel.Caption>
       </Carousel.Item>
 
       <Carousel.Item>
         <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Second slide&bg=282c34"
+          className="d-block " height={590}
+          src="https://i.imgur.com/aQu02Yj.png"
           alt="Second slide"
         />
 
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <Carousel.Caption className='slide2'>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Third slide&bg=20232a"
+          className="d-block"  height={590}
+          src="https://i.imgur.com/aSav2Em.jpg"
           alt="Third slide"
         />
 
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
+        <Carousel.Caption className='cap'>
           <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+           In need for food? Check Donations
           </p>
+          <Button  className='donationBtn' onClick={navigateToFoodPage}>Donations</Button>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
