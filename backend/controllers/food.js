@@ -13,14 +13,17 @@ const createFood = async (req, res) => {
 
     try {
 
-        console.log(req.body)
-        console.log('name', req.body.name)
+        const idOfUser = user.user.id
 
         let containsIdArray = req.body.contains 
 
-        containsIdArray.forEach(element => {
-            element = mongoose.Types.ObjectId(element)
-        });
+        if (containsIdArray === undefined){
+            containsIdArray = []
+        } else {
+            containsIdArray.forEach(element => {
+                element = mongoose.Types.ObjectId(element)
+            });
+        }
 
         const newFood = await Food.create({
             name: req.body.name,
@@ -30,13 +33,13 @@ const createFood = async (req, res) => {
             images: req.body.images,
     
             // to pass reference
-            userDonateId: mongoose.Types.ObjectId(req.body.userDonateId),
+            userDonateId: mongoose.Types.ObjectId(idOfUser),
     
-            // reference to person reserving the food
-            userReserved: (req.body.userReserved),
+            // // reference to person reserving the food
+            userReserved: undefined,
     
             // reference the location table
-            // location: mongoose.Types.ObjectId(req.body.location),
+            location: undefined,
 
             
 
@@ -45,40 +48,26 @@ const createFood = async (req, res) => {
             contains: containsIdArray
         })
 
-        let user = await User.findById(mongoose.Types.ObjectId(req.body._id))
-        
-        let food = newFood;
+        let userDb = await User.findById(mongoose.Types.ObjectId(idOfUser))
 
-        user.foods.push(food._id)
 
-        await user.save()
-    
+        userDb.foods.push(newFood._id)
+        await userDb.save()
 
-        /*
-            governorate: {type: String, required: true},
-            city: {type: String, required: true},
-            block: {type: String, required: true},
-            road: {type: String, required: true},
-            house: {type: String, required: true},
-
-            // can be [arrays of string] that represents latitude and longitude
-            // or it can be [float number]   so [lat, len]
-
-            mapsInfo:  {type: String}
-        */
 
         // Create location for food
-        let foodLocation = await Location.create({
+        const newLocation = await Location.create({
             governorate: req.body.location.governorate,
             city: req.body.location.city,
             block: req.body.location.block,
             road: req.body.location.road,
             house: req.body.location.house,
-            mapsInfo: [parseFloat(req.body.mapsInfo.lat), parseFloat(req.body.mapsInfo.len)]
+            mapsInfo: [parseFloat(req.body.location.mapsInfo[0]), parseFloat(req.body.location.mapsInfo[1])]
         })
         
+        console.log('food location', newLocation)
         
-        let updatedUser = await user.findByIdAndUpdate(user._id, {location: foodLocation._id})
+        let updatedFood = await Food.findByIdAndUpdate(newFood._id, {location: newLocation._id})
         
 
         res.json({message: "Food got created"})
@@ -162,6 +151,17 @@ const getFoodWithContent = async (req , res) => {
     }
 }
 
+const getAllLocations = async (req, res) => {
+    
+    try {
+
+        let locations =  await Location.find({})
+
+        res.send(locations)
+    } catch (err) {
+        res.send(err)
+    }
+}
 
 module.exports = {
     createFood,
@@ -170,5 +170,6 @@ module.exports = {
     getFoodByIdWithUserDonatorDetails,
     createContent,
     getAllFoodContents,
-    getFoodWithContent
+    getFoodWithContent,
+    getAllLocations
 }
