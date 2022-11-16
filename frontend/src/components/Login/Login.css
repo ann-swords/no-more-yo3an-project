@@ -1,0 +1,12 @@
+.left-col{
+    background-image: url('https://www.trusselltrust.org/wp-content/uploads/sites/2/2017/11/Foodbank-Warehouse-Tin-Sorting-2_WEB-e1512736203945.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.right-col{
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-top: 10px;
+    width: 49%;
+}

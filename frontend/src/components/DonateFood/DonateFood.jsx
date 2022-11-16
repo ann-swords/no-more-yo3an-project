@@ -3,6 +3,7 @@ import axios from "axios";
 import './DonateFood.css'
 
 import FoodMap from "../FoodMap/FoodMap";
+import { Container, Button, Row, Col, Form } from "react-bootstrap";
 
 
 export default function DonateFood(props) {
@@ -69,61 +70,100 @@ export default function DonateFood(props) {
 
   return (
     <div>
-      <h1>Donate Food</h1>
-      <form onSubmit={donationHandler}>
-        <label>Name</label>
-        <input type="text" name="name" onChange={changeHandler}/>
-        <br /><br />
-        <label>Description</label>
-        <input type="text" name="description" onChange={changeHandler}/>
-        <br /><br />
-        <label>Production Date</label>
-        <input type="date" name="prodDate" onChange={changeHandler}/>
-        <br /><br />
-        <label>Expiry Date</label>
-        <input type="date" name="expDate" onChange={changeHandler}/>
-        <br /><br />
-        <label>Attach Images</label>
-        <input type="file" name="images" onChange={changeHandler}/>
-        <br /><br />
-
-{/* Map and Location Deatils: */}
-        <div>
-          <label>Address:</label> <br />
-          <input type="text" placeholder="Block" name="block"/>
-          <input type="text" placeholder="Road" name="road" />
-          <input type="text" placeholder="House" name="house" />
-          <br /><br />
-          
 
 
-          <div className='map-details'>
+<Container>
+        <h1>Donate Food</h1>
+        <Form onSubmit={donationHandler}>
+          <Row>
+            <Col className="right-row">
+              <Form.Group className="mb-3">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  onChange={changeHandler}
+                  placeholder="Enter name"
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="description"
+                  onChange={changeHandler}
+                  placeholder="Enter food description"
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Production Date</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="prodDate"
+                  onChange={changeHandler}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Expiry Date</Form.Label>
+                <Form.Control
+                  type="date"
+                  name="expDate"
+                  onChange={changeHandler}
+                  required
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Attach at least one Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  name="images"
+                  onChange={changeHandler}
+                  required
+                />
+              </Form.Group>
+              <label>Contains:</label> <br />
+              {allergie.map((a, index) => (
+                <React.Fragment key={index}>
+                  <input
+                    type="checkbox"
+                    id={index}
+                    name="contains"
+                    value={a._id}
+                    onChange={changeHandler}
+                  />
+                  <label htmlFor={index}>{a.contentName}</label> <br />
+                </React.Fragment>
+              ))}
+              <br />
+              <Button type="submit">
+                Donate
+              </Button>
+            </Col>
 
-          < FoodMap setSelected={setSelected} selected={selected} />
-                
-        </div>
-        
-          <br /><br />
-        </div>
 
+            {/* Map and Location Deatils: */}
+            <Col>
+              <div>
+                <label>Address:</label> <br />
+                <input type="text" placeholder="Block" name="block" />
+                <input type="text" placeholder="Road" name="road" />
+                <input type="text" placeholder="House" name="house" />
+                <br />
+                <br />
+                <div className="map-details">
+                  <FoodMap setSelected={setSelected} selected={selected} />
+                </div>
+              </div>
+            </Col>
 
-        <label>Contains:</label> <br />
-        {allergie.map((a, index) => (
-          <React.Fragment key={index}>
-            <input
-              type="checkbox"
-              id={index}
-              name= "contains"
-              value={a._id}
-              onChange={changeHandler}
-            />
-            <label htmlFor={index}>{a.contentName}</label> <br />
-          </React.Fragment>
-        ))}
-        <br /><br />
-        <button type="submit">Donate</button>
-        {/* <button type="submit">Donate</button> */}
-      </form>
+            
+          </Row>
+        </Form>
+      </Container>
+
     </div>
   );
 }

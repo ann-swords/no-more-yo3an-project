@@ -1,11 +1,22 @@
 .left-row{
-    border: 2px blue solid;
-    
+    background-image: url('https://cf.ltkcdn.net/charity/images/orig/266622-1600x1030-guide-giving-food-donations.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .right-row{
-    border: 2px red solid;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-top: 10px;
+    width: 49%;
 }
 .container{
-    margin-top: 20px ;
-border: 2px solid green;
+    margin-top: 5% ;
+}
+
+.form-control{
+    line-height: 2;
+}
+.signup{
+    color: rgb(236, 93, 41);
 }
