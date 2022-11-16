@@ -20,7 +20,7 @@ function FoodDetails(props) {
     const [foodStatus, setFoodStatus] = useState({status: ''})
   
     useEffect(()=>{
-      axios.get(`http://localhost:4000/foodContent/${id}`)
+      axios.get(`http://localhost:4000/food/${id}/details`)
       .then(res => {
         console.log(res.data)
         setFood(res.data)
