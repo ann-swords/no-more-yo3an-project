@@ -89,7 +89,7 @@ export default function DonateFood(props) {
                   type="text"
                   name="name"
                   onChange={changeHandler}
-                  placeholder="Enter name"
+                  placeholder="Enter food name"
                   required
                 />
               </Form.Group>
@@ -154,10 +154,12 @@ export default function DonateFood(props) {
             <Col>
               <div>
                 <label>Address:</label> <br />
-                <input type="text" placeholder="Block No" name="block" onChange={changeHandler} />
-                <input type="text" placeholder="Road No" name="road" onChange={changeHandler}/>
-                <input type="text" placeholder="Building No / villa " name="building" onChange={changeHandler}/>
-                <input type="text" placeholder="Flat" name="flat" onChange={changeHandler}/>
+
+                <input type="text" placeholder="Block No" name="block" onChange={changeHandler} required />
+                <input type="text" placeholder="Road No" name="road" onChange={changeHandler} required/>
+                <input type="text" placeholder="Building No / villa " name="building" onChange={changeHandler} required/>
+                <input type="text" placeholder="Flat" name="flat" onChange={changeHandler} required/>
+
                 <br />
                 <br />
                 <div className="map-details">
