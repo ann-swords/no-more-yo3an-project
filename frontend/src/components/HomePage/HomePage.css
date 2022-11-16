@@ -19,9 +19,10 @@
 
 .d-block{
     width: 100vw;
+    
 }
 
-.btn-primary{
+.btn-home{
     background-color: rgb(236, 93, 41);
     --bs-btn-bg: rgb(236, 93, 41);
     --bs-btn-border-color: rgb(236, 93, 41);
@@ -53,4 +54,12 @@
     font-size: 17px;
     height: 50px;
     width: 105px;
+    font-family: 'Lato', sans-serif;
+
+
+    background-color: rgb(236, 93, 41);
+    --bs-btn-bg: rgb(236, 93, 41);
+    --bs-btn-border-color: rgb(236, 93, 41);
+    --bs-btn-hover-bg: rgb(183, 83, 47);
+    --bs-btn-hover-border-color: rgb(183, 83, 47);
 }

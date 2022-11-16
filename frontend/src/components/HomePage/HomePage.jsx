@@ -32,14 +32,14 @@ export default function HomePage() {
         />
         <Carousel.Caption className='caption'>
           <p> Help to significantly reduce the amount of food waste in Bahrain.</p>
-        <Button  className='btn' onClick={navigateToDonatePage}>Donate</Button>
+        <Button  className='btn-home' onClick={navigateToDonatePage}>Donate</Button>
         </Carousel.Caption>
       </Carousel.Item>
 
       <Carousel.Item>
         <img
-          className="d-block " height={590}
-          src="https://i.imgur.com/aQu02Yj.png"
+          className="d-block"  height={590}
+          src="https://i.imgur.com/JyfOKWb.png"
           alt="Second slide"
         />
 
