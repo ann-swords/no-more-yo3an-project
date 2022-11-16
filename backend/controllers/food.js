@@ -12,10 +12,19 @@ const createFood = async (req, res) => {
     console.log(user)
 
     try {
-
         const idOfUser = user.user.id
-
         let containsIdArray = req.body.contains 
+
+        const newLocation = await Location.create({
+            // city: req.body.city,
+            block: req.body.block,
+            road: req.body.road,
+            building: req.body.building,
+            flat: req.body.flat,
+            lat: req.body.lat,
+            lng: req.body.lng
+        })
+
 
         if (containsIdArray === undefined){
             containsIdArray = []
@@ -39,10 +48,7 @@ const createFood = async (req, res) => {
             userReserved: undefined,
     
             // reference the location table
-            location: undefined,
-
-            
-
+            location: newLocation._id,
 
             // references the foodContent table
             contains: containsIdArray
@@ -56,18 +62,19 @@ const createFood = async (req, res) => {
 
 
         // Create location for food
-        const newLocation = await Location.create({
-            governorate: req.body.location.governorate,
-            city: req.body.location.city,
-            block: req.body.location.block,
-            road: req.body.location.road,
-            house: req.body.location.house,
-            mapsInfo: [parseFloat(req.body.location.mapsInfo[0]), parseFloat(req.body.location.mapsInfo[1])]
-        })
+        // const newLocation = await Location.create({
+        //     // city: req.body.city,
+        //     block: req.body.block,
+        //     road: req.body.road,
+        //     building: req.body.house,
+        //     flat: req.body.flat,
+        //     lat: req.body.lat,
+        //     lng: req.body.lng
+        // })
         
         console.log('food location', newLocation)
         
-        let updatedFood = await Food.findByIdAndUpdate(newFood._id, {location: newLocation._id})
+        // let updatedFood = await Food.findByIdAndUpdate(newFood._id, {location: newLocation._id})
         
 
         res.json({message: "Food got created"})
