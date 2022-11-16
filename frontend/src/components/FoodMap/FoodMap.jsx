@@ -7,9 +7,9 @@ import usePlacesAutocomplete, {
 
 import { Combobox } from '@headlessui/react'
 
-export default function FoodMap() {
+export default function FoodMap(props) {
   const center = useMemo(() => ({ lat: 26.0667, lng: 50.5577 }), []);
-  const [selected, setSelected] = useState(null)
+  // const [selected, setSelected] = useState(null)
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
@@ -18,7 +18,7 @@ export default function FoodMap() {
 
   // add single marker
   // const [markers, setMarkers] = useState([])
-  console.log('selected', selected)
+  // console.log('selected', selected)
   // debugger
 
   if (!isLoaded) {
@@ -27,7 +27,7 @@ export default function FoodMap() {
     return (
       <>
         <div className="places-container">
-            <PlacesAutocomplete setSelected={setSelected} />
+            <PlacesAutocomplete setSelected={props.setSelected} />
         </div>
 
         <GoogleMap
@@ -35,7 +35,7 @@ export default function FoodMap() {
           center={center}
           mapContainerStyle={{ width: "100%", height: "100%" }}
         >
-            {selected && <Marker position={selected}></Marker>}
+            {props.selected && <Marker position={props.selected}></Marker>}
         </GoogleMap>
       </>
     );
@@ -66,7 +66,6 @@ const PlacesAutocomplete = ({ setSelected}) => {
         console.log("📍 Coordinates: ", { lat, lng });
         setSelected({lat, lng});
         // console.log("selected",selected)
-
     }
 
     //Call axios here 
@@ -74,20 +73,15 @@ const PlacesAutocomplete = ({ setSelected}) => {
     return (
     <Combobox onChange={handleSelect}>
         <Combobox.Input value={value} onChange={e =>setValue(e.target.value)} disabled={!ready} placeholder={"Search an address"} />
-    
-            <Combobox.Options>
-            {
-             data.map(item => 
-            <ul>
-                <Combobox.Option key={item.place_id}  value={item.description}><li>{item.description}</li></Combobox.Option>
-            </ul>
-            )}
-            </Combobox.Options>
-
-
+        <Combobox.Options>
+          {
+            data.map(item => 
+          <ul>
+              <Combobox.Option key={item.place_id}  value={item.description}><li>{item.description}</li></Combobox.Option>
+          </ul>
+          )}
+        </Combobox.Options>
     </Combobox>
-
-
     )
 
 }

@@ -7,7 +7,7 @@ import { Container, Button, Row, Col, Form } from "react-bootstrap";
 
 
 export default function DonateFood(props) {
-
+  const [selected, setSelected] = useState(null);
   const [allergie, setAllergie] = useState([]);
 
 
@@ -154,7 +154,7 @@ export default function DonateFood(props) {
                 <br />
                 <br />
                 <div className="map-details">
-                  <FoodMap />
+                  <FoodMap setSelected={setSelected} selected={selected} />
                 </div>
               </div>
             </Col>
