@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-
 .map-details{
     width: 50vw;
-    height: 65vh;
+    height: 60vh;
 }
 .address{
     padding: 20px;
     margin: 10px;
     box-shadow: 7px 7px 7px 7px rgb(219, 219, 219);
     border-radius: 25px;
+    padding-bottom: 90px;
+    background-color: white;
 
 }
 
@@ -18,6 +18,7 @@ margin: 10px;
 padding-top: 30px;
 box-shadow: 7px 7px 7px 7px  rgb(235, 234, 234);
 border-radius: 25px;
+background-color: white;
 
 }
 
@@ -31,7 +32,6 @@ border-radius: 25px;
 }
 
 .head1{
-  font-family: 'Lato', sans-serif;
   color: rgb(255, 98, 0);
   margin-bottom: 20px;
 }
@@ -40,7 +40,6 @@ border-radius: 25px;
     margin-right: 90%;
     font-size: 20px;
     font-weight: 300;
-    font-family: 'Lato', sans-serif;
 }
 
 .donateBtn{
@@ -75,4 +74,7 @@ border-radius: 25px;
 
 .file-img {
     width: 100px;
+}
+.boddy{
+    background-image: url('https://en.bahrainfoodbank.com/wp-content/uploads/2020/05/white-back-scaled.jpg');
 }

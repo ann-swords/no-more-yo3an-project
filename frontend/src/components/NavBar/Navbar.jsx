@@ -56,10 +56,10 @@ export default function Navbar(props) {
         <div className='navbar'>
           <div className="navbar-container">
           <div>
-             <Link className="navbar-href" to='/home'>Home</Link>
+             <Link className="navbar-href" to='/home'><img src="https://i.imgur.com/HUEuXKf.png" alt="No More Yo3an Logo" width="155" height="45"/></Link>
              <Link className="navbar-href" to='/about'>About</Link>
              <Link className="navbar-href" to='/donate'>Donate</Link>
-             {/* <img src="https://i.imgur.com/7JjrDzk.png" alt="No More Yo3an Logo" width="250" height="90"/> */}
+             {/* <img src="https://i.imgur.com/HUEuXKf.png" alt="No More Yo3an Logo" width="250" height="90"/> */}
           </div>
           <div>
             <NavDropdown title={props.user ? "Welcome " + localStorage.getItem("userName") : null}>
@@ -74,7 +74,7 @@ export default function Navbar(props) {
     (<div className='navbar'>
         <div className="navbar-container">
             <div>
-                <Link className="navbar-href" to='/home'>Home</Link>
+                <Link className="navbar-href" to='/home'><img src="https://i.imgur.com/HUEuXKf.png" alt="No More Yo3an Logo" width="155" height="45"/></Link>
                 <Link className="navbar-href" to='/about'>About</Link>
                 <Link className="navbar-href" to='/food'>Find Food</Link>
                 <Link className="navbar-href" to='/donate'>Donate</Link>

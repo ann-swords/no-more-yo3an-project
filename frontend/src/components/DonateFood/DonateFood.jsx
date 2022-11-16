@@ -188,10 +188,11 @@ export default function DonateFood(props) {
 
 
   return (
-    <div>
+    <div className='bodyy'>
 
-<Container>
+<br /><br />
         <h1 className="head1">Donate Food</h1>
+    <Container>
         <Form onSubmit={donationHandler}>
           <Row>
             <Col className="donation">
@@ -229,10 +230,8 @@ export default function DonateFood(props) {
                 />
               </Form.Group>
       </Row>
-      
+      <br />
       </>
-        
-
               {/* Image Upload: */}
 
               {//older version
@@ -259,11 +258,6 @@ export default function DonateFood(props) {
                   accept="image/png, image/jpeg, image/webp"
                 />
               </Form.Group>
-
-              <br />
-              <br />
-              <br />
-              <br />
               <br />
 
               <Form.Group className="mb-3" controlId="formFileMultiple">
@@ -347,6 +341,8 @@ export default function DonateFood(props) {
                 <div className="map-details">
                   <FoodMap setSelected={setSelected} selected={selected} />
                 </div>
+
+                
               </div>
             </Col>
           
