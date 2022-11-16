@@ -3,10 +3,12 @@ import Badge from 'react-bootstrap/Badge';
 import axios from 'axios';
 import './MyDonations.css';
 import Moment from 'react-moment';
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function MyDonations() {
-
+  const navigate = new useNavigate();
   const [foods, setFoods] = useState([]);
 
   const getUsersDonates = () =>{
@@ -23,7 +25,14 @@ export default function MyDonations() {
 
   const handleFoodClick = (id) =>{
     console.log('food id', id)
-    // axios.get('')
+    navigate(`/food/${id}/details`);
+    // axios.get(`http://localhost:4000/food/${req.params.id}/details`)
+    // .then(res => {
+    //   res.json(res.data);
+    // })
+    // .catch(err =>{
+    //   res.json(err);
+    // })
   }
     useEffect(() => {
      getUsersDonates();
@@ -40,21 +49,18 @@ export default function MyDonations() {
             <img className='myDonations-img' src={food.images[0]}  
               alt="Food"
              onError={(e) =>
-              (e.target.onerror = null)(
                 (e.target.src="https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png")
-              )
             }/>  
       
           <div className='donation-details'>
             <p>{food.name}</p>
             <span className="time-text">
-              <Moment format="D MMM YYYY">{food.createdAt}</Moment>
+             Posted on <Moment format="D MMM YYYY">{food.createdAt}</Moment>
             </span>
           </div>
-          <div className='badge-container'>
-            <Badge bg="success">{food.status}</Badge>
+          <div className='badge-container' >
+            <Badge bg={food.status === 'Available' ? "success" : "danger"}>{food.status}</Badge>
           </div>
-          {/* <p>{food.status}</p> */}
         </div>
           )
           ):

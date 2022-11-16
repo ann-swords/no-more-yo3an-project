@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-
 export default function Login(props) {
 
   const [newUser, setNewUser] = useState({});

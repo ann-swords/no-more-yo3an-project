@@ -6,22 +6,24 @@ import DonateFood from './components/DonateFood/DonateFood';
 import AllFood from './components/AllFood/AllFood';
 import Navbar from './components/NavBar/Navbar';
 import { useState, useEffect} from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import Footer from './components/Footer/Footer';
 import FoodDetails from './components/FoodDetails/FoodDetails';
-
 import MyDonations from './components/MyDonations/MyDonations';
-
 import NotAuthorized from './components/NotAuthorized';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState({});
-
+  // const navigate = new useNavigate();
+  // const history = useHistory();
+  const notify = toast();
   useEffect(()=>{
     let token = localStorage.getItem("token");
     if(token != null){
@@ -47,9 +49,20 @@ const loginHandler = (cred) =>{
       localStorage.setItem("token", res.data.token);
       let user = jwt_decode(res.data.token);
       setIsAuth(true);
-      getUser(user.user.id)
-
+      getUser(user.user.id);
     }
+  })
+  .finally(()=>{
+    toast("You are logged in successfuly",{
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
 
   })
   .catch(err => {
@@ -92,6 +105,21 @@ const onLogoutHandler = (e) => {
   localStorage.removeItem("token");
   setIsAuth(false);
   setUser(null);
+  window.location.replace("/home")
+  // .finally(()=>{
+  //   toast('You are logged out successfuly!',{
+  //     position: "top-right",
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "light",
+  //     })
+  // })
+
+
 }
 
 
@@ -124,11 +152,13 @@ const donationHandler = (food) => {
         <Route path="/food" element={isAuth? <AllFood/> : <Login login={loginHandler}/>} />
 
         <Route path="/user/donates" element={<MyDonations/>} />
+        <Route path="/food/:id/details" element={<FoodDetails/>} />
 
         <Route path="/donate" element={user.role == 'Donator' ? <DonateFood donate={donationHandler} /> : <NotAuthorized/> } />
 
         <Route path="/fooddetails/:id" element={isAuth? <FoodDetails /> : <Login login={loginHandler}/>} />
       </Routes>
+      <ToastContainer />
       <Footer/>
     </div>
   </Router>
