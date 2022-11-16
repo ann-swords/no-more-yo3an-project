@@ -24,8 +24,7 @@ function AllFood() {
   return (
     <>
 
-    <h1>Food Page</h1>
-
+    <h1>Food to be claimed</h1>
 
     <div className='food-container'>
         
@@ -34,7 +33,6 @@ function AllFood() {
           <SingleFood food={food} />
           </React.Fragment>
         )}
-
 
     </div>
 
