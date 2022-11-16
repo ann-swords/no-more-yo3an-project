@@ -4,8 +4,8 @@ import axios from 'axios';
 import './MyDonations.css';
 import Moment from 'react-moment';
 import { useNavigate } from "react-router-dom";
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyDonations() {
   const navigate = new useNavigate();
@@ -37,8 +37,25 @@ export default function MyDonations() {
     useEffect(() => {
      getUsersDonates();
     },[])
+
+    const { search } = window.location;   
+    const donated = (new URLSearchParams(search)).get('donated');
   
-  
+    if (donated === '1') {
+    
+      toast("Thanks for donating ❤️" ,{
+        toastId: 'success1',
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        }); 
+      }
+      
   return (
     <div className='myDonations-list-container'>
 
