@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import './Login.css'
 export default function Login(props) {
 
@@ -13,8 +14,12 @@ export default function Login(props) {
     }
 
     const loginHandler = (e) => {
-      e.preventDefault() 
-      props.login(newUser)
+try {
+  e.preventDefault() 
+  props.login(newUser)
+} catch (error) {
+  toast.error("ERROR ->" + error);
+}     
     }
 
 

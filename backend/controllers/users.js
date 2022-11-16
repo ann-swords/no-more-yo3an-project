@@ -68,13 +68,13 @@ async function auth_signin(req, res){
         let user = await User.findOne({email});
 
         if(!user){
-            return res.json({message: "User not found"}).status(400);
+            return res.json({error: "User not found!"}).status(400);
         }
 
         const isMatch = await bcrypt.compareSync(password, user.password);
 
         if(!isMatch){
-            return res.json({message: "Password not matched!"}).status(401);
+            return res.json({error: "Password not matched!"}).status(401);
         }
 
         const payload = {
@@ -100,7 +100,7 @@ async function auth_signin(req, res){
         // req.user = payload;
 
     } catch (err){
-        res.json({message: "You are not loggedin, please try again later!"}).status(400);
+        res.json({error: "You are not loggedin, please try again later!"}).status(400);
     }
 }
 

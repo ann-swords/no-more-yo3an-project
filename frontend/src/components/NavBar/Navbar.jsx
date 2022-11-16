@@ -57,6 +57,8 @@ export default function Navbar(props) {
           <div className="navbar-container">
           <div>
              <Link to='/home'>Home</Link>
+             <Link to='/about'>About</Link>
+             <Link to='/donate'>Donate</Link>
              {/* <img src="https://i.imgur.com/7JjrDzk.png" alt="No More Yo3an Logo" width="250" height="90"/> */}
           </div>
           <div>
@@ -73,6 +75,9 @@ export default function Navbar(props) {
         <div className="navbar-container">
             <div>
                 <Link to='/home'>Home</Link>
+                <Link to='/about'>About</Link>
+                <Link to='/food'>Find Food</Link>
+                <Link to='/donate'>Donate</Link>
                 {/* <img src="https://i.imgur.com/7JjrDzk.png" alt="No More Yo3an Logo" width="250" height="90"/> */}
             </div>
             <div>

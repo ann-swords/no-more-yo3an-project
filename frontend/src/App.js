@@ -2,6 +2,7 @@ import './App.css';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import HomePage from './components/HomePage/HomePage'; 
+import About from './components/About/About';
 import DonateFood from './components/DonateFood/DonateFood';
 import AllFood from './components/AllFood/AllFood';
 import Navbar from './components/NavBar/Navbar';
@@ -12,7 +13,7 @@ import axios from "axios";
 import Footer from './components/Footer/Footer';
 import FoodDetails from './components/FoodDetails/FoodDetails';
 import MyDonations from './components/MyDonations/MyDonations';
-import NotAuthorized from './components/NotAuthorized';
+// import NotAuthorized from './components/NotAuthorized';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -43,31 +44,39 @@ function App() {
 
 
 const loginHandler = (cred) =>{
+try {
   axios.post("http://localhost:4000/auth/signin", cred)
   .then(res =>{
+    if(res.data.error){
+      toast.error(res.data.error);
+    } else{
+      toast("You're successfully logged in !",{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }
+
     if(res.data.token != null){
       localStorage.setItem("token", res.data.token);
       let user = jwt_decode(res.data.token);
       setIsAuth(true);
       getUser(user.user.id);
     }
-  })
-  .finally(()=>{
-    toast("You are logged in successfuly",{
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      });
 
   })
   .catch(err => {
-    console.log(err);
+    toast.error("Error -> " + err)
   })
+
+} catch (error) {
+  toast.error("Error -> " + error)
+}
 }
 
 const getUser = (id) =>{
@@ -81,11 +90,24 @@ const getUser = (id) =>{
 }
 
 const onSubmitHandler = (formData) =>{
-  axios.post(`http://localhost:4000/users/${user._id}`, formData)
+  try {
+    axios.post(`http://localhost:4000/users/${user._id}`, formData)
   .then(res => {
       getUser(res.data._id);
-    
-  })
+      toast("Your profile data is successfully updated !",{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    })
+  } catch (error) {
+    toast.error(error)
+  }
 }
 
 //Add a new user:
@@ -96,7 +118,7 @@ const registerHandler = (user) => {
       console.log(res);
     })
     .catch((err) => {
-      alert(err.response.data.message)
+      toast.error("Error -> " + err.response.data.message)
     });
 };
 
@@ -105,22 +127,18 @@ const onLogoutHandler = (e) => {
   localStorage.removeItem("token");
   setIsAuth(false);
   setUser(null);
-  window.location.replace("/home")
-  // .finally(()=>{
-  //   toast('You are logged out successfuly!',{
-  //     position: "top-right",
-  //     autoClose: 3000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "light",
-  //     })
-  // })
-
-
-}
+  // window.location.replace("/home")
+    toast('You are logged out successfuly!',{
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      })
+    }
 
 
 //Add a new Food donation
@@ -131,12 +149,21 @@ const donationHandler = (food) => {
       .post("http://localhost:4000/food", food, {
         headers: {Authorization: token}
       })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        toast("Thanks for donating ❤️" ,{
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       })
       .catch((err) => {
-        console.log(err);
-      });
+        toast.error("Error -> " + err)
+      })
   }
 };
 
@@ -146,6 +173,7 @@ const donationHandler = (food) => {
     <Navbar onLogoutHandler={onLogoutHandler} onSubmitHandler={onSubmitHandler} isAuth={isAuth} user={user}></Navbar>
       <Routes>
       <Route path="/home" element={<HomePage/>} />
+      <Route path="/about" element={<About/>} />
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
         <Route path="/login" element={isAuth? <HomePage/> : <Login login={loginHandler}/>} />
         {/* <Route path="/food/new" element={ <Food donate={donationHandler}/>} />         */}
@@ -154,7 +182,7 @@ const donationHandler = (food) => {
         <Route path="/user/donates" element={<MyDonations/>} />
         <Route path="/food/:id/details" element={<FoodDetails/>} />
 
-        <Route path="/donate" element={user.role == 'Donator' ? <DonateFood donate={donationHandler} /> : <NotAuthorized/> } />
+        <Route path="/donate" element={isAuth? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/>}/> {/*<NotAuthorized/> */}
 
         <Route path="/fooddetails/:id" element={isAuth? <FoodDetails /> : <Login login={loginHandler}/>} />
       </Routes>
