@@ -3,12 +3,16 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    border-radius: 25px;
 }
 .right-row{
-    padding-left: 8%;
-    padding-right: 8%;
+    padding-left: 5%;
+    padding-right: 5%;
     padding-top: 10px;
     width: 49%;
+    border-radius: 25px;
+    box-shadow: 10px 10px 10px 15px rgb(219, 219, 219);
+    margin-left: 20px;
 }
 .container{
     margin-top: 5% ;
