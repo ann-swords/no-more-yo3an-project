@@ -8,35 +8,41 @@ import { Container, Button, Row, Col, Form } from "react-bootstrap";
 
 export default function DonateFood(props) {
   const [selected, setSelected] = useState(null);
-  const [allergie, setAllergie] = useState([]);
-
-
-  useEffect(()=>{
-    axios.get("http://localhost:4000/food-contents")
-    .then(res => {
-      console.log(res.data)
-      setAllergie(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-
-  },[])
-
-
-
+  const [allergies, setAllergies] = useState([]);
   const [newFood, setNewFood] = useState({
-
     // must be declared
     contains: []
   });
 
+
+  useEffect(()=>{
+    if(allergies.length === 0){
+      getAllergies();
+    }
+    setNewFood({
+      ...newFood, ...selected
+    })
+    // changeHandler();
+  },[selected])
+
+
+  const getAllergies = () =>{
+    axios.get("http://localhost:4000/food-contents")
+    .then(res => {
+      console.log(res.data)
+      setAllergies(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  
+
   const changeHandler = (e) => {
-
-
     console.log('target name', e.target.name)
 
-      const food = { ...newFood };
+      const food = { ...newFood, ...selected };
 
       // if the field is contains then do this
       if(e.target.name === 'contains'){
@@ -125,7 +131,7 @@ export default function DonateFood(props) {
                 />
               </Form.Group>
               <label>Contains:</label> <br />
-              {allergie.map((a, index) => (
+              {allergies.map((a, index) => (
                 <React.Fragment key={index}>
                   <input
                     type="checkbox"
@@ -148,9 +154,10 @@ export default function DonateFood(props) {
             <Col>
               <div>
                 <label>Address:</label> <br />
-                <input type="text" placeholder="Block" name="block" />
-                <input type="text" placeholder="Road" name="road" />
-                <input type="text" placeholder="House" name="house" />
+                <input type="text" placeholder="Block No" name="block" onChange={changeHandler} />
+                <input type="text" placeholder="Road No" name="road" onChange={changeHandler}/>
+                <input type="text" placeholder="Building No / villa " name="building" onChange={changeHandler}/>
+                <input type="text" placeholder="Flat" name="flat" onChange={changeHandler}/>
                 <br />
                 <br />
                 <div className="map-details">

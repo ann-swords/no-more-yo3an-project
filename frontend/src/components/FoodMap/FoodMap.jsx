@@ -1,5 +1,6 @@
 import { GoogleMap, useLoadScript, MarkerF, Marker } from "@react-google-maps/api";
 import React, { useMemo, useState } from "react";
+import './FoodMap.css';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -63,7 +64,6 @@ const PlacesAutocomplete = ({ setSelected}) => {
         const results = await getGeocode({address});
         console.log(results);
         const {lat, lng} = await getLatLng(results[0]);
-        console.log("📍 Coordinates: ", { lat, lng });
         setSelected({lat, lng});
         // console.log("selected",selected)
     }
@@ -76,9 +76,7 @@ const PlacesAutocomplete = ({ setSelected}) => {
         <Combobox.Options>
           {
             data.map(item => 
-          <ul>
-              <Combobox.Option key={item.place_id}  value={item.description}><li>{item.description}</li></Combobox.Option>
-          </ul>
+              <div className="predictions-list"  key={item.place_id}><Combobox.Option  value={item.description}>{item.description}</Combobox.Option></div>
           )}
         </Combobox.Options>
     </Combobox>
