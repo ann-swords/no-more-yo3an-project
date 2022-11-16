@@ -6,7 +6,7 @@ import Maps from '../Maps/Maps';
 import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
 
-function FoodDetails(props) {
+function FoodDetails() {
 
 
     // get all the food details from api
@@ -104,7 +104,7 @@ function FoodDetails(props) {
                 <h3>Location:...</h3>
                 
                 <p></p>
-                {food.status == 'Reserved' ? null : <Button
+                {food.status === 'Reserved' ? null : <Button
                 id='reserveBtn'
           variant="success"
           name="status"
@@ -121,7 +121,7 @@ function FoodDetails(props) {
         
         
 
-          < Maps />
+          < Maps location={food.location}/>
                 
         </div>
         {/* <div>

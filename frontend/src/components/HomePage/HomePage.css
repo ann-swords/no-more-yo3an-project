@@ -1,24 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 .main-carousel {
     width:100%;
-    height:105vh;
+    height:90vh;
     margin: auto;
   }
 
-.caption{
+.firstCap{
     font-size: 40px;
-   margin-bottom: 15%;
+   margin-bottom: 10%;
     inline-size: 30%;
     overflow-wrap: break-word;
     font-family: 'Lato', sans-serif;
 }
 
-.slide2{
-    margin-bottom: 5%;
-}
 
 .d-block{
     width: 100vw;
+    object-fit: cover;
     
 }
 
@@ -41,16 +39,16 @@
 
 }
 
-.cap{
+.thirdCap{
     font-size: 50px;
-    margin-bottom: 19%;
+    margin-bottom: 12%;
      inline-size: 30%;
      overflow-wrap: break-word;
      font-family: 'Lato', sans-serif;
 
 }
 
-.donationBtn{
+.findFoodBtn{
     font-size: 17px;
     height: 50px;
     width: 105px;
@@ -63,3 +61,93 @@
     --bs-btn-hover-bg: rgb(183, 83, 47);
     --bs-btn-hover-border-color: rgb(183, 83, 47);
 }
+
+.termsPack{
+    margin-top: 15%;
+    height: 10%;
+    padding: 20px;
+}
+
+
+.row1{
+   height: 30%;
+   margin: 10px;
+}
+
+.row2{
+    height: 30%;
+    margin-top: 5%;
+}
+
+.row3{
+    height: 30%;
+    margin-top: 5%;
+}
+
+.row4{
+    height: 30%;
+    margin-top: 5%;
+}
+
+.terms1{
+    height: 300px;
+    width: 90px;
+
+    font-size: 35px;
+    text-align: center;
+    padding: 50px;
+    margin-bottom: 3%;
+    inline-size: 30%;
+    overflow-wrap: break-word;
+    font-family: 'Lato', sans-serif;
+    
+}
+
+.terms2{
+    height: 300px;
+    width: 90px;
+    background-image: url('https://www.mayoclinichealthsystem.org/-/media/national-files/images/hometown-health/2021/food-in-containers.jpg?h=370&w=660&la=en&hash=F8FEAF8858B98024803D8C21C4C54DC2');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 10px 10px 20px rgb(176, 176, 176);
+    border-radius: 25px;
+}
+
+.terms3{
+    height: 300px;
+    width: 90px;
+    background-image: url('https://marocmama.com/wp-content/uploads/2012/05/Eating-with-Your-Hands-COVER.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 10px 10px 20px rgb(196, 195, 195);
+    border-radius: 25px;
+}
+
+
+.terms6{
+    height: 300px;
+    width: 90px;
+    background-image: url('https://t3.ftcdn.net/jpg/01/89/74/72/360_F_189747266_FpuLhVpA2Agew6UHl91f9tbdZAsSAfzG.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 10px 10px 20px rgb(196, 195, 195);
+    border-radius: 25px;
+}
+
+.terms7{
+    height: 300px;
+    width: 90px;
+    background-image: url('https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/bahrainfoodbank_outsidefood.jpg?w=640&ssl=1');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 10px 10px 20px rgb(176, 176, 176);
+    border-radius: 25px;
+}
+/* 
+.bodyy{
+    background-image: url('https://venngage-wordpress.s3.amazonaws.com/uploads/2018/09/Simple-Blue-White-Background-Image.jpg');
+} */
