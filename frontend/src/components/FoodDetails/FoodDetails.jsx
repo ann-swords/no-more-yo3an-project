@@ -66,6 +66,9 @@ function FoodDetails() {
         setIndex(selectedIndex);
       };
 
+
+
+      
   return (
     <div className='food-details-container'>
 
@@ -85,10 +88,10 @@ function FoodDetails() {
           : (<h1>stil loading</h1>)}
         </div>
         <div className='food-details-text'>
-            <h3>{food.name}</h3>
-                <h3>{food.description}</h3>
+            <h3>Dish Name: {food.name}</h3>
+                <h3>Discription: {food.description}</h3>
                 
-
+                
 
                 {food.contains? <h3>Food Contents:</h3> : null}
 
@@ -102,6 +105,11 @@ function FoodDetails() {
 
                 {/* Add the location */}
                 <h3>Location:...</h3>
+
+                <h3>{food.road}</h3>
+                <h3>{food.block}</h3>
+                <h3>{food.building}</h3>
+                <h3>{food.flat}</h3>
                 
                 <p></p>
                 {food.status === 'Reserved' ? null : <Button

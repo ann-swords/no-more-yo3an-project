@@ -72,11 +72,11 @@ const PlacesAutocomplete = ({ setSelected}) => {
 
     return (
     <Combobox onChange={handleSelect}>
-        <Combobox.Input value={value} onChange={e =>setValue(e.target.value)} disabled={!ready} placeholder={"Search an address"} />
+        <Combobox.Input value={value} onChange={e =>setValue(e.target.value)} disabled={!ready} placeholder={"Search an address"}  className="search"/>
         <Combobox.Options>
           {
             data.map(item => 
-              <div className="predictions-list"  key={item.place_id}><Combobox.Option  value={item.description}>{item.description}</Combobox.Option></div>
+              <div className="predictions-list"  key={item.place_id}><Combobox.Option className="locations" value={item.description}>{item.description}</Combobox.Option></div>
           )}
         </Combobox.Options>
     </Combobox>

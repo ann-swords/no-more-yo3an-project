@@ -56,10 +56,10 @@ export default function Navbar(props) {
         <div className='navbar'>
           <div className="navbar-container">
           <div>
-             <Link to='/home'>Home</Link>
+             <Link to='/home'><img src="https://i.imgur.com/HUEuXKf.png" alt="No More Yo3an Logo" width="135" height="45"/></Link>
              <Link to='/about'>About</Link>
              <Link to='/donate'>Donate</Link>
-             {/* <img src="https://i.imgur.com/7JjrDzk.png" alt="No More Yo3an Logo" width="250" height="90"/> */}
+             {/*  */}
           </div>
           <div>
             <NavDropdown title={props.user ? "Welcome " + localStorage.getItem("userName") : null}>

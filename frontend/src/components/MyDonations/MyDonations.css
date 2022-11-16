@@ -64,3 +64,7 @@
     padding: 30px;
     width: 100%;
 }
+.helpNum{
+    color:  rgb(255, 98, 0);
+    font-weight: bolder;
+}

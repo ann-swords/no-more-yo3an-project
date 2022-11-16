@@ -3,7 +3,7 @@ import axios from "axios";
 import './DonateFood.css'
 
 import FoodMap from "../FoodMap/FoodMap";
-import { Container, Button, Row, Col, Form } from "react-bootstrap";
+import { Container, Button, Row, Col, Form, FloatingLabel  } from "react-bootstrap";
 
 
 export default function DonateFood(props) {
@@ -77,33 +77,25 @@ export default function DonateFood(props) {
   return (
     <div>
 
-
 <Container>
-        <h1>Donate Food</h1>
+        <h1 className="head1">Donate Food</h1>
         <Form onSubmit={donationHandler}>
           <Row>
-            <Col className="right-row">
-              <Form.Group className="mb-3">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  onChange={changeHandler}
-                  placeholder="Enter food name"
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="description"
-                  onChange={changeHandler}
-                  placeholder="Enter food description"
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
+            <Col className="donation">
+
+              <FloatingLabel controlId="floatingInput" label="Dish Name" className="mb-3">
+                <Form.Control type="text" name="name" onChange={changeHandler} placeholder="Description" required/>
+              </FloatingLabel>
+
+              <FloatingLabel controlId="floatingTextarea" label="Description" className="mb-3">
+                <Form.Control as="textarea" name="description" onChange={changeHandler} placeholder="Description" required/>
+              </FloatingLabel>
+
+            {/* Prod and Exp Dates */}
+        
+      <>
+      <Row>
+      <Form.Group className="mb-3" as={Col} md="6">
                 <Form.Label>Production Date</Form.Label>
                 <Form.Control
                   type="date"
@@ -112,7 +104,9 @@ export default function DonateFood(props) {
                   required
                 />
               </Form.Group>
-              <Form.Group className="mb-3">
+
+
+              <Form.Group className="mb-3" as={Col} md="6">
                 <Form.Label>Expiry Date</Form.Label>
                 <Form.Control
                   type="date"
@@ -121,8 +115,14 @@ export default function DonateFood(props) {
                   required
                 />
               </Form.Group>
+      </Row>
+      
+      </>
+        
+
+              {/* Image Upload: */}
               <Form.Group className="mb-3">
-                <Form.Label>Attach at least one Image</Form.Label>
+                {/* <Form.Label>Attach at least one Image</Form.Label> */}
                 <Form.Control
                   type="file"
                   name="images"
@@ -130,45 +130,78 @@ export default function DonateFood(props) {
                   required
                 />
               </Form.Group>
+
+
+
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
               <label>Contains:</label> <br />
               {allergies.map((a, index) => (
                 <React.Fragment key={index}>
-                  <input
+               <div className="allergies">
+               <input
                     type="checkbox"
                     id={index}
                     name="contains"
                     value={a._id}
                     onChange={changeHandler}
                   />
-                  <label htmlFor={index}>{a.contentName}</label> <br />
+                  <label htmlFor={index}>{a.contentName}</label> 
+               </div>
+                 
                 </React.Fragment>
               ))}
-              <br />
-              <Button type="submit">
-                Donate
-              </Button>
+              <br /> <br />
+              <Button className="donateBtn" type="submit"> Donate </Button>
             </Col>
 
 
             {/* Map and Location Deatils: */}
-            <Col>
+            <Col className="address">
               <div>
-                <label>Address:</label> <br />
+                <p className="address-tag">Address:</p>  
 
-                <input type="text" placeholder="Block No" name="block" onChange={changeHandler} required />
-                <input type="text" placeholder="Road No" name="road" onChange={changeHandler} required/>
-                <input type="text" placeholder="Building No / villa " name="building" onChange={changeHandler} required/>
-                <input type="text" placeholder="Flat" name="flat" onChange={changeHandler} required/>
+                <Row className="mb-5 haha">
 
-                <br />
-                <br />
+                  <Form.Group as={Col} md="3">
+                  <div class="form-floating mb-3">
+                          <input type="text" name="block" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Block No" required/>
+                          <label for="floatingInput">Block No</label>
+                        </div>
+                  </Form.Group>
+
+                  <Form.Group as={Col} md="3">
+                  <div class="form-floating mb-3">
+                          <input type="text" name="road" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Road No" required/>
+                          <label for="floatingInput">Road No</label>
+                        </div>
+                  </Form.Group>
+
+                  <Form.Group as={Col} md="3">
+                  <div class="form-floating mb-3">
+                          <input type="text" name="building" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Building/Villa" required/>
+                          <label for="floatingInput">Building/Villa</label>
+                        </div>
+                  </Form.Group>
+
+                  <Form.Group as={Col} md="3">
+                  <div class="form-floating mb-3">
+                          <input type="text" name="flat" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Flat" required/>
+                          <label for="floatingInput">Flat</label>
+                        </div>
+                  </Form.Group>
+                </Row>
+                
                 <div className="map-details">
                   <FoodMap setSelected={setSelected} selected={selected} />
                 </div>
               </div>
             </Col>
-
-            
+          
           </Row>
         </Form>
       </Container>
@@ -176,3 +209,4 @@ export default function DonateFood(props) {
     </div>
   );
 }
+
