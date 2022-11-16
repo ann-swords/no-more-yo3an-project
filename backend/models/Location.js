@@ -2,12 +2,14 @@ const mongoose = require('mongoose'),
 Schema = mongoose.Schema;
 
 const LocationModel = new Schema({
-    governorate: {type: String, required: true},
-    city: {type: String, required: true},
+    // governorate: {type: String, required: true},
+    // city: {type: String, required: true},
     block: {type: String, required: true},
     road: {type: String, required: true},
-    house: {type: String, required: true},
-    mapsInfo: [Number]
+    building: {type: String, required: true},
+    flat: {type: String},
+    lat: {type: String, required: true},
+    lng: {type: String, required: true}
 },{
     timestamps: true
 })

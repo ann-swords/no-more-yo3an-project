@@ -1,0 +1,4 @@
+.predictions-lis{
+    display: flex;
+    flex-direction: row;
+}
