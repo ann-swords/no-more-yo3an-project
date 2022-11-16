@@ -37,19 +37,20 @@ try {
   <br/>
 
 <Form onSubmit={loginHandler}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" name="email" onChange={changeHandler}  placeholder="Enter email" required/>
-        <Form.Text className="text-muted">
+ 
+     <div class="form-floating mb-3">
+      <input  type="email" name="email" onChange={changeHandler} class="form-control" id="floatingInput"  placeholder="Email Address" required/>
+      <label for="floatingInput">Email Address</label>
+      <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
-      </Form.Group>
+    </div>
 
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" name="password" autoComplete='' onChange={changeHandler}  placeholder="Password" required/>
-      </Form.Group>
+    <div class="form-floating mb-3">
+      <input type="password" name="password" autoComplete='' onChange={changeHandler} class="form-control" id="floatingPassword"  placeholder="Password" required/>
+      <label for="floatingPassword">Password</label>
+    </div>
 
       <Button type='submit'>Login</Button>
 

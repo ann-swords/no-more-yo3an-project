@@ -1,4 +1,5 @@
 import React from 'react'
+import './About.css'
 
 document.documentElement.classList.add(
     'jetpack-lazy-images-js-enabled'
@@ -10,7 +11,7 @@ export default function About() {
     <div data-elementor-type="wp-page" data-elementor-id="118" className="elementor elementor-118">
                          <br />
 
-						<div className="elementor-inner">
+						<div className="elementor-inner" >
 				<div className="elementor-section-wrap">
 									<section className="elementor-section elementor-top-section elementor-element elementor-element-10d28abd elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="10d28abd" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
 						<div className="elementor-container elementor-column-gap-default">
@@ -99,7 +100,7 @@ export default function About() {
 						<div className="elementor-element elementor-element-56e07cf elementor-widget elementor-widget-image" data-id="56e07cf" data-element_type="widget" data-widget_type="image.default">
 				<div className="elementor-widget-container">
 								<div className="elementor-image">
-												<img decoding="async" width="640" height="427" src="https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-donate-bahrainfoodbank_.jpg?fit=640%2C427&amp;ssl=1" className="attachment-full size-full jetpack-lazy-image jetpack-lazy-image--handled" alt="" srcSet="https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-donate-bahrainfoodbank_.jpg?w=640&amp;ssl=1 640w, https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-donate-bahrainfoodbank_.jpg?resize=300%2C200&amp;ssl=1 300w" data-lazy-loaded="1" sizes="(max-width: 640px) 100vw, 640px" loading="eager"/>														</div>
+												<img id="foody" decoding="async" width="640" height="427" src="https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-donate-bahrainfoodbank_.jpg?fit=640%2C427&amp;ssl=1" className="attachment-full size-full jetpack-lazy-image jetpack-lazy-image--handled" alt="" srcSet="https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-donate-bahrainfoodbank_.jpg?w=640&amp;ssl=1 640w, https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-donate-bahrainfoodbank_.jpg?resize=300%2C200&amp;ssl=1 300w" data-lazy-loaded="1" sizes="(max-width: 640px) 100vw, 640px" loading="eager"/>														</div>
 						</div>
 				</div>
 						</div>
@@ -141,7 +142,7 @@ export default function About() {
 						<div className="elementor-element elementor-element-6a1058e elementor-widget elementor-widget-image" data-id="6a1058e" data-element_type="widget" data-widget_type="image.default">
 				<div className="elementor-widget-container">
 								<div className="elementor-image">
-												<img decoding="async" width="640" height="427" src="https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-delivery-ontime.jpg?fit=640%2C427&amp;ssl=1" className="attachment-full size-full jetpack-lazy-image jetpack-lazy-image--handled" alt="" srcSet="https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-delivery-ontime.jpg?w=640&amp;ssl=1 640w, https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-delivery-ontime.jpg?resize=300%2C200&amp;ssl=1 300w" data-lazy-loaded="1" sizes="(max-width: 640px) 100vw, 640px" loading="eager"/>														</div>
+												<img id="foody" decoding="async" width="640" height="427" src="https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-delivery-ontime.jpg?fit=640%2C427&amp;ssl=1" className="attachment-full size-full jetpack-lazy-image jetpack-lazy-image--handled" alt="" srcSet="https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-delivery-ontime.jpg?w=640&amp;ssl=1 640w, https://i0.wp.com/en.bahrainfoodbank.com/wp-content/uploads/2020/05/food-delivery-ontime.jpg?resize=300%2C200&amp;ssl=1 300w" data-lazy-loaded="1" sizes="(max-width: 640px) 100vw, 640px" loading="eager"/>														</div>
 						</div>
 				</div>
 						</div>

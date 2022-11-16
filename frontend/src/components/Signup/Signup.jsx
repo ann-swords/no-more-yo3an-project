@@ -55,36 +55,33 @@ import './Signup.css'
 
     <Form  id='signUpForm' onSubmit={regsiterHandler}>
 
-      <Form.Group className="mb-3" >
-        <Form.Label>First Name</Form.Label>
-        <Form.Control type="text" name="firstName" onChange={changeHandler} placeholder="Enter first name" required/>
-      </Form.Group>
+    <div class="form-floating mb-3">
+      <input type="text" name="firstName" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="First Name" required/>
+      <label for="floatingInput">First Name</label>
+    </div>
 
-      <Form.Group className="mb-3" >
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control type="text" name="lastName" onChange={changeHandler} placeholder="Enter last name" required/>
-      </Form.Group>
-
-      <Form.Group className="mb-3" >
-        <Form.Label>Phone Number</Form.Label>
-        <Form.Control type="text" name="mobile" onChange={changeHandler} placeholder="Enter phone number" required/>
-      </Form.Group>
-
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" name="email" onChange={changeHandler}  placeholder="Enter email" required/>
-        <Form.Text className="text-muted">
+    <div class="form-floating mb-3">
+      <input type="text" name="lastName" onChange={changeHandler} class="form-control" id="floatingInput"  placeholder="Last Name" required/>
+      <label for="floatingInput">Last Name</label>
+    </div>
+      
+    <div class="form-floating mb-3">
+      <input type="text" name="mobile" onChange={changeHandler} class="form-control" id="floatingInput"  placeholder="Phone Number" required/>
+      <label for="floatingInput">Phone Number</label>
+    </div>
+      
+    <div class="form-floating mb-3">
+      <input  type="email" name="email" onChange={changeHandler} class="form-control" id="floatingInput"  placeholder="Email Address" required/>
+      <label for="floatingInput">Email Address</label>
+      <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
-      </Form.Group>
+    </div>
 
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" name="password" autoComplete='' onChange={changeHandler}  placeholder="Password" required/>
-      </Form.Group>
-
+    <div class="form-floating mb-3">
+      <input type="password" name="password" autoComplete='' onChange={changeHandler} class="form-control" id="floatingPassword"  placeholder="Password" required/>
+      <label for="floatingPassword">Password</label>
+    </div>
 
       
       <div className="custom-control custom-radio custom-control-inline">
