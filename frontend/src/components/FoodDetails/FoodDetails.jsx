@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams } from 'react-router-dom';
 import Maps from '../Maps/Maps';
 import Button from 'react-bootstrap/Button';
-
+import Carousel from 'react-bootstrap/Carousel';
 
 function FoodDetails(props) {
 
@@ -60,13 +60,29 @@ function FoodDetails(props) {
         })
       }
 
+      const [index, setIndex] = useState(0);
+
+      const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+      };
 
   return (
     <div className='food-details-container'>
 
         {/* will be carsoul later one */}
         <div className='food-details-img-div'>
-            <img alt='foodImage' className='food-details-img' src='https://media.npr.org/assets/img/2013/09/26/ap110725132481-64efa1b0559d2ba8f38c7f6aaa9b96221806903b-s1100-c50.jpg'></img>
+            {food.images ? 
+            (<Carousel  activeIndex={index} onSelect={handleSelect} className='food-image-carousel' interval={1000}>
+                {food.images.map((image, idx) => (
+                    <Carousel.Item>
+                      <img
+                        src={image}
+                        alt={"slide "+idx}
+                      />
+                    </Carousel.Item>
+                )) }
+            </Carousel>)
+          : (<h1>stil loading</h1>)}
         </div>
         <div className='food-details-text'>
             <h3>{food.name}</h3>

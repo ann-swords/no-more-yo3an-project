@@ -11,7 +11,7 @@ export default function HomePage() {
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
+    <Carousel activeIndex={index} onSelect={handleSelect} className='main-carousel' interval={1000}>
       <Carousel.Item>
         <img
           className="d-block"  height={560}
