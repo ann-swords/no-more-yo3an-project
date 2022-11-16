@@ -56,10 +56,10 @@ export default function Navbar(props) {
         <div className='navbar'>
           <div className="navbar-container">
           <div>
-             <Link to='/home'><img src="https://i.imgur.com/HUEuXKf.png" alt="No More Yo3an Logo" width="135" height="45"/></Link>
-             <Link to='/about'>About</Link>
-             <Link to='/donate'>Donate</Link>
-             {/*  */}
+             <Link className="navbar-href" to='/home'>Home</Link>
+             <Link className="navbar-href" to='/about'>About</Link>
+             <Link className="navbar-href" to='/donate'>Donate</Link>
+             {/* <img src="https://i.imgur.com/7JjrDzk.png" alt="No More Yo3an Logo" width="250" height="90"/> */}
           </div>
           <div>
             <NavDropdown title={props.user ? "Welcome " + localStorage.getItem("userName") : null}>
@@ -74,18 +74,18 @@ export default function Navbar(props) {
     (<div className='navbar'>
         <div className="navbar-container">
             <div>
-                <Link to='/home'>Home</Link>
-                <Link to='/about'>About</Link>
-                <Link to='/food'>Find Food</Link>
-                <Link to='/donate'>Donate</Link>
+                <Link className="navbar-href" to='/home'>Home</Link>
+                <Link className="navbar-href" to='/about'>About</Link>
+                <Link className="navbar-href" to='/food'>Find Food</Link>
+                <Link className="navbar-href" to='/donate'>Donate</Link>
                 {/* <img src="https://i.imgur.com/7JjrDzk.png" alt="No More Yo3an Logo" width="250" height="90"/> */}
             </div>
             <div>
                 <li>
-                    <Link to="/signup">Signup</Link>
+                    <Link className="navbar-href" to="/signup">Signup</Link>
                 </li>
                 <li>
-                    <Link to="/login">Login</Link>
+                    <Link className="navbar-href" to="/login">Login</Link>
                 </li>
             </div>
         </div>

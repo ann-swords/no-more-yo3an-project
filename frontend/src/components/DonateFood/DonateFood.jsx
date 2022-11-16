@@ -11,7 +11,8 @@ export default function DonateFood(props) {
   const [allergies, setAllergies] = useState([]);
   const [newFood, setNewFood] = useState({
     // must be declared
-    contains: []
+    contains: [],
+    images: []
   });
 
 
@@ -65,12 +66,124 @@ export default function DonateFood(props) {
 
       console.log(food);
       setNewFood(food);
+      console.log(newFood)
   }
 
   // ISSUE HERE
   const donationHandler = (e) => {
       e.preventDefault();
+
+      // call function to upload the images to cloud
+      // get the url from the cloud
+      // save it to the newFood state
+      uploadImages()
+
+      setNewFood(...newFood, newFood.images=cloudImages)
+
       props.donate(newFood)
+  }
+
+
+
+
+  const [selectedImages, setSelectedImages] = useState([])
+
+  const [imagesFiles, setImagesFiles] = useState([])
+
+
+  const [image, setImage] = useState()
+
+
+  const [cloudImages, setCloudImages] = useState([])
+
+  const uploadImages = (e) => {
+
+
+    let files = imagesFiles
+
+    console.log('first file', files[0])
+    console.log('second file', files[1])
+
+    const filesKeys = Object.keys(files)
+
+
+    console.log('files keys', filesKeys)
+
+
+    for (let i = 0; i < filesKeys.length-1; i++) {
+
+
+      let image = files[filesKeys[i]];
+      
+      let formData = new FormData()
+      formData.append('file', image)
+      formData.append('upload_preset', 'project_3')
+      axios.post('https://api.cloudinary.com/v1_1/dnjtrpebc/image/upload/', formData)
+      .then(res => {
+        console.log(res.data.url)
+        let image = res.data.url
+  
+
+        console.log('image', image)
+
+        setCloudImages([...cloudImages, image])
+  
+        // setCloudImages(...cloudImages);
+  
+        // food.images.push(image)
+  
+        // must be save to the form state
+        // setNewFood(food)
+        
+        console.log('cloudImages', cloudImages)
+  
+        console.log('sample updating the state of images')
+      })
+      .catch(err => console.log(err))
+      
+    }
+
+
+
+  }
+
+
+
+
+
+  const onSelectFile = (e) => {
+    const selectedFiles = e.target.files
+
+    setImagesFiles(selectedFiles)
+
+    console.log(selectedFiles)
+
+    // convert to array to view it
+    const selectedFilesArray = Array.from(selectedFiles)
+
+    const imagesArray = selectedFilesArray.map((file) => {
+      return URL.createObjectURL(file)
+    })
+    console.log(imagesArray)
+    setSelectedImages((previousImages) => previousImages.concat(imagesArray))
+
+  }
+
+  const removeImage = (e) => {
+
+    const image = e.target.value
+
+    const updatedSelected = selectedImages.filter((e) => e !== image)
+    setSelectedImages(updatedSelected)
+
+    console.log('selectedImages', selectedImages)
+
+
+    // must update the file
+    // const updatedSelected = selectedImages.filter((e) => e !== image)
+    // setSelectedImages(updatedSelected)
+
+    // console.log('selectedImages', selectedImages)
   }
 
 
@@ -121,24 +234,59 @@ export default function DonateFood(props) {
         
 
               {/* Image Upload: */}
+
+              {//older version
+              
+              /* <Form.Group className="mb-3">
+                <Form.Label>Attach at least one Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  name="images"
+                  onChange={(event) => { setImage(event.target.files[0])}}
+                  required
+                />
+                <button onClick={uploadImage}>Upload Image</button>
+              </Form.Group> */}
+
               <Form.Group className="mb-3">
                 {/* <Form.Label>Attach at least one Image</Form.Label> */}
                 <Form.Control
                   type="file"
                   name="images"
-                  onChange={changeHandler}
+                  onChange={onSelectFile}
                   required
+                  multiple
+                  accept="image/png, image/jpeg, image/webp"
                 />
               </Form.Group>
 
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+
+              <Form.Group className="mb-3" controlId="formFileMultiple">
+              <div className="file-images-div">
+                  {selectedImages && selectedImages.map((image, idx) => {
+                    return(
+                      <div key={'single-file-div-'+idx} className='single-file-div'>
+                      
+                        <div key={`file-${idx}-img`} className='file-img-div'>
+                            <img src={image} className="file-img" alt="upload"/>
+                        </div>
+                        <div key={`file-${idx}-btn`} className='file-delete-btn'>
+                          <Button value={image} onClick={removeImage}>
+                            Delete
+                          </Button>
+                        </div >
+                      </div>
+                    )
+                  })}  
+                </div>
+              </Form.Group>
 
 
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
               <label>Contains:</label> <br />
               {allergies.map((a, index) => (
                 <React.Fragment key={index}>

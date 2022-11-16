@@ -38,53 +38,27 @@ try {
 
 <Form onSubmit={loginHandler}>
  
-     <div class="form-floating mb-3">
-      <input  type="email" name="email" onChange={changeHandler} class="form-control" id="floatingInput"  placeholder="Email Address" required/>
-      <label for="floatingInput">Email Address</label>
-      <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-    </div>
+  <div className="form-floating mb-3">
+    <input  type="email" name="email" onChange={changeHandler} className="form-control" id="floatingInput"  placeholder="Email Address" required/>
+    <label htmlFor="floatingInput">Email Address</label>
+    <Form.Text className="text-muted">
+        We'll never share your email with anyone else.
+      </Form.Text>
+  </div>
 
 
-    <div class="form-floating mb-3">
-      <input type="password" name="password" autoComplete='' onChange={changeHandler} class="form-control" id="floatingPassword"  placeholder="Password" required/>
-      <label for="floatingPassword">Password</label>
-    </div>
+  <div className="form-floating mb-3">
+    <input type="password" name="password" autoComplete='' onChange={changeHandler} className="form-control" id="floatingPassword"  placeholder="Password" required/>
+    <label htmlFor="floatingPassword">Password</label>
+  </div>
 
-      <Button type='submit'>Login</Button>
-
-      <p> <br />
-        Don't have an account? <br />
-        <a className="btn btn-link" href="/signup">Signup here</a>
-
-      </p>
-
+  <Button type='submit' className="submit-button">Login</Button>
+  <br />
+  <span className="signup-text">Don't have an account? <a href="/signup">Signup</a></span>
 </Form>
-
-
-     
-
-
-      {/* <form onSubmit={loginHandler}>
-        <label>Email:</label>
-        <input type="email" name="email"  onChange={changeHandler}  />
-        <br /><br />
-        <label>Password:</label>
-        <input type="password" name="password"  onChange={changeHandler} />
-        <br /><br />
-        <button type="submit">Login</button>
-
-        <p> <br />
-        Don't have an account? <br />
-        <a className="btn btn-link" href="/signup">Signup here</a>
-
-      </p>
-      </form> */}
-
-   </Col>
-      </Row>
-    </Container>
+  </Col>
+</Row>
+</Container>
       
     </div>
   );
