@@ -150,16 +150,7 @@ const donationHandler = (food) => {
         headers: {Authorization: token}
       })
       .then(() => {
-        toast("Thanks for donating ❤️" ,{
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
+        window.location.replace("/user/donates" + "?donated=1")
       })
       .catch((err) => {
         toast.error("Error -> " + err)
