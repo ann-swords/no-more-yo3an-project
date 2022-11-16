@@ -57,33 +57,36 @@ export default function MyDonations() {
       }
       
   return (
-    <div className='myDonations-list-container'>
-
-      <h2>My Donations</h2>
-      <div className="donations-list">
-        {foods ? foods.map(food => (
-        <div key={food._id} onClick={e => handleFoodClick(food._id)} className="donations-container">
-            <img className='myDonations-img' src={food.images[0]}  
-              alt="Food"
-             onError={(e) =>
-                (e.target.src="https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png")
-            }/>  
+    <div className="page-container">
+      <div><img src="https://i.imgur.com/WBkRhKD.png" alt="" /></div>
+      <div className='myDonations-list-container'>
+        <p className="donation-text">{localStorage.getItem("userName")}, you helped {foods.length} people! </p>
+        <h2>My Donations</h2>
+        <div className="donations-list">
+          {foods ? foods.map(food => (
+          <div key={food._id} onClick={e => handleFoodClick(food._id)} className="donations-container">
+              <img className='myDonations-img' src={food.images[0]}
+                alt="Food"
+               onError={(e) =>
+                  (e.target.src="https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png")
+              }/>
       
-          <div className='donation-details'>
-            <p>{food.name}</p>
-            <span className="time-text">
-             Posted on <Moment format="D MMM YYYY">{food.createdAt}</Moment>
-            </span>
+            <div className='donation-details'>
+              <p>{food.name}</p>
+              <span className="time-text">
+               Posted on <Moment format="D MMM YYYY">{food.createdAt}</Moment>
+              </span>
+            </div>
+            <div className='badge-container' >
+              <Badge bg={food.status === 'Available' ? "success" : "danger"}>{food.status}</Badge>
+            </div>
           </div>
-          <div className='badge-container' >
-            <Badge bg={food.status === 'Available' ? "success" : "danger"}>{food.status}</Badge>
-          </div>
+            )
+            ):
+            <div>
+              <h2>You don't have any donation yet, Make your first donation.</h2>
+            </div>}
         </div>
-          )
-          ):
-          <div>
-            <h2>You don't have any donation yet, Make your first donation.</h2>
-          </div>}
       </div>
     </div>
   )
