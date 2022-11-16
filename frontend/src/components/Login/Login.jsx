@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import './Login.css'
-
 export default function Login(props) {
 
   const [newUser, setNewUser] = useState({});

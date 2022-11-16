@@ -18,6 +18,8 @@ export default function FoodMap() {
 
   // add single marker
   // const [markers, setMarkers] = useState([])
+  console.log('selected', selected)
+  // debugger
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -49,7 +51,7 @@ const PlacesAutocomplete = ({ setSelected}) => {
         suggestions: {status, data},
         clearSuggestions,
     } = usePlacesAutocomplete();
-
+    // console.log('setValue', value)
     // debugger;
 
     //----- A function that convertes the address to lang and lut--------------
@@ -59,9 +61,11 @@ const PlacesAutocomplete = ({ setSelected}) => {
         clearSuggestions();
 
         const results = await getGeocode({address});
+        console.log(results);
         const {lat, lng} = await getLatLng(results[0]);
         console.log("📍 Coordinates: ", { lat, lng });
         setSelected({lat, lng});
+        // console.log("selected",selected)
 
     }
 

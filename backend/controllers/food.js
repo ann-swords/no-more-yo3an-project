@@ -173,6 +173,17 @@ const getAllLocations = async (req, res) => {
     }
 }
 
+
+const getFoodbyId = async (req,res) => {
+    try{
+        const food = await Food.findById(req.params.id);
+        await food.populate(['location', 'contains', 'userReserved'])
+        res.json(food);
+    } catch(err){
+        res.json(err)
+    }
+}
+
 module.exports = {
     createFood,
     getAllFood,
@@ -182,5 +193,6 @@ module.exports = {
     getAllFoodContents,
     getFoodWithContent,
     updateFoodStatus,
-    getAllLocations
+    getAllLocations,
+    getFoodbyId,
 }
