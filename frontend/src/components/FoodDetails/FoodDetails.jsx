@@ -104,15 +104,6 @@ function FoodDetails() {
 
           : (<h1>Still loading..</h1>)}
         </div>
-        <div className='food-details-text'>
-            <h3>{food.name}</h3>
-                <h3>{food.description}</h3>
-                
-                {food.contains? <h3>Food Contents:</h3> : null}
-                
-          <hr/>
-        </div>
-
 
       <div class="div2"> 
 
@@ -128,18 +119,20 @@ function FoodDetails() {
                 {food.contains ?
                 
                 food.contains.map((el, idx) =>
-                <p key={idx} className="allergies">
+                <p key={idx} className="allergie">
                     {el.contentName}
                 </p>) : null}
 
 
                 {/* Add the location */}
-                <p className='food'>Location:</p>
-                {/* 
-                <h3>{food.road}</h3>
-                <h3>{food.block}</h3>
-                <h3>{food.building}</h3>
-                <h3>{food.flat}</h3> */}
+               {/* Add the location */}
+               <p className='food'>Adress:</p>
+               <div className='adds'>
+               <p className='add1'>Block: <span className='foodContent2'>{food.location.block}</span> </p>
+                <p className='add1'>Road: <span className='foodContent2'>{food.location.road}</span> </p>
+                <p className='add1'>Building: <span className='foodContent2'>{food.location.building}</span> </p>
+                <p className='add1'>Flat: <span className='foodContent2'>{food.location.flat}</span> </p>
+               </div>
                 
 
   { food.status === 'Reserved' ? <Button id='collectedBtn' variant="secondary" name="status"
@@ -164,7 +157,7 @@ function FoodDetails() {
 
   {/* //To work on later -> Need to validate userdonator should not be able to reserve his donated food .  */}
 
-        </div>
+          </div>
       
                 <br />
         
