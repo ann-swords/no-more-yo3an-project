@@ -1,34 +1,56 @@
 .food-details-container {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     width: 80%;
     /* height: 700px; */
     height: 1000px;
     margin: 20px auto;
-    display: grid;
+    /* display: grid;
     grid-gap: 10px;
     grid-template-columns: 1.5fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr; */
 
+    border-radius: 25px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: white;
 }
 
-.food-details-container > div {
-    border: 2px solid green;
-
+.bodyy{
+    background-image: url('https://en.bahrainfoodbank.com/wp-content/uploads/2020/05/white-back-scaled.jpg');
 }
 
+.rowFood{
+    margin: 20px;
+    /* border: 2px solid pink; */
+}
+
+.colImg{
+    /* border: 2px solid blue; */
+    padding: 10px;
+    height: 400px;
+    margin: 10px;
+    width: 240px;
+}
+
+.colText{
+    /* border: 2px solid black; */
+    padding: 10px;
+    height: 400px;
+    margin: 10px;
+}
+
+.rowMap{
+    margin: 20px;
+    height: 50%;
+    /* border: 2px solid red; */
+}
 
 .food-details-text  {
-    grid-area: 1 / 2 / span 2 / 2;
+    text-align: left;
 }
 
 .food-details-img {
     width: 460px;
 }
-
-.map-img {
-    width: 620px;
-}
-
 
 .food-image-carousel {
     /* width:100%; */
@@ -41,7 +63,16 @@
     height: 100%;
 }
 
-.wd-100{
-    /* width: 100px; */
+/* .wd-100{
+    width: 100px;
     color: red;
+} */
+
+/* .food-details-maps-div{
+    width: 100%;
+} */
+
+#reserveBtn{
+    margin-top: 20px;
+    width: 350px;
 }

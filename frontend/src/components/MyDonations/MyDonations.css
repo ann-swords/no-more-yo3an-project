@@ -6,6 +6,7 @@
 
 .page-container{
     display: flex;
+    background-image: url('https://en.bahrainfoodbank.com/wp-content/uploads/2020/05/white-back-scaled.jpg');
 }
 
 .donation-text{
@@ -21,6 +22,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border-radius: 20px;
+    background-color: white;
 }
 
 .badge-container{
@@ -63,4 +65,8 @@
     text-align: left;
     padding: 30px;
     width: 100%;
+}
+.helpNum{
+    color:  rgb(255, 98, 0);
+    font-weight: bolder;
 }
