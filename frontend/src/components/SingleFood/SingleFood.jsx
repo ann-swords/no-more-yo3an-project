@@ -16,13 +16,18 @@ function SingleFood(props) {
   }
 
   return (
-
     <div className='food-card' onClick={handleFoodClick}>
 
-      {food.images.length ? 
-      (<img alt='food image' className='food-img' src= {food.images[0]} />)
-      : (<img alt='food image' className='food-img' src= 'https://media.npr.org/assets/img/2013/09/26/ap110725132481-64efa1b0559d2ba8f38c7f6aaa9b96221806903b-s1100-c50.jpg'/>
-      )}
+      {/* <img alt='food image' className='food-img' src={food.images[0]} 
+         onError={(e) =>
+                  (e.target.src="https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png")}
+                  /> */}
+
+        <img className='food-img' src={food.images[0]}
+                alt="Food"
+               onError={(e) =>
+                  (e.target.src="https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png")
+          }/>
         <p className='food-card-title'>{food.name}</p>            
         <p className='food-card-desc'>{food.description}</p>
     </div>

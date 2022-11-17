@@ -5,6 +5,9 @@ export default function Maps(props) {
   const [center, setCenter] = useState(
     {lat: 26.0667, lng: 50.5577}
   );
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
+  });
 
   useEffect(()=>{
     if(props.location){
@@ -14,10 +17,9 @@ export default function Maps(props) {
       })
       // debugger
     }
-  })
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
-  });
+  },[isLoaded])
+
+
 
 
 
