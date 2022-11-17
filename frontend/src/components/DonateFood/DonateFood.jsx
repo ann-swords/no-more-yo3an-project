@@ -29,7 +29,7 @@ export default function DonateFood(props) {
   const getAllergies = () =>{
     axios.get("http://localhost:4000/food-contents")
     .then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setAllergies(res.data)
     })
     .catch(err => {
@@ -158,7 +158,7 @@ export default function DonateFood(props) {
                 <input type="text" placeholder="Block No" name="block" onChange={changeHandler} required />
                 <input type="text" placeholder="Road No" name="road" onChange={changeHandler} required/>
                 <input type="text" placeholder="Building No / villa " name="building" onChange={changeHandler} required/>
-                <input type="text" placeholder="Flat" name="flat" onChange={changeHandler} required/>
+                <input type="text" placeholder="Flat" name="flat" onChange={changeHandler}/>
 
                 <br />
                 <br />

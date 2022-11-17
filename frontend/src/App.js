@@ -149,8 +149,12 @@ const donationHandler = (food) => {
       .post("http://localhost:4000/food", food, {
         headers: {Authorization: token}
       })
-      .then(() => {
+      .then((res) => {
+        if(res.data.error){
+          toast.error(res.data.error)
+        } else{
         window.location.replace("/user/donates" + "?donated=1")
+      }
       })
       .catch((err) => {
         toast.error("Error -> " + err)
@@ -158,12 +162,23 @@ const donationHandler = (food) => {
   }
 };
 
+const userRole = () => {
+  if(isAuth){
+    if(user){
+      let userRole = user.role;
+      return userRole;
+    }
+}
+}
+
+
+
   return (
     <Router>
     <div className="App">
     <Navbar onLogoutHandler={onLogoutHandler} onSubmitHandler={onSubmitHandler} isAuth={isAuth} user={user}></Navbar>
       <Routes>
-      <Route path="/home" element={<HomePage/>} />
+      <Route path="/" element={<HomePage/>} />
       <Route path="/about" element={<About/>} />
         <Route path="/signup" element={<Signup register={registerHandler}/>} />
         <Route path="/login" element={isAuth? <HomePage/> : <Login login={loginHandler}/>} />
@@ -173,7 +188,7 @@ const donationHandler = (food) => {
         <Route path="/user/donates" element={<MyDonations/>} />
         <Route path="/food/:id/details" element={<FoodDetails/>} />
 
-        <Route path="/donate" element={isAuth? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/>}/> {/*<NotAuthorized/> */}
+        <Route path="/donate" element={userRole() == 'Donator'? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/>}/> {/*<NotAuthorized/> */}
 
         <Route path="/fooddetails/:id" element={isAuth? <FoodDetails /> : <Login login={loginHandler}/>} />
       </Routes>

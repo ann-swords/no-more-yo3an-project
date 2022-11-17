@@ -42,13 +42,20 @@ export default function Navbar(props) {
       setFormData(user);
 
       setShow(true);
+      userRole();
     }
 
     const handleSubmit = (e) =>{
         props.onSubmitHandler(formData);
         handleClose();
     }
-    
+
+    const userRole = () => {
+      if(props.user){
+      let role = props.user.role ;
+      return role;
+    }
+  }
 
   return (
     <div>
@@ -56,16 +63,17 @@ export default function Navbar(props) {
         <div className='navbar'>
           <div className="navbar-container">
           <div>
-             <Link to='/home'>Home</Link>
+             <Link to='/'>Home</Link>
              <Link to='/about'>About</Link>
-             <Link to='/donate'>Donate</Link>
+             <Link to='/food'>Find Food</Link>
+             {userRole() == 'Donator' ? <Link to='/donate'>Donate</Link> : null}
              {/* <img src="https://i.imgur.com/7JjrDzk.png" alt="No More Yo3an Logo" width="250" height="90"/> */}
           </div>
           <div>
             <NavDropdown title={props.user ? "Welcome " + localStorage.getItem("userName") : null}>
                 <NavDropdown.Item onClick={handleShow}>My Profile</NavDropdown.Item>
-                <NavDropdown.Item href='/user/donates'>My Donations</NavDropdown.Item>
-                <NavDropdown.Item href='/home' onClick={props.onLogoutHandler}>Logout</NavDropdown.Item>
+                {userRole() == 'Donator' ? <NavDropdown.Item href='/user/donates'>My Donations</NavDropdown.Item> : null}
+                <NavDropdown.Item href='/' onClick={props.onLogoutHandler}>Logout</NavDropdown.Item>
             </NavDropdown>
           </div>
           </div>
@@ -74,7 +82,7 @@ export default function Navbar(props) {
     (<div className='navbar'>
         <div className="navbar-container">
             <div>
-                <Link to='/home'>Home</Link>
+                <Link to='/'>Home</Link>
                 <Link to='/about'>About</Link>
                 <Link to='/food'>Find Food</Link>
                 <Link to='/donate'>Donate</Link>

@@ -35,13 +35,20 @@ function FoodDetails() {
       return new Promise((resolve) => setTimeout(resolve, 3000));
     }
 
-      const [isReserving, setReserving] = useState(false);
+      const [isUpdatingOrderStatus, setUpdatingOrderStatus] = useState(false);
     
       useEffect(() => {
-        if (isReserving) {
+        if (isUpdatingOrderStatus) {
 
           reservedStat().then(() => {
-            document.getElementById('reserveBtn').innerText = 'Reserved'
+
+            if(document.getElementById('reserveBtn')){
+              document.getElementById('reserveBtn').innerText = 'Reserved'
+            }else{
+              document.getElementById('collectedBtn').innerText = 'Food Collected'
+            }
+            
+
           });
           
           axios.post(`http://localhost:4000/food/${id}` , foodStatus)
@@ -50,10 +57,10 @@ function FoodDetails() {
             console.log(err)
           })
         }
-      }, [isReserving]);
+      }, [isUpdatingOrderStatus]);
     
       const handleClick = (e) => { 
-        setReserving(true);
+        setUpdatingOrderStatus(true);
         setFoodStatus({
           ...foodStatus,
           [e.target.name]: e.target.value
@@ -74,7 +81,7 @@ function FoodDetails() {
             {food.images ? 
             (<Carousel  activeIndex={index} onSelect={handleSelect} className='food-image-carousel' interval={1000}>
                 {food.images.map((image, idx) => (
-                    <Carousel.Item>
+                    <Carousel.Item key={idx}>
                       <img
                         src={image}
                         alt={"slide "+idx}
@@ -82,14 +89,12 @@ function FoodDetails() {
                     </Carousel.Item>
                 )) }
             </Carousel>)
-          : (<h1>stil loading</h1>)}
+          : (<h1>Still loading..</h1>)}
         </div>
         <div className='food-details-text'>
             <h3>{food.name}</h3>
                 <h3>{food.description}</h3>
                 
-
-
                 {food.contains? <h3>Food Contents:</h3> : null}
 
                 {food.contains ?
@@ -103,25 +108,35 @@ function FoodDetails() {
                 {/* Add the location */}
                 <h3>Location:...</h3>
                 
-                <p></p>
-                {food.status === 'Reserved' ? null : <Button
-                id='reserveBtn'
-          variant="success"
-          name="status"
-          value={foodStatus.status = 'Reserved'}
-          disabled={isReserving}
-          onClick={!isReserving ? handleClick : null}
-        >
-          {isReserving ? 'Reserving...' : 'Reserve'}
-        </Button>}
-                
-                </div>
+  { food.status === 'Reserved' ? <Button id='collectedBtn' variant="secondary" name="status"
+                                          value={setFood.status = 'Collected'} disabled={isUpdatingOrderStatus}
+                                          onClick={!isUpdatingOrderStatus ? handleClick : null} >
+                                          {isUpdatingOrderStatus ? 'Updating...' : 'Dispatch'}
+                                  </Button>
+    : null}
+
+  { food.status  === 'Available' ? <Button id='reserveBtn' variant="success" name="status" 
+                                           value={setFood.status = 'Reserved'} disabled={isUpdatingOrderStatus}
+                                           onClick={!isUpdatingOrderStatus ? handleClick : null} >
+                                          {isUpdatingOrderStatus ? 'Reserving...' : 'Reserve'}
+                                   </Button>
+        
+   : null}
+        
+{ food.status  === 'Collected' ? <Button variant="secondary" disabled={true} > {'This Food has been collected'} </Button>
+        
+   : null}
+  
+
+  {/* //To work on later -> Need to validate userdonator should not be able to reserve his donated food .  */}
+
+        </div>
         <div className='food-details-maps-div'>
             {/* <img className='map-img' src='https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg'></img> */}
         
         
-
-          < Maps location={food.location}/>
+          {/* Below commented part is causing Maximum update depth issue  */}
+          < Maps   /* location={food.location} */   /> 
                 
         </div>
         {/* <div>

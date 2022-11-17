@@ -80,7 +80,7 @@ const createFood = async (req, res) => {
         res.json({message: "Food got created"})
 
     } catch(err) {
-        res.json(err)
+        return res.json({error: "Error -> " + err}).status(400);
     }
 
 }
