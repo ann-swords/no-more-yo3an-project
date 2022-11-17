@@ -11,6 +11,8 @@ const createFood = async (req, res) => {
     const user = jwt_decode(req.headers.authorization)
     console.log(user)
 
+    console.log(req.body)
+
     try {
         const idOfUser = user.user.id
         let containsIdArray = req.body.contains 
