@@ -1,10 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 .food-card {
-    border: 2px solid red;
     width: 95%;
     padding: 2px;
     border-radius: 20px;
+    box-shadow: 0px 16px 24px 2px rgba(0, 0, 0, 0.10);
+
+
+    background: rgba(135, 178, 107, 0.1);
+    cursor: pointer;
+    padding: 5px 2px 2px 1px;
 }
 
 .food-img {
-    width: 180px;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    height: 200px;
+    object-fit: cover;
+}
+
+.food-card > p {
+    font-family: 'Lato', sans-serif;
+}
+
+.food-card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.food-card-desc {
+    font-size: 14px;
 }

@@ -60,7 +60,7 @@ export default function MyDonations() {
     <div className="page-container">
       <div><img src="https://i.imgur.com/WBkRhKD.png" alt="" /></div>
       <div className='myDonations-list-container'>
-        <p className="donation-text">{localStorage.getItem("userName")}, you helped {foods.length} people! </p>
+        <p className="donation-text">{localStorage.getItem("userName")}, you helped <span className='helpNum'>{foods.length}</span> people! </p>
         <h2>My Donations</h2>
         <div className="donations-list">
           {foods ? foods.map(food => (

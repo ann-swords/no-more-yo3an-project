@@ -1,10 +1,8 @@
 .food-container {
-    width: 960px;
     margin: 0 auto;
     display: grid;
-    grid-gap: 10px;
+    grid-gap: 30px;
     grid-template-columns: repeat(4, 1fr);
-    border: 2px solid blue;
-    padding: 4px;
+    padding: 50px 90px;
 }
 

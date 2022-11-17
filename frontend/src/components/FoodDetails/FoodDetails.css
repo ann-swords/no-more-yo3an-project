@@ -1,7 +1,7 @@
-.food-details-container {
+/* .food-details-container {
     border: 2px solid red;
     width: 80%;
-    /* height: 700px; */
+    height: 700px;
     height: 1000px;
     margin: 20px auto;
     display: grid;
@@ -9,29 +9,51 @@
     grid-template-columns: 1.5fr 1fr;
     grid-template-rows: 1fr 1fr;
 
+    border-radius: 25px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: white;
+} */
+
+.bodyy{
+    background-image: url('https://en.bahrainfoodbank.com/wp-content/uploads/2020/05/white-back-scaled.jpg');
 }
 
-.food-details-container > div {
-    border: 2px solid green;
-
+/* .rowFood{
+    margin: 20px;
+    border: 2px solid pink;
 }
 
+.colImg{
+    border: 2px solid blue;
+    padding: 10px;
+    height: 400px;
+    margin: 10px;
+    width: 240px;
+}
 
+.colText{
+    border: 2px solid black;
+    padding: 10px;
+    height: 400px;
+    margin: 10px;
+}
+
+.rowMap{
+    margin: 20px;
+    height: 50%;
+    border: 2px solid red;
+} */
+/* 
 .food-details-text  {
-    grid-area: 1 / 2 / span 2 / 2;
+    text-align: left;
 }
 
 .food-details-img {
     width: 460px;
 }
 
-.map-img {
-    width: 620px;
-}
-
-
 .food-image-carousel {
-    /* width:100%; */
+    width:100%;
     height: 100%;
     margin: auto;
   }
@@ -39,9 +61,91 @@
 .carousel-item {
     width:100%;
     height: 100%;
-}
+} */
 
-.wd-100{
-    /* width: 100px; */
+/* .wd-100{
+    width: 100px;
     color: red;
+} */
+
+/* .food-details-maps-div{
+    width: 100%;
+} */
+
+
+/* New Grid Desing */
+.parent {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: 10px;
+    height: 1000px;
+    width: 80%;
+    margin-left: 10%;
+    
+    
+    border-radius: 25px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: white;
+    }
+    
+    .div1 { grid-area: 1 / 1 / 2 / 2; 
+        object-fit: fill;
+        height: fit-content;
+    }
+        
+    .div2 { grid-area: 2 / 1 ; 
+        display: flex;
+        flex-direction: row;
+        object-fit: fill;
+    }
+        
+    .col1 { grid-area: 1 / 1 / 2 / 2; 
+        width: 50%;
+        object-fit: fill;
+    }
+        
+    .col2 { grid-area: 1 / 2 / 2 / 3; 
+        width: 60%;
+        margin: 10px;
+    }
+
+    .food-image-carousel{
+    width:80%;
+    height: 80%;
+    object-fit: cover;
+    margin-left: 10%;
+    margin-top: 2%;
+    }
+  
+    .carousel-inner{
+        height: inherit;
+    }
+
+    .imgg{
+        width: inherit;
+        height: inherit;
+    }
+
+    
+    #reserveBtn{
+        margin-top: inherit;
+        width: 350px;
+    }
+
+    .allergies{
+        display: inline-block;
+        margin: 10px;
+        font-weight: bold;
+        color: rgb(254, 97, 40);
+        text-align: left;
+    }
+    .food{
+        text-align: left;
+        margin: 20px;
+        font-weight: bold;
+    }
+.foodContent{
+    font-weight: lighter;
+    margin-left: 5px;
 }

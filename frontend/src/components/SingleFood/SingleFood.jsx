@@ -1,31 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './SingleFood.css'
+import { useNavigate } from "react-router-dom";
 
 function SingleFood(props) {
+  
+  const [food, setFood] = useState(props.food)
+
+  const navigate = new useNavigate();
+
+  const id = food._id
+
+  const handleFoodClick = (e) => {
+      console.log('food id', id)
+      navigate(`/food/${id}/details`);
+  }
+
   return (
+    <div className='food-card' onClick={handleFoodClick}>
 
+      {/* <img alt='food image' className='food-img' src={food.images[0]} 
+         onError={(e) =>
+                  (e.target.src="https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png")}
+                  /> */}
 
-    <div className='food-card'>
-
-      <a href={`fooddetails/${props.food._id}`} style={{textDecoration: 'none'}}>
-
-        <div className='single-food'>
-
-        {/* <img alt='foodImage' className='food-img' src={props.food.images[0]}></img> */}
-        <img alt='foodImage' className='food-img' src={'https://media.npr.org/assets/img/2013/09/26/ap110725132481-64efa1b0559d2ba8f38c7f6aaa9b96221806903b-s1100-c50.jpg'}></img>
-        <p>{props.food.name}</p>            
-        <p>{props.food.description}</p>
-
-
-        </div>
-
-
-
-
-      </a>
-   
-
-
+        <img className='food-img' src={food.images[0]}
+                alt="Food"
+               onError={(e) =>
+                  (e.target.src="https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png")
+          }/>
+        <p className='food-card-title'>{food.name}</p>            
+        <p className='food-card-desc'>{food.description}</p>
     </div>
 
 

@@ -24,18 +24,16 @@ function AllFood() {
   return (
     <>
 
-    <h1>Food Page</h1>
-
-
-    <div className='food-container'>
-        
-        {foodList.map( (food, index) => 
-          <React.Fragment key={index}>
-          <SingleFood food={food} />
-          </React.Fragment>
-        )}
-
-
+    <div className="container">
+      <h1>Available Food</h1>
+      <div className='food-container'>
+      
+          {foodList.map( (food, index) =>
+            <React.Fragment key={index}>
+            <SingleFood food={food} />
+            </React.Fragment>
+          )}
+      </div>
     </div>
 
     </>

@@ -22,7 +22,8 @@ export default function About() {
 							<div className="elementor-widget-wrap">
 						<div className="elementor-element elementor-element-508ecd1f elementor-widget elementor-widget-heading" data-id="508ecd1f" data-element_type="widget" data-widget_type="heading.default">
 				<div className="elementor-widget-container">
-			<h2 className="elementor-heading-title elementor-size-large">ABOUT</h2>		</div>
+			<h2 className="elementor-heading-title elementor-size-large">ABOUT</h2>	
+			<h3>No More Yo3an</h3>	</div>
 				</div>
 				<div className="elementor-element elementor-element-1fd0d048 elementor-widget elementor-widget-text-editor" data-id="1fd0d048" data-element_type="widget" data-widget_type="text-editor.default">
 				<div className="elementor-widget-container">
