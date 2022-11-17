@@ -1,12 +1,12 @@
 import { GoogleMap, useLoadScript, MarkerF, Marker } from "@react-google-maps/api";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, Fragment } from "react";
 import './FoodMap.css';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
 
-import { Combobox } from '@headlessui/react'
+import { Combobox } from '@headlessui/react';
 
 export default function FoodMap(props) {
   const center = useMemo(() => ({ lat: 26.0667, lng: 50.5577 }), []);
@@ -72,11 +72,24 @@ const PlacesAutocomplete = ({ setSelected}) => {
 
     return (
     <Combobox onChange={handleSelect}>
-        <Combobox.Input value={value} onChange={e =>setValue(e.target.value)} disabled={!ready} placeholder={"Search an address"}  className="search"/>
+        <Combobox.Input value={value} onChange={e =>setValue(e.target.value)}  disabled={!ready} placeholder={"Search an address"}  className="search"/>
         <Combobox.Options>
           {
             data.map(item => 
-              <div className="predictions-list"  key={item.place_id}><Combobox.Option className="locations" value={item.description}>{item.description}</Combobox.Option></div>
+              <div className="predictions-list" key={item.place_id}>
+                <Combobox.Option className="locations" value={item.description} as={Fragment}>
+                {({ active, selected }) => (
+              <li
+                className={`${
+                  active ? 'bg-blue-500 text-white' : 'bg-white text-black'
+                }`}
+              >
+                {selected}
+                {item.description}
+              </li>
+            )}
+                </Combobox.Option>
+              </div>
           )}
         </Combobox.Options>
     </Combobox>

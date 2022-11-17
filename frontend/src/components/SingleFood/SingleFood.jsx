@@ -16,7 +16,6 @@ function SingleFood(props) {
   }
 
   return (
-
     <div className='food-card' onClick={handleFoodClick}>
 
       {/* <img alt='food image' className='food-img' src={food.images[0]} 
@@ -24,11 +23,11 @@ function SingleFood(props) {
                   (e.target.src="https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png")}
                   /> */}
 
-<img className='food-img' src={food.images[0]}
+        <img className='food-img' src={food.images[0]}
                 alt="Food"
                onError={(e) =>
                   (e.target.src="https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png")
-              }/>
+          }/>
         <p className='food-card-title'>{food.name}</p>            
         <p className='food-card-desc'>{food.description}</p>
     </div>

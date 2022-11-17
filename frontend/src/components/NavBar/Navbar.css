@@ -16,7 +16,7 @@
 
 .navbar-href{
     text-decoration: none;
-    line-height: 2;
+    line-height: 3;
     color: #fff;
     padding: 14px 16px;
 }
@@ -27,10 +27,15 @@
 
 .nav-link , .nav-link:hover, .nav-link:focus{
     color: #fff;
+    line-height: 3;
 }
 
 li{
     margin: 0 20px;
     list-style: none;
     display: inline-block;
+}
+
+.navbar-href> img{
+    object-fit: contain;
 }
