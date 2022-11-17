@@ -70,17 +70,28 @@ export default function DonateFood(props) {
   }
 
   // ISSUE HERE
-  const donationHandler = (e) => {
+  const donationHandler = async (e) => {
       e.preventDefault();
 
       // call function to upload the images to cloud
       // get the url from the cloud
       // save it to the newFood state
-      uploadImages()
+      await uploadImages()
 
-      setNewFood(...newFood, newFood.images=cloudImages)
+      // const foodWithoutImages = { ...newFood };
+      
+      // foodWithoutImages.images = cloudImages
+      // // foodWithoutImages.images = newThing
 
-      props.donate(newFood)
+      // // must wait for the newthing
+
+      // // useEffect
+      // // setNewFood(foodWithoutImages)
+      // setNewFood({...newFood, images: cloudImages})
+      // // debugger
+      // console.log('newFood', newFood)
+
+      // props.donate(newFood)
   }
 
 
@@ -88,32 +99,39 @@ export default function DonateFood(props) {
 
   const [selectedImages, setSelectedImages] = useState([])
 
+  // issue here
   const [imagesFiles, setImagesFiles] = useState([])
 
 
-  const [image, setImage] = useState()
+  // const [image, setImage] = useState()
 
+  // let newThing = []
 
   const [cloudImages, setCloudImages] = useState([])
 
-  const uploadImages = (e) => {
+  const uploadImages = () => {
 
 
-    let files = imagesFiles
+    // let files = imagesFiles
 
-    console.log('first file', files[0])
-    console.log('second file', files[1])
+    // console.log('first file', files[0])
+    // console.log('second file', files[1])
 
-    const filesKeys = Object.keys(files)
-
-
-    console.log('files keys', filesKeys)
+    // const filesKeys = Object.keys(files)
 
 
-    for (let i = 0; i < filesKeys.length-1; i++) {
+    // console.log('files keys', filesKeys)
+    let images = [];
+    console.log('imagesFiles', imagesFiles)
+
+    for (let i = 0; i < imagesFiles.length; i++) {
+
+    // for (let i = 0; i < filesKeys.length-1; i++) {
 
 
-      let image = files[filesKeys[i]];
+      let image = imagesFiles[i];
+
+      console.log('image is being sent', image)
       
       let formData = new FormData()
       formData.append('file', image)
@@ -122,11 +140,15 @@ export default function DonateFood(props) {
       .then(res => {
         console.log(res.data.url)
         let image = res.data.url
-  
+        images.push(image);
 
         console.log('image', image)
 
-        setCloudImages([...cloudImages, image])
+        // 
+        // setCloudImages(...cloudImages, image)
+
+        // setCloudImages(current => [...current, image])
+        // setCloudImages(...cloudImages, image)
   
         // setCloudImages(...cloudImages);
   
@@ -135,14 +157,39 @@ export default function DonateFood(props) {
         // must be save to the form state
         // setNewFood(food)
         
-        console.log('cloudImages', cloudImages)
+        // console.log('cloudImages', cloudImages)
   
         console.log('sample updating the state of images')
+
+        console.log('cloudImages now',cloudImages)
+
+        // newThing.push(image)
+
+        // console.log('newthing now',newThing)
       })
       .catch(err => console.log(err))
+      .finally(()=> {
+        setCloudImages(images);
+        setNewFood({...newFood, images: images})
+        props.donate(newFood)
+        // debugger
+      })
       
     }
+    // console.log('cloudImages', cloudImages)
 
+
+    // const foodWithoutImages = { ...newFood };
+      
+    // foodWithoutImages.images = cloudImages
+    // foodWithoutImages.images = newThing
+
+    // must wait for the newthing
+
+    // useEffect
+    // setNewFood(foodWithoutImages)
+    // debugger
+    console.log('newFood', newFood)
 
 
   }
@@ -153,10 +200,27 @@ export default function DonateFood(props) {
 
   const onSelectFile = (e) => {
     const selectedFiles = e.target.files
+    
+    console.log('selected filess', selectedFiles)
 
-    setImagesFiles(selectedFiles)
+    console.log('type', typeof selectedFiles)
 
-    console.log(selectedFiles)
+    // setImagesFiles({...selectedFiles})
+
+    
+    let chosenFiles = [...selectedFiles]
+
+    console.log('chosen files', chosenFiles)
+
+    console.log('chosen type ', typeof chosenFiles)
+
+    // handleUploadFiles(chosenFiles);
+
+    setImagesFiles([...chosenFiles])
+
+    console.log('images', imagesFiles)
+
+
 
     // convert to array to view it
     const selectedFilesArray = Array.from(selectedFiles)
@@ -172,6 +236,8 @@ export default function DonateFood(props) {
   const removeImage = (e) => {
 
     const image = e.target.value
+
+    const id = e.target.id
 
     const updatedSelected = selectedImages.filter((e) => e !== image)
     setSelectedImages(updatedSelected)
@@ -270,7 +336,7 @@ export default function DonateFood(props) {
                             <img src={image} className="file-img" alt="upload"/>
                         </div>
                         <div key={`file-${idx}-btn`} className='file-delete-btn'>
-                          <Button value={image} onClick={removeImage}>
+                          <Button value={image} id={idx} onClick={removeImage}>
                             Delete
                           </Button>
                         </div >

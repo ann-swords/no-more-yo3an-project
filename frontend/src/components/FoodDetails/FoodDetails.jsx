@@ -71,35 +71,52 @@ function FoodDetails() {
 
       
   return (
-    <div className='bodyy'>
+<div className='bodyy'>
 
 <br /><br />
     <h1>Donation Details</h1>
-    <div className='food-details-container'>
+    
+    <div class="parent">
 
-      <Row className='rowFood'>
-                {/* Food Details: */}
+        {/* Food Images: */}
+        <div class="div1">
+        {food.images ? 
+            (<Carousel  activeIndex={index} onSelect={handleSelect} className='food-image-carousel' interval={1000}>
+                {food.images.map((image, idx) => (
+                    <Carousel.Item>
+                      <img className='imgg'
+                        src={image}
+                        alt={"slide "+idx}
+                      />
+                    </Carousel.Item>
+                )) }
+            </Carousel>)
+          : (<h1>stil loading</h1>)}
+          <hr/>
+        </div>
 
-                <Col className='colText'>
-        <div className='food-details-text'>
-            <h4>Dish Name: {food.name}</h4>
-                <h4>Discription: {food.description}</h4>
+
+      <div class="div2"> 
+
+          {/* Food Details: */}
+          <div class="col1"> 
+            <p className='food'>Dish Name: <span className='foodContent'>{food.name}</span></p>
+                <p className='food'>Discription: <span className='foodContent'>{food.description}</span> </p>
                 
-                
-
-                {food.contains? <h4>Food Contents:</h4> : null}
+              
+                {food.contains? <p className='food'>Food Contents: </p> : null}
 
                 {food.contains ?
                 
                 food.contains.map((el, idx) =>
-                <h5 key={idx}>
+                <p key={idx} className="allergies">
                     {el.contentName}
-                </h5>) : null}
+                </p>) : null}
 
 
                 {/* Add the location */}
-                {/* <h3>Location:...</h3>
-
+                <p className='food'>Location:</p>
+                {/* 
                 <h3>{food.road}</h3>
                 <h3>{food.block}</h3>
                 <h3>{food.building}</h3>
@@ -117,47 +134,26 @@ function FoodDetails() {
           {isReserving ? 'Reserving...' : 'Reserve'}
         </Button>}
                 
-                </div>
-        </Col>
-
-                {/* will be carsoul later one */}
-          <Col className='colImg'>
-            {food.images ? 
-            (<Carousel  activeIndex={index} onSelect={handleSelect} className='food-image-carousel' interval={1000}>
-                {food.images.map((image, idx) => (
-                    <Carousel.Item>
-                      <img
-                        src={image}
-                        alt={"slide "+idx}
-                      />
-                    </Carousel.Item>
-                )) }
-            </Carousel>)
-          : (<h1>stil loading</h1>)}
-          </Col>
+        </div>
 
 
-
-        
-
-      </Row>
-
-      <Row className='rowMap'>
-          {/* The Map: */}
-        <div className='food-details-maps-div'>
+        {/* The Map: */}
+        <div class="col2"> 
             {/* <img className='map-img' src='https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg'></img> */}
         
         
 
           < Maps location={food.location}/>
-                
-        </div>
-
-      </Row>
-
+        
+        </div> 
+        
 
 
+      </div>
 
+
+    </div>
+   
 
         {/* <div>
             right down box
@@ -167,9 +163,9 @@ function FoodDetails() {
         {/* <img alt='foodImage' className='food-details-img' src={props.food.images[0]}></img> */}
         {/* <img alt='foodImage' className='food-details-img' src='https://media.npr.org/assets/img/2013/09/26/ap110725132481-64efa1b0559d2ba8f38c7f6aaa9b96221806903b-s1100-c50.jpg'></img> */}
         
-    </div>
+    
 
-    </div>
+</div>
   )
       }
 export default FoodDetails
