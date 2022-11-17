@@ -46,7 +46,7 @@ export default function MyDonations() {
       toast("Thanks for donating ❤️" ,{
         toastId: 'success1',
         position: "top-right",
-        autoClose: 1000,
+        autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -78,7 +78,7 @@ export default function MyDonations() {
               </span>
             </div>
             <div className='badge-container' >
-              <Badge bg={food.status === 'Available' ? "success" : "danger"}>{food.status}</Badge>
+              <Badge bg={food.status === 'Available' ? "success" : food.status === 'Reserved' ? "warning" : "danger"}>{food.status}</Badge>
             </div>
           </div>
             )

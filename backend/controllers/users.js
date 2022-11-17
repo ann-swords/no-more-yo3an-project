@@ -20,7 +20,7 @@ async function createUser(req, res){
                 })
                 res.json(newUser);
             } else{
-                res.status(400).send({message:'All Fields Are Required!'})
+                res.status(400).send({error:'All Fields Are Required!'})
                 return;
             }
     }catch (err){

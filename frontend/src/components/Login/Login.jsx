@@ -9,7 +9,7 @@ export default function Login(props) {
     const changeHandler = (e) => {
         const user = { ...newUser };
         user[e.target.name] = e.target.value;
-        console.log(user);
+        // console.log(user);
         setNewUser(user);
     }
 
