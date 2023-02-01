@@ -116,11 +116,11 @@ function FoodDetails() {
 
                 {/* Add the location */}
                 <p className='food'>Location:</p>
-                {/* 
-                <h3>{food.road}</h3>
-                <h3>{food.block}</h3>
-                <h3>{food.building}</h3>
-                <h3>{food.flat}</h3> */}
+{/*                 
+                <h3>{food.location.road}</h3>
+                <h3>{food.location.block}</h3>
+                <h3>{food.location.building}</h3>
+                <h3>{food.location.flat}</h3> */}
                 
                 <br />
                 {food.status === 'Reserved' ? null : <Button

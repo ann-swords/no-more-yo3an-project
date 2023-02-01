@@ -47,31 +47,16 @@ const loginHandler = (cred) =>{
 try {
   axios.post("http://localhost:4000/auth/signin", cred)
   .then(res =>{
-    if(res.data.error){
-      toast.error(res.data.error);
-    } else{
-      toast("You're successfully logged in !",{
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
-    }
-
     if(res.data.token != null){
       localStorage.setItem("token", res.data.token);
       let user = jwt_decode(res.data.token);
       setIsAuth(true);
-      getUser(user.user.id);
+      // getUser(user.user.id);
     }
 
   })
   .catch(err => {
-    toast.error("Error -> " + err)
+    toast.error("Error -> " + err.response.data.message)
   })
 
 } catch (error) {
@@ -142,21 +127,7 @@ const onLogoutHandler = (e) => {
 
 
 //Add a new Food donation
-const donationHandler = (food) => {
-  const token = localStorage.getItem('token')
-  if (token) {
-    axios
-      .post("http://localhost:4000/food", food, {
-        headers: {Authorization: token}
-      })
-      .then(() => {
-        window.location.replace("/user/donates" + "?donated=1")
-      })
-      .catch((err) => {
-        toast.error("Error -> " + err)
-      })
-  }
-};
+
 
   return (
     <Router>
@@ -173,7 +144,7 @@ const donationHandler = (food) => {
         <Route path="/user/donates" element={<MyDonations/>} />
         <Route path="/food/:id/details" element={<FoodDetails/>} />
 
-        <Route path="/donate" element={isAuth? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/>}/> {/*<NotAuthorized/> */}
+        <Route path="/donate" element={isAuth? <DonateFood/> : <Login login={loginHandler}/>}/> {/*<NotAuthorized/> */}
 
         <Route path="/fooddetails/:id" element={isAuth? <FoodDetails /> : <Login login={loginHandler}/>} />
       </Routes>
