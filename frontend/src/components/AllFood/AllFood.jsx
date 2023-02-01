@@ -11,14 +11,14 @@ function AllFood() {
     useEffect(()=>{
       axios.get("http://localhost:4000/food")
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         setFoodList(res.data)
       })
       .catch(err => {
         console.log(err)
       })
   
-    },[])
+    },[foodList])
 
     
   return (

@@ -37,7 +37,7 @@ export default function DonateFood(props) {
   const getAllergies = () =>{
     axios.get("http://localhost:4000/food-contents")
     .then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       setAllergies(res.data)
     })
     .catch(err => {
@@ -351,12 +351,14 @@ export default function DonateFood(props) {
                         </div>
                   </Form.Group>
 
+
                   <Form.Group as={Col} md="3">
                   <div class="form-floating mb-3">
                           <input type="text" name="building" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Building/Villa"  />
                           <label for="floatingInput">Building/Villa</label>
                         </div>
                   </Form.Group>
+
 
                   <Form.Group as={Col} md="3">
                   <div class="form-floating mb-3">

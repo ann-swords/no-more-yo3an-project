@@ -28,6 +28,7 @@ import './Signup.css'
   return (
     <div>
       <Container>
+
         <Row>
           <Col className='left-row' ></Col>
           <Col className='right-row' xs={8 }>
@@ -77,6 +78,7 @@ import './Signup.css'
                 Already have an account? <a  href="/login">Login</a>
               </p>
           </Form>
+
         </Col>
       </Row>
     </Container>    

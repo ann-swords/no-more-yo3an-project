@@ -42,13 +42,20 @@ export default function Navbar(props) {
       setFormData(user);
 
       setShow(true);
+      userRole();
     }
 
     const handleSubmit = (e) =>{
         props.onSubmitHandler(formData);
         handleClose();
     }
-    
+
+    const userRole = () => {
+      if(props.user){
+      let role = props.user.role ;
+      return role;
+    }
+  }
 
   return (
     <div>
@@ -56,16 +63,18 @@ export default function Navbar(props) {
         <div className='navbar'>
           <div className="navbar-container">
           <div>
-             <Link className="navbar-href" to='/home'><img src="https://i.imgur.com/HUEuXKf.png" alt="No More Yo3an Logo" width="155" height="45"/></Link>
+
+             <Link className="navbar-href" to='/'><img src="https://i.imgur.com/HUEuXKf.png" alt="No More Yo3an Logo" width="155" height="45"/></Link>
              <Link className="navbar-href" to='/about'>About</Link>
-             <Link className="navbar-href" to='/donate'>Donate</Link>
-             {/* <img src="https://i.imgur.com/HUEuXKf.png" alt="No More Yo3an Logo" width="250" height="90"/> */}
+             <Link className="navbar-href" to='/food'>Find Food</Link>
+             {userRole() == 'Donator' ? <Link className="navbar-href" to='/donate'>Donate</Link> : null}
+             
           </div>
           <div>
             <NavDropdown title={props.user ? "Welcome " + localStorage.getItem("userName") : null}>
                 <NavDropdown.Item onClick={handleShow}>My Profile</NavDropdown.Item>
-                <NavDropdown.Item href='/user/donates'>My Donations</NavDropdown.Item>
-                <NavDropdown.Item href='/home' onClick={props.onLogoutHandler}>Logout</NavDropdown.Item>
+                {userRole() == 'Donator' ? <NavDropdown.Item href='/user/donates'>My Donations</NavDropdown.Item> : null}
+                <NavDropdown.Item href='/' onClick={props.onLogoutHandler}>Logout</NavDropdown.Item>
             </NavDropdown>
           </div>
           </div>
@@ -74,10 +83,12 @@ export default function Navbar(props) {
     (<div className='navbar'>
         <div className="navbar-container">
             <div>
-                <Link className="navbar-href" to='/home'><img src="https://i.imgur.com/HUEuXKf.png" alt="No More Yo3an Logo" width="155" height="45"/></Link>
+
+                <Link className="navbar-href" to='/'><img src="https://i.imgur.com/HUEuXKf.png" alt="No More Yo3an Logo" width="155" height="45"/></Link>
                 <Link className="navbar-href" to='/about'>About</Link>
                 <Link className="navbar-href" to='/food'>Find Food</Link>
                 <Link className="navbar-href" to='/donate'>Donate</Link>
+
                 {/* <img src="https://i.imgur.com/7JjrDzk.png" alt="No More Yo3an Logo" width="250" height="90"/> */}
             </div>
             <div>
