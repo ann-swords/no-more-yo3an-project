@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const foodController = require('../controllers/food');
 const isLoggedIn = require('../helper/isLoggedIn');
-
+const multer = require('multer');
+var food = multer({ dest: './food' })
 
 router.post('/food/:_id', foodController.updateFoodStatus)
-router.post('/food',isLoggedIn, foodController.createFood)
+router.post('/food',food.any('images'),isLoggedIn , foodController.createFood)
 router.get('/food', foodController.getAllFood)
 router.get('/food/:_id', foodController.getFoodByIdWithUserDonatorDetails)
 router.delete('/food/:_id', foodController.deleteFood)
