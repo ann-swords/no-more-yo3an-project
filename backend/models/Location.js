@@ -8,8 +8,8 @@ const LocationModel = new Schema({
     road: {type: String, required: true},
     building: {type: String, required: true},
     flat: {type: String},
-    lat: {type: String},
-    lng: {type: String}
+    lat: {type: String, required: true},
+    lng: {type: String, required: true}
 },{
     timestamps: true
 })

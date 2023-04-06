@@ -115,7 +115,6 @@ function FoodDetails() {
               
                 {food.contains? <p className='food'>Food Contents: </p> : null}
 
-                
 
                 {food.contains ?
                 
