@@ -12,7 +12,7 @@ export default function DonateFood(props) {
   const [newFood, setNewFood] = useState({
     // must be declared
     contains: [],
-    images: []
+    images: ['https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png']
   });
 
 
@@ -91,7 +91,7 @@ export default function DonateFood(props) {
       // // debugger
       // console.log('newFood', newFood)
 
-      // props.donate(newFood)
+      props.donate(newFood)
   }
 
 
