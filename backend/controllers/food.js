@@ -1,9 +1,17 @@
-const Food = require('../models/Food')
-const FoodContent = require('../models/FoodContent')
-const Location = require('../models/Location')
-mongoose = require('mongoose'),
-User = require('../models/User')
-const jwt_decode = require('jwt-decode')
+const Food = require('../models/Food');
+const FoodContent = require('../models/FoodContent');
+const Location = require('../models/Location');
+mongoose = require('mongoose');
+User = require('../models/User');
+const jwt_decode = require('jwt-decode');
+const cloudinary = require('cloudinary').v2;
+
+
+cloudinary.config({ 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY, 
+    api_secret: process.env.API_SECRET
+  });
 
 const createFood = async (req, res) => {
     console.log("this is the create food function!!!")
@@ -12,55 +20,63 @@ const createFood = async (req, res) => {
     console.log(user)
 
     console.log(req.body)
+    console.log('req.body', req.body)
+    console.log('req.file', req.files)
+    // res.json(req.body)
+    // if(req.body.images.length > 0){
+    //     console.log('hi there are images!', req.body.images[0])
 
+    // }
     try {
-        const idOfUser = user.user.id
-        let containsIdArray = req.body.contains 
+     
 
-        const newLocation = await Location.create({
-            // city: req.body.city,
-            block: req.body.block,
-            road: req.body.road,
-            building: req.body.building,
-            flat: req.body.flat,
-            lat: req.body.lat,
-            lng: req.body.lng
-        })
+        // const idOfUser = user.user.id
+        // let containsIdArray = req.body.contains 
+
+        // const newLocation = await Location.create({
+        //     // city: req.body.city,
+        //     block: req.body.block,
+        //     road: req.body.road,
+        //     building: req.body.building,
+        //     flat: req.body.flat,
+        //     lat: req.body.lat,
+        //     lng: req.body.lng
+        // })
 
 
-        if (containsIdArray === undefined){
-            containsIdArray = []
-        } else {
-            containsIdArray.forEach(element => {
-                element = mongoose.Types.ObjectId(element)
-            });
-        }
+        // if (containsIdArray === undefined){
+        //     containsIdArray = []
+        // } else {
+        //     containsIdArray.forEach(element => {
+        //         element = mongoose.Types.ObjectId(element)
+        //     });
+        // }
 
-        const newFood = await Food.create({
-            name: req.body.name,
-            description: req.body.description,
-            prodDate: req.body.prodDate,
-            expDate: req.body.expDate,
-            images: req.body.images,
+        // const newFood = await Food.create({
+        //     name: req.body.name,
+        //     description: req.body.description,
+        //     prodDate: req.body.prodDate,
+        //     expDate: req.body.expDate,
+        //     // images: req.body.images,
     
-            // to pass reference
-            userDonateId: mongoose.Types.ObjectId(idOfUser),
+        //     // to pass reference
+        //     userDonateId: mongoose.Types.ObjectId(idOfUser),
     
-            // // reference to person reserving the food
-            userReserved: undefined,
+        //     // // reference to person reserving the food
+        //     userReserved: undefined,
     
-            // reference the location table
-            location: newLocation._id,
+        //     // reference the location table
+        //     location: newLocation._id,
 
-            // references the foodContent table
-            contains: containsIdArray
-        })
+        //     // references the foodContent table
+        //     contains: containsIdArray
+        // })
 
-        let userDb = await User.findById(mongoose.Types.ObjectId(idOfUser))
+        // let userDb = await User.findById(mongoose.Types.ObjectId(idOfUser))
 
 
-        userDb.foods.push(newFood._id)
-        await userDb.save()
+        // userDb.foods.push(newFood._id)
+        // await userDb.save()
 
 
         // Create location for food
@@ -74,12 +90,12 @@ const createFood = async (req, res) => {
         //     lng: req.body.lng
         // })
         
-        console.log('food location', newLocation)
+        // console.log('food location', newLocation)
         
         // let updatedFood = await Food.findByIdAndUpdate(newFood._id, {location: newLocation._id})
         
 
-        res.json({message: "Food got created"})
+        // res.json({message: "Food got created"})
 
     } catch(err) {
         return res.json({error: "Error -> " + err}).status(400);

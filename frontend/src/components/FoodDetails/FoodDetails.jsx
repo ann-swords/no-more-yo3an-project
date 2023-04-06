@@ -126,18 +126,6 @@ function FoodDetails() {
 
 
                 {/* Add the location */}
-               {/* Add the location */}
-               {/* <p className='food'>Adress:</p>
-               <div className='adds'>
-               {food.location.block ? <p className='add1'>Block: <span className='foodContent2'>{food.location.block}</span> </p> : null}
-               {food.location.road ? <p className='add1'>Road: <span className='foodContent2'>{food.location.road}</span> </p> : null}
-               {food.location.building ? <p className='add1'>Building: <span className='foodContent2'>{food.location.building}</span> </p> : null}
-               {food.location.flat ? <p className='add1'>Flat: <span className='foodContent2'>{food.location.flat}</span> </p> : null}
-               <p className='add1'>Block: <span className='foodContent2'>{food.location.block}</span> </p>
-                <p className='add1'>Road: <span className='foodContent2'>{food.location.road}</span> </p>
-                <p className='add1'>Building: <span className='foodContent2'>{food.location.building}</span> </p>
-                <p className='add1'>Flat: <span className='foodContent2'>{food.location.flat}</span> </p>
-               </div> */}
                 
 
   { food.status === 'Reserved' ? <Button id='collectedBtn' variant="secondary" name="status"

@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import './DonateFood.css'
-
 import FoodMap from "../FoodMap/FoodMap";
 import { Container, Button, Row, Col, Form, FloatingLabel  } from "react-bootstrap";
+import {useNavigate } from "react-router-dom";
+import {toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function DonateFood(props) {
+
+  const navigate = new useNavigate();
+  const [selectedImages, setSelectedImages] = useState([])
   const [selected, setSelected] = useState(null);
   const [allergies, setAllergies] = useState([]);
+  const form = useRef(null)
   const [newFood, setNewFood] = useState({
     // must be declared
     contains: [],
-    images: ['https://www.food4fuel.com/wp-content/uploads/woocommerce-placeholder-600x600.png']
+    // images: [{}]
   });
+
 
 
   useEffect(()=>{
@@ -69,187 +76,143 @@ export default function DonateFood(props) {
       console.log(newFood)
   }
 
-  // ISSUE HERE
-  const donationHandler = async (e) => {
-      e.preventDefault();
-
-      // call function to upload the images to cloud
-      // get the url from the cloud
-      // save it to the newFood state
-      await uploadImages()
-
-      // const foodWithoutImages = { ...newFood };
-      
-      // foodWithoutImages.images = cloudImages
-      // // foodWithoutImages.images = newThing
-
-      // // must wait for the newthing
-
-      // // useEffect
-      // // setNewFood(foodWithoutImages)
-      // setNewFood({...newFood, images: cloudImages})
-      // // debugger
-      // console.log('newFood', newFood)
-
-      props.donate(newFood)
-  }
 
 
+  const donationHandler = (e) => {
+    e.preventDefault();
+    submitFood()
+  };
 
-
-  const [selectedImages, setSelectedImages] = useState([])
-
-  // issue here
-  const [imagesFiles, setImagesFiles] = useState([])
-
-
-  // const [image, setImage] = useState()
-
-  // let newThing = []
-
-  const [cloudImages, setCloudImages] = useState([])
-
-  const uploadImages = () => {
-
-
-    // let files = imagesFiles
-
-    // console.log('first file', files[0])
-    // console.log('second file', files[1])
-
-    // const filesKeys = Object.keys(files)
-
-
-    // console.log('files keys', filesKeys)
-    let images = [];
-    console.log('imagesFiles', imagesFiles)
-
-    for (let i = 0; i < imagesFiles.length; i++) {
-
-    // for (let i = 0; i < filesKeys.length-1; i++) {
-
-
-      let image = imagesFiles[i];
-
-      console.log('image is being sent', image)
-      
-      let formData = new FormData()
-      formData.append('file', image)
-      formData.append('upload_preset', 'project_3')
-      axios.post('https://api.cloudinary.com/v1_1/dnjtrpebc/image/upload/', formData)
-      .then(res => {
-        console.log(res.data.url)
-        let image = res.data.url
-        images.push(image);
-
-        console.log('image', image)
-
-        // 
-        // setCloudImages(...cloudImages, image)
-
-        // setCloudImages(current => [...current, image])
-        // setCloudImages(...cloudImages, image)
-  
-        // setCloudImages(...cloudImages);
-  
-        // food.images.push(image)
-  
-        // must be save to the form state
-        // setNewFood(food)
-        
-        // console.log('cloudImages', cloudImages)
-  
-        console.log('sample updating the state of images')
-
-        console.log('cloudImages now',cloudImages)
-
-        // newThing.push(image)
-
-        // console.log('newthing now',newThing)
-      })
-      .catch(err => console.log(err))
-      .finally(()=> {
-        setCloudImages(images);
-        setNewFood({...newFood, images: images})
-        props.donate(newFood)
-        // debugger
-      })
-      
+  const submitFood = async() =>{
+    console.log('newFood',newFood)
+    const token = localStorage.getItem('token')
+    const myData = new FormData();
+    // formData.append('images')
+    // myData.append()
+    for (let i = 0; i < newFood.images.length; i++) {
+      myData.append('images', newFood.images[i]) 
     }
-    // console.log('cloudImages', cloudImages)
+    for (let i = 0; i < newFood.contains.length; i++) {
+      myData.append('contains',  newFood.contains[i]) 
+    }
+    myData.append('name', newFood.name)
+    myData.append('description', newFood.description)
+    myData.append('prodDate', newFood.prodDate)
+    myData.append('expDate', newFood.expDate)
+    myData.append('block', newFood.block)
+    myData.append('road', newFood.road)
+    myData.append('flat', newFood.flat)
+    myData.append('lat', newFood.lat)
+    myData.append('lng', newFood.lng)
+    myData.append('building', newFood.building)
+   console.log('myData', ...myData);
+   if (token) {
+      const result = await axios.post('http://localhost:4000/food', myData, { headers: {"Authorization": token, "Content-Type": "multipart/form-data"}})
+      if(result){
+        alert(result)
+      }
+      // axios({
+      //   method: 'POST',
+      //   url: "http://localhost:4000/food",
+      //   data: myData,
+      //   headers: {"Authorization": token, "Content-Type": "multipart/form-data",}
+      // })
+      // .then(() => {
 
-
-    // const foodWithoutImages = { ...newFood };
-      
-    // foodWithoutImages.images = cloudImages
-    // foodWithoutImages.images = newThing
-
-    // must wait for the newthing
-
-    // useEffect
-    // setNewFood(foodWithoutImages)
-    // debugger
-    console.log('newFood', newFood)
-
-
+      //     // USE NAVIGATE
+      //     // navigate("/user/donates" + "?donated=1")
+      //     // window.location.replace("/user/donates" + "?donated=1")
+      //   })
+      //   .catch((err) => {
+      //     toast.error("Error -> " + err)
+      //   })
+    }
   }
 
 
+ 
+
+  // const uploadImages = async() => {
+  //     await setImages();
+  //     console.log('uploadimages', cloudImages);
+  //     setNewFood({...newFood, })
+  //     // cloudImages["images"] = cloudImages
+  //     props.donate(newFood);
+  //     // navigate("/user/donates");
+  //     // debugger;
+  //   }
+
+  // const uploadImage = () => {
+  //   console.log('selectedImages', selectedImages);
+
+  //   const data = new FormData()
+  //   data.append("file", image)
+  //   data.append("upload_preset", "project_3")
+  //   // data.append("cloud_name","project_3")
+  //   fetch("https://api.cloudinary.com/v1_1/dnjtrpebc/image/upload/",{
+  //   method:"post",
+  //   body: data
+  //   })
+  //   .then(resp => resp.json())
+  //   .then(data => {
+  //     setUrl(data.url)
+  //     // debugger
+  //   })
+  //   .catch(err => console.log(err))
+  //   }
+    
+
+  //   const setImages = async() => {
+  //     console.log('imagesFiles', imagesFiles)
+  
+  //     for (let i = 0; i < imagesFiles.length; i++) {
+  
+  //       let image = imagesFiles[i];
+  
+  //       console.log('image is being sent', image)
+        
+  //       let formData = new FormData()
+  //       formData.append('file', image)
+  //       formData.append('upload_preset', 'project_3')
+  //       await axios.post('https://api.cloudinary.com/v1_1/dnjtrpebc/image/upload/', formData)
+  //       .then(res => {
+  //         console.log(res.data.url)
+  //         let image_ = res.data.url
+  //         // images.push(image_);  
+  //         setCloudImages([...cloudImages, image_])
+  //       })
+  //       .catch(err => console.log(err))
+  //     } 
+  //     // debugger
+  //   // setCloudImages(images);
+  //   // debugger
+  //   console.log('newFood', newFood)
+  // }
+  
+  // console.log('cloudImages', cloudImages);
 
 
+// debugger;
 
   const onSelectFile = (e) => {
-    const selectedFiles = e.target.files
-    
-    console.log('selected filess', selectedFiles)
-
-    console.log('type', typeof selectedFiles)
-
-    // setImagesFiles({...selectedFiles})
-
-    
-    let chosenFiles = [...selectedFiles]
-
-    console.log('chosen files', chosenFiles)
-
-    console.log('chosen type ', typeof chosenFiles)
-
-    // handleUploadFiles(chosenFiles);
-
-    setImagesFiles([...chosenFiles])
-
-    console.log('images', imagesFiles)
-
-
-
-    // convert to array to view it
-    const selectedFilesArray = Array.from(selectedFiles)
-
-    const imagesArray = selectedFilesArray.map((file) => {
-      return URL.createObjectURL(file)
-    })
-    console.log(imagesArray)
-    setSelectedImages((previousImages) => previousImages.concat(imagesArray))
-
+    let images_= [];
+    // console.log('e.target.files',e.target.files)
+    let files = e.target.files;
+    console.log('typeof files',typeof e.target.files[0])
+    for(let i=0; i < files.length; i++){
+      images_.push(files[i]);
+      // debugger
+    }
+    setSelectedImages(selectedImages.concat(images_))
+    console.log(images_);
+    setNewFood({...newFood, images:images_})
+    // setNewFood({...newFood, images: selectedImages})
+    console.log('selectedImages', selectedImages);
   }
 
-  const removeImage = (e) => {
-
-    const image = e.target.value
-
-    const id = e.target.id
-
-    const updatedSelected = selectedImages.filter((e) => e !== image)
-    setSelectedImages(updatedSelected)
-
-    console.log('selectedImages', selectedImages)
-
-
-    // must update the file
-    // const updatedSelected = selectedImages.filter((e) => e !== image)
-    // setSelectedImages(updatedSelected)
-
-    // console.log('selectedImages', selectedImages)
+  const removeImage = (index) => {
+    selectedImages.splice(index, 1);
+    setSelectedImages(selectedImages.filter((index_) => index_ !== index))
   }
 
 
@@ -259,16 +222,16 @@ export default function DonateFood(props) {
 <br /><br />
         <h1 className="head1">Donate Food</h1>
     <Container>
-        <Form onSubmit={donationHandler}>
+        <Form ref={form} onSubmit={donationHandler}>
           <Row>
             <Col className="donation">
 
               <FloatingLabel controlId="floatingInput" label="Dish Name" className="mb-3">
-                <Form.Control type="text" name="name" onChange={changeHandler} placeholder="Description" required/>
+                <Form.Control type="text" name="name" onChange={changeHandler} placeholder="Description"  />
               </FloatingLabel>
 
               <FloatingLabel controlId="floatingTextarea" label="Description" className="mb-3">
-                <Form.Control as="textarea" name="description" onChange={changeHandler} placeholder="Description" required/>
+                <Form.Control as="textarea" name="description" onChange={changeHandler} placeholder="Description"  />
               </FloatingLabel>
 
             {/* Prod and Exp Dates */}
@@ -281,7 +244,7 @@ export default function DonateFood(props) {
                   type="date"
                   name="prodDate"
                   onChange={changeHandler}
-                  required
+                   
                 />
               </Form.Group>
 
@@ -292,7 +255,7 @@ export default function DonateFood(props) {
                   type="date"
                   name="expDate"
                   onChange={changeHandler}
-                  required
+                   
                 />
               </Form.Group>
       </Row>
@@ -308,7 +271,7 @@ export default function DonateFood(props) {
                   type="file"
                   name="images"
                   onChange={(event) => { setImage(event.target.files[0])}}
-                  required
+                   
                 />
                 <button onClick={uploadImage}>Upload Image</button>
               </Form.Group> */}
@@ -319,7 +282,6 @@ export default function DonateFood(props) {
                   type="file"
                   name="images"
                   onChange={onSelectFile}
-                  required
                   multiple
                   accept="image/png, image/jpeg, image/webp"
                 />
@@ -333,10 +295,10 @@ export default function DonateFood(props) {
                       <div key={'single-file-div-'+idx} className='single-file-div'>
                       
                         <div key={`file-${idx}-img`} className='file-img-div'>
-                            <img src={image} className="file-img" alt="upload"/>
+                            <img src={URL.createObjectURL(image)} className="file-img" alt="upload"/>
                         </div>
                         <div key={`file-${idx}-btn`} className='file-delete-btn'>
-                          <Button value={image} id={idx} onClick={removeImage}>
+                          <Button  onClick={e => removeImage(idx)}>
                             Delete
                           </Button>
                         </div >
@@ -377,14 +339,14 @@ export default function DonateFood(props) {
 
                   <Form.Group as={Col} md="3">
                   <div class="form-floating mb-3">
-                          <input type="text" name="block" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Block No" required/>
+                          <input type="text" name="block" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Block No"  />
                           <label for="floatingInput">Block No</label>
                         </div>
                   </Form.Group>
 
                   <Form.Group as={Col} md="3">
                   <div class="form-floating mb-3">
-                          <input type="text" name="road" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Road No" required/>
+                          <input type="text" name="road" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Road No"  />
                           <label for="floatingInput">Road No</label>
                         </div>
                   </Form.Group>
@@ -392,7 +354,7 @@ export default function DonateFood(props) {
 
                   <Form.Group as={Col} md="3">
                   <div class="form-floating mb-3">
-                          <input type="text" name="building" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Building/Villa" required/>
+                          <input type="text" name="building" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Building/Villa"  />
                           <label for="floatingInput">Building/Villa</label>
                         </div>
                   </Form.Group>
@@ -400,7 +362,7 @@ export default function DonateFood(props) {
 
                   <Form.Group as={Col} md="3">
                   <div class="form-floating mb-3">
-                          <input type="text" name="flat" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Flat" required/>
+                          <input type="text" name="flat" onChange={changeHandler} class="form-control" id="floatingInput" placeholder="Flat"  />
                           <label for="floatingInput">Flat</label>
                         </div>
                   </Form.Group>
