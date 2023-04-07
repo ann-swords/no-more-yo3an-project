@@ -8,18 +8,28 @@ function AllFood() {
 
     const [foodList, setFoodList] = useState([])
 
-    useEffect(()=>{
-      axios.get("http://localhost:4000/food")
-      .then(res => {
-        // console.log(res.data)
-        setFoodList(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  
-    },[foodList])
+    // useEffect(()=>{
 
+  
+    // },[foodList])
+
+  useEffect(() => {
+  foods()
+  }, [])
+
+
+
+const foods = (e) =>{
+  axios.get("/food")
+  .then(res => {
+    setFoodList(res.data)
+    console.log(res.data)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+}
     
   return (
     <>
