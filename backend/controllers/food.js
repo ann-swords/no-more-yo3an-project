@@ -1,9 +1,17 @@
-const Food = require('../models/Food')
-const FoodContent = require('../models/FoodContent')
-const Location = require('../models/Location')
-mongoose = require('mongoose'),
-User = require('../models/User')
-const jwt_decode = require('jwt-decode')
+const Food = require('../models/Food');
+const FoodContent = require('../models/FoodContent');
+const Location = require('../models/Location');
+mongoose = require('mongoose');
+User = require('../models/User');
+const jwt_decode = require('jwt-decode');
+const cloudinary = require('cloudinary').v2;
+
+
+cloudinary.config({ 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY, 
+    api_secret: process.env.API_SECRET
+  });
 
 const createFood = async (req, res) => {
     console.log("this is the create food function!!!")
@@ -12,8 +20,16 @@ const createFood = async (req, res) => {
     console.log(user)
 
     console.log(req.body)
+    console.log('req.body', req.body)
+    // console.log('req.file', req.files)
+    // res.json(req.body)
+    // if(req.body.images.length > 0){
+    //     console.log('hi there are images!', req.body.images[0])
 
+    // }
     try {
+     
+
         const idOfUser = user.user.id
         let containsIdArray = req.body.contains 
 
@@ -23,8 +39,8 @@ const createFood = async (req, res) => {
             road: req.body.road,
             building: req.body.building,
             flat: req.body.flat,
-            lat: req.body.lat,
-            lng: req.body.lng
+            // lat: req.body.lat,
+            // lng: req.body.lng
         })
 
 
@@ -41,13 +57,13 @@ const createFood = async (req, res) => {
             description: req.body.description,
             prodDate: req.body.prodDate,
             expDate: req.body.expDate,
-            images: req.body.images,
+            // images: req.body.images,
     
             // to pass reference
             userDonateId: mongoose.Types.ObjectId(idOfUser),
     
             // // reference to person reserving the food
-            userReserved: undefined,
+            status: 'Available',
     
             // reference the location table
             location: newLocation._id,
@@ -70,7 +86,7 @@ const createFood = async (req, res) => {
         //     road: req.body.road,
         //     building: req.body.house,
         //     flat: req.body.flat,
-        //     lat: req.body.lat,
+            // lat: req.body.lat,
         //     lng: req.body.lng
         // })
         

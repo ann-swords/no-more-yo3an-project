@@ -1,6 +1,6 @@
 const isLoggedIn = require('../helper/isLoggedIn')
 
-const express = require('express'),
+const express = require('express')
 router = express.Router(),
 userController = require('../controllers/users')
 

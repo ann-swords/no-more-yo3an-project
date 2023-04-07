@@ -11,7 +11,11 @@ const FoodModel = new Schema({
     expDate: {type: Date, required: true},
 
     // array of strings
-    images: [String],
+    images: [
+        {
+            type: Buffer,
+        }
+    ],
 
     // reference to person that donates the food of User table
     userDonateId: {type: mongoose.Types.ObjectId, ref: "User"},
@@ -19,8 +23,10 @@ const FoodModel = new Schema({
     // Idle is not selected
     status: {
         type: String,
-        enum : ['Available','Reserved','Collected'],
-        default: 'Available'
+        enum: {
+        values: ['Available', 'Reserved', 'Collected'],
+        default: 'Available',
+        }
     },
 
     // reference to person reserving the food
