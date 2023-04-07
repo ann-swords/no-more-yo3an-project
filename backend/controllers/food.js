@@ -26,7 +26,6 @@ const createFood = async (req, res) => {
     // if(req.body.images.length > 0){
     //     console.log('hi there are images!', req.body.images[0])
 
-    // }
     try {
      
 

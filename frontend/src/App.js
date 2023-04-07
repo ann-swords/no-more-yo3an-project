@@ -51,12 +51,12 @@ try {
       localStorage.setItem("token", res.data.token);
       let user = jwt_decode(res.data.token);
       setIsAuth(true);
-      // getUser(user.user.id);
+      getUser(user.user.id);
     }
 
   })
   .catch(err => {
-    toast.error("Error -> " + err.response.data.message)
+    toast.error("Error -> " + err)
   })
 
 } catch (error) {
@@ -146,6 +146,7 @@ const donationHandler = (food) => {
       })
   }
 };
+
 const userRole = () => {
   if(isAuth){
     if(user){
@@ -172,6 +173,8 @@ const userRole = () => {
         <Route path="/donate" element={isAuth? <DonateFood donate={donationHandler} />: <Login login={loginHandler}/>} />
         <Route path="/user/donates" element={<MyDonations/>} />
         <Route path="/food/:id/details" element={<FoodDetails/>} />
+
+        <Route path="/donate" element={userRole() == 'Donator'? <DonateFood donate={donationHandler} /> : <Login login={loginHandler}/>}/> {/*<NotAuthorized/> */}
 
         <Route path="/fooddetails/:id" element={isAuth? <FoodDetails /> : <Login login={loginHandler}/>} />
       </Routes>
